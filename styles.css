@@ -141,3 +141,10 @@ body{min-height:100dvh;background-image:radial-gradient(ellipse 45% 30% at 100% 
 .hero-side .help-button{margin-right:0}
 .topbar:empty{display:none}
 .park-title{align-items:flex-start}.park-heading .eyebrow{line-height:1.2;margin-bottom:2px}.park-logos{margin-top:-4px}
+.park-title{align-items:center;margin-bottom:11px}.park-text{flex:1;min-width:0}.park-text h2{margin-bottom:0}.park-logos{margin-top:0}
+.hero{align-items:stretch}
+.hero-text{display:flex;flex-direction:column;justify-content:flex-end}
+.hero-side{justify-content:space-between}
+.park-heading .eyebrow{white-space:nowrap}
+@media(max-width:480px){.park-logo{height:44px;max-width:74px}.park-logos{gap:4px}}
+.hero-text .brand{align-self:flex-start}

@@ -135,3 +135,4 @@ body{min-height:100dvh;background-image:radial-gradient(ellipse 45% 30% at 100% 
 .sticky-nav.stuck::after{content:"";position:absolute;top:100%;left:-100vmax;right:-100vmax;height:10px;background:linear-gradient(rgba(82,37,61,.07),rgba(82,37,61,0));pointer-events:none}
 @media(min-width:800px){.sticky-nav.stuck{clip-path:none}}
 .park-heading .eyebrow{margin-bottom:4px}
+.sticky-nav .days,.sticky-nav .filters{background:transparent}

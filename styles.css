@@ -158,3 +158,5 @@ body::before{content:"";position:fixed;inset:-12%;z-index:-1;pointer-events:none
 .sticky-nav::after{content:"";position:absolute;top:100%;left:-100vmax;right:-100vmax;height:10px;background:linear-gradient(rgba(82,37,61,.07),rgba(82,37,61,0));pointer-events:none;opacity:0;transition:opacity .3s ease}
 .sticky-nav.stuck::before,.sticky-nav.stuck::after{opacity:1}
 @media(prefers-reduced-motion:reduce){.sticky-nav,.sticky-nav::before,.sticky-nav::after{transition:none}}
+.sticky-nav,.sticky-nav.stuck{border-bottom-color:transparent}
+.sticky-nav::after{border-top:1px solid var(--line)}

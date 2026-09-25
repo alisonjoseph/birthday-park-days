@@ -160,3 +160,5 @@ body::before{content:"";position:fixed;inset:-12%;z-index:-1;pointer-events:none
 @media(prefers-reduced-motion:reduce){.sticky-nav,.sticky-nav::before,.sticky-nav::after{transition:none}}
 .sticky-nav,.sticky-nav.stuck{border-bottom-color:transparent}
 .sticky-nav::after{border-top:1px solid var(--line)}
+.tag.lockers-tag{background:#e3e6ee;color:#39415a;margin-right:6px}
+.tag.mobile-tag{background:#fff;color:#1f4d78;border:1.5px solid #5b9bd5;margin-right:6px}

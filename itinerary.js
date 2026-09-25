@@ -42,7 +42,7 @@ window.TRIP_DAYS = [
             "id": "sun-button",
             "title": "Ask for a birthday button",
             "description": "",
-            "note": "Ask Guest Services whether complimentary birthday buttons are available.",
+            "note": "Ask the Stella Nova front desk at Saturday check-in, or any shop later. Skip Guest Services before 8. It costs your Hagrid’s spot.",
             "tag": "BIRTHDAY MOMENT",
             "optional": true,
             "est": "~10 min"
@@ -57,24 +57,26 @@ window.TRIP_DAYS = [
             "id": "sun-hagrid",
             "title": "Hagrid’s Motorbike Adventure",
             "note": "No Express on Hagrid’s, so ride it first at early admission when standby is shortest.",
-            "tag": "PRIORITY",
+            "tag": "",
             "optional": false,
             "kind": "ride",
             "photo": "photos/sun-hagrid.jpg",
             "photoAlt": "People riding Hagrid's Magical Creatures Motorbike Adventure.",
             "est": "~45–60 min",
-            "noExpress": true
+            "noExpress": true,
+            "lockers": true
           },
           {
             "id": "sun-veloci",
             "title": "Jurassic World VelociCoaster",
             "note": "Right after Hagrid’s, around 9 AM when Express starts. Standby 25 min or less? Ride standby and save Express for this afternoon. Longer? Use Express now.",
-            "tag": "PRIORITY",
+            "tag": "",
             "optional": false,
             "kind": "ride",
             "photo": "photos/sun-veloci.jpg",
             "photoAlt": "VelociCoaster",
-            "est": "~15–25 min"
+            "est": "~15–25 min",
+            "lockers": true
           }
         ]
       },
@@ -93,7 +95,8 @@ window.TRIP_DAYS = [
             "est": "~20 min",
             "express": true,
             "photo": "photos/sun-forbidden.jpg",
-            "photoAlt": "Harry Potter and the Forbidden Journey"
+            "photoAlt": "Harry Potter and the Forbidden Journey",
+            "lockers": true
           },
           {
             "id": "sun-frog-choir",
@@ -141,35 +144,6 @@ window.TRIP_DAYS = [
             "photo": "photos/sun-wand.jpg",
             "photoAlt": "Family shopping at Ollivanders.",
             "est": "~20–30 min"
-          },
-          {
-            "id": "sun-spells",
-            "title": "Try your first Hogsmeade spells",
-            "note": "",
-            "tag": "",
-            "optional": true,
-            "est": "~20 min"
-          },
-          {
-            "id": "sun-butterbeer",
-            "title": "Must-try: frozen Butterbeer",
-            "note": "",
-            "tag": "",
-            "optional": true,
-            "photo": "photos/sun-butterbeer.jpg",
-            "photoAlt": "A father and son sipping Butterbeer in Diagon Alley in Universal Studios Florida",
-            "est": "~15 min",
-            "food": "snack"
-          },
-          {
-            "id": "sun-frog",
-            "title": "Honeydukes",
-            "description": "",
-            "note": "",
-            "tag": "",
-            "optional": true,
-            "est": "~10 min",
-            "food": "snack"
           }
         ]
       },
@@ -186,7 +160,8 @@ window.TRIP_DAYS = [
             "photo": "photos/sun-lunch.jpg",
             "photoAlt": "A family dines at the Three Broomsticks in Universal Islands of Adventure",
             "est": "~45 min",
-            "food": "meal"
+            "food": "meal",
+            "mobileOrder": true
           }
         ]
       },
@@ -286,14 +261,15 @@ window.TRIP_DAYS = [
           {
             "id": "sun-hulk",
             "title": "The Incredible Hulk Coaster",
-            "tag": "PRIORITY",
+            "tag": "",
             "optional": false,
             "description": "Launch coaster packed with loops.",
             "kind": "ride",
             "photo": "photos/sun-hulk.jpg",
             "photoAlt": "The Incredible Hulk Coaster at sunset.",
             "est": "~20 min",
-            "express": true
+            "express": true,
+            "lockers": true
           }
         ]
       },
@@ -397,7 +373,8 @@ window.TRIP_DAYS = [
             "est": "~15 min",
             "express": true,
             "photo": "photos/sun-veloci.jpg",
-            "photoAlt": "VelociCoaster"
+            "photoAlt": "VelociCoaster",
+            "lockers": true
           },
           {
             "id": "sun-repeat",
@@ -429,7 +406,7 @@ window.TRIP_DAYS = [
       },
       {
         "time": "6:45–8 PM · ~1 HR",
-        "name": "One last ride & castle lights",
+        "name": "Hogsmeade at dusk",
         "items": [
           {
             "id": "sun-last",
@@ -440,7 +417,37 @@ window.TRIP_DAYS = [
             "kind": "ride",
             "est": "~45 min",
             "photo": "photos/sun-hagrid.jpg",
-            "photoAlt": "People riding Hagrid's Magical Creatures Motorbike Adventure."
+            "photoAlt": "People riding Hagrid's Magical Creatures Motorbike Adventure.",
+            "lockers": true
+          },
+          {
+            "id": "sun-spells",
+            "title": "Try your first Hogsmeade spells",
+            "note": "Save most for tonight. Hogsmeade is prettier at dusk.",
+            "tag": "",
+            "optional": true,
+            "est": "~20 min"
+          },
+          {
+            "id": "sun-butterbeer",
+            "title": "Must-try: frozen Butterbeer",
+            "note": "",
+            "tag": "",
+            "optional": true,
+            "photo": "photos/sun-butterbeer.jpg",
+            "photoAlt": "A father and son sipping Butterbeer in Diagon Alley in Universal Studios Florida",
+            "est": "~15 min",
+            "food": "snack"
+          },
+          {
+            "id": "sun-frog",
+            "title": "Honeydukes",
+            "description": "",
+            "note": "",
+            "tag": "",
+            "optional": true,
+            "est": "~10 min",
+            "food": "snack"
           },
           {
             "id": "sun-dark-arts",
@@ -533,24 +540,49 @@ window.TRIP_DAYS = [
         ]
       },
       {
-        "time": "8–9:15 AM · ~1¼ HR · STANDBY + EXPRESS",
+        "time": "8–8:40 AM · ~40 MIN · STANDBY",
         "name": "VelociCoaster, again!",
         "items": [
           {
             "id": "mon-veloci",
             "title": "Jurassic World VelociCoaster",
             "note": "Head straight here if it is operating during early admission. Check the official app that morning.",
-            "tag": "PRIORITY",
+            "tag": "",
             "optional": false,
             "kind": "ride",
             "photo": "photos/sun-veloci.jpg",
             "photoAlt": "VelociCoaster",
-            "est": "~30–45 min"
-          },
+            "est": "~30–45 min",
+            "lockers": true
+          }
+        ]
+      },
+      {
+        "time": "8:40–9:15 AM · ~35 MIN",
+        "name": "Breakfast between laps",
+        "items": [
+          {
+            "id": "mon-breakfast",
+            "title": "Breakfast: Three Broomsticks",
+            "note": "Opens at early admission, a short walk from VelociCoaster. Express doesn’t start until 9, so eat now.",
+            "tag": "",
+            "optional": false,
+            "est": "~30 min",
+            "food": "meal",
+            "photo": "photos/mon-breakfast.jpg",
+            "photoAlt": "Family eating at Three Broomsticks",
+            "mobileOrder": true
+          }
+        ]
+      },
+      {
+        "time": "9:15–9:45 AM · ~30 MIN · EXPRESS",
+        "name": "VelociCoaster, round two",
+        "items": [
           {
             "id": "mon-veloci-repeat",
             "title": "Second VelociCoaster lap",
-            "note": "After 9 AM, when Express starts.",
+            "note": "Use Express, which starts at 9 AM.",
             "tag": "",
             "optional": false,
             "description": "Round two!",
@@ -558,24 +590,8 @@ window.TRIP_DAYS = [
             "photo": "photos/sun-veloci.jpg",
             "photoAlt": "VelociCoaster",
             "est": "~15 min",
-            "express": true
-          }
-        ]
-      },
-      {
-        "time": "9:15–9:45 AM · ~30 MIN",
-        "name": "A bite before the train",
-        "items": [
-          {
-            "id": "mon-breakfast",
-            "title": "Breakfast: Three Broomsticks",
-            "note": "Serves breakfast from early admission, and it’s a short walk from Hogsmeade Station. For something quicker, grab a pastry at Honeydukes.",
-            "tag": "",
-            "optional": false,
-            "est": "~30 min",
-            "food": "meal",
-            "photo": "photos/mon-breakfast.jpg",
-            "photoAlt": "Family eating at Three Broomsticks"
+            "express": true,
+            "lockers": true
           }
         ]
       },
@@ -592,7 +608,8 @@ window.TRIP_DAYS = [
             "kind": "ride",
             "photo": "photos/mon-train-to-studios.jpg",
             "photoAlt": "Hogwarts Express Train",
-            "est": "~30–45 min"
+            "est": "~30–45 min",
+            "express": true
           }
         ]
       },
@@ -604,7 +621,7 @@ window.TRIP_DAYS = [
             "id": "mon-gringotts",
             "title": "Harry Potter and the Escape from Gringotts",
             "note": "From King’s Cross, head into Diagon Alley.",
-            "tag": "PRIORITY",
+            "tag": "",
             "optional": false,
             "description": "Coaster and 3-D ride under the wizard bank.",
             "kind": "ride",
@@ -644,6 +661,33 @@ window.TRIP_DAYS = [
             "tag": "",
             "optional": false,
             "est": "~20 min"
+          },
+          {
+            "id": "mon-dragon",
+            "title": "Watch the Gringotts dragon breathe fire",
+            "note": "Every 10–20 minutes, on top of the bank.",
+            "tag": "",
+            "optional": true,
+            "est": "~5 min"
+          },
+          {
+            "id": "mon-knockturn",
+            "title": "Walk Knockturn Alley",
+            "note": "The dark side street off Diagon Alley.",
+            "tag": "",
+            "optional": true,
+            "est": "~10 min"
+          },
+          {
+            "id": "mon-death-eaters",
+            "title": "Death Eaters in Diagon Alley",
+            "note": "Select days through Nov 1. Check the app.",
+            "tag": "",
+            "optional": true,
+            "kind": "meet",
+            "meet": true,
+            "est": "~10 min",
+            "maybe": true
           }
         ]
       },
@@ -660,7 +704,8 @@ window.TRIP_DAYS = [
             "est": "~45 min",
             "food": "meal",
             "photo": "photos/mon-lunch.jpg",
-            "photoAlt": "Inside the Leaky Cauldron"
+            "photoAlt": "Inside the Leaky Cauldron",
+            "mobileOrder": true
           },
           {
             "id": "mon-icecream",
@@ -695,7 +740,7 @@ window.TRIP_DAYS = [
             "id": "mon-mummy",
             "title": "Revenge of the Mummy",
             "note": "Top priority, so it’s first after lunch. From Diagon Alley, walk through San Francisco into New York; it’s about 5 minutes.",
-            "tag": "PRIORITY",
+            "tag": "",
             "optional": false,
             "kind": "ride",
             "photo": "photos/mon-mummy.jpg",
@@ -914,7 +959,8 @@ window.TRIP_DAYS = [
             "kind": "ride",
             "photo": "photos/mon-train-to-studios.jpg",
             "photoAlt": "Hogwarts Express Train",
-            "est": "~30–45 min"
+            "est": "~30–45 min",
+            "express": true
           }
         ]
       },
@@ -1014,7 +1060,7 @@ window.TRIP_DAYS = [
             "id": "tue-ministry",
             "title": "Harry Potter and the Battle at the Ministry",
             "note": "Ride standby at early admission. Your Express entry still works later, so you can ride twice.",
-            "tag": "PRIORITY",
+            "tag": "",
             "optional": false,
             "description": "Epic Harry Potter dark ride.",
             "kind": "ride",
@@ -1112,7 +1158,8 @@ window.TRIP_DAYS = [
             "photo": "photos/tue-cone.jpg",
             "photoAlt": "Mac and Cheese cones from Hooligan's Grog and Gruel at Epic Universe",
             "est": "~10 min",
-            "food": "snack"
+            "food": "snack",
+            "mobileOrder": true
           }
         ]
       },
@@ -1123,14 +1170,15 @@ window.TRIP_DAYS = [
           {
             "id": "tue-stardust",
             "title": "Stardust Racers",
-            "tag": "PRIORITY",
+            "tag": "",
             "optional": false,
             "description": "Dueling launch coaster.",
             "kind": "ride",
             "photo": "photos/tue-stardust.jpg",
             "photoAlt": "Guests smile as they ride Stardust Racers in Celestial Park",
             "est": "~20 min",
-            "express": true
+            "express": true,
+            "lockers": true
           },
           {
             "id": "tue-carousel",
@@ -1152,15 +1200,25 @@ window.TRIP_DAYS = [
         "name": "Super Nintendo World",
         "items": [
           {
+            "id": "tue-powerup",
+            "title": "Power-Up Band",
+            "note": "Plays the Nintendo World games and tracks Mario Kart scores. About $40 at the Super Nintendo World Store in CityWalk (by Toothsome) or here in the land.",
+            "tag": "",
+            "optional": true,
+            "est": "~10 min",
+            "maybe": true
+          },
+          {
             "id": "tue-lunch",
             "title": "Lunch: Toadstool Cafe",
-            "note": "Join the Toadstool Cafe waitlist in the Universal app first thing in the morning. Aim to eat around 12:30.",
+            "note": "No reservations or waitlist. Grab a table, scan the QR code and order in the app. Aim for about 12:30.",
             "tag": "",
             "optional": false,
             "photo": "photos/tue-lunch.jpg",
             "photoAlt": "The interior of Toadstool Cafe in SUPER NINTENDO WORLD",
             "est": "~1 hr",
-            "food": "meal"
+            "food": "meal",
+            "mobileOrder": true
           },
           {
             "id": "tue-mario-meet",
@@ -1187,7 +1245,7 @@ window.TRIP_DAYS = [
           {
             "id": "tue-mine",
             "title": "Mine-Cart Madness",
-            "tag": "PRIORITY",
+            "tag": "",
             "optional": false,
             "description": "Coaster that seems to jump broken track.",
             "kind": "ride",
@@ -1243,14 +1301,15 @@ window.TRIP_DAYS = [
             "id": "tue-monsters",
             "title": "Monsters Unchained: The Frankenstein Experiment",
             "note": "",
-            "tag": "PRIORITY",
+            "tag": "",
             "optional": false,
             "description": "Intense robot-arm ride with monsters.",
             "kind": "ride",
             "photo": "photos/tue-monsters.jpg",
             "photoAlt": "Monsters Unchained: The Frankenstein Experiment in Dark Universe at Epic Universe",
             "est": "~20 min",
-            "express": true
+            "express": true,
+            "lockers": true
           },
           {
             "id": "tue-werewolf",
@@ -1335,7 +1394,38 @@ window.TRIP_DAYS = [
             "est": "~1 hr",
             "food": "meal",
             "photo": "photos/tue-dinner.jpg",
-            "photoAlt": "Inside Das Stakehaus"
+            "photoAlt": "Inside Das Stakehaus",
+            "mobileOrder": true
+          }
+        ]
+      },
+      {
+        "time": "6:30–8 PM · ~1½ HR",
+        "name": "Epic after dark",
+        "items": [
+          {
+            "id": "tue-monsters-night",
+            "title": "Monsters Unchained, round two",
+            "note": "Right next door to Das Stakehaus.",
+            "tag": "YOUR CHOICE",
+            "optional": true,
+            "kind": "ride",
+            "photo": "photos/tue-monsters.jpg",
+            "photoAlt": "Monsters Unchained: The Frankenstein Experiment in Dark Universe at Epic Universe",
+            "est": "~20–40 min",
+            "lockers": true
+          },
+          {
+            "id": "tue-stardust-night",
+            "title": "Stardust Racers in the dark",
+            "note": "Celestial Park is lit up at night.",
+            "tag": "YOUR CHOICE",
+            "optional": true,
+            "kind": "ride",
+            "photo": "photos/tue-stardust.jpg",
+            "photoAlt": "Guests smile as they ride Stardust Racers in Celestial Park",
+            "est": "~20–40 min",
+            "lockers": true
           }
         ]
       }

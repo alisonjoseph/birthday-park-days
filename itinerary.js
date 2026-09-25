@@ -11,18 +11,32 @@ window.TRIP_DAYS = [
     "early": "8 AM",
     "color": "lime",
     "intro": "Start with the big thrills, work around the park, and keep the evening for favorites.",
-    "tip": "The optional rides and snacks are choices, not a race to finish everything. Hagrid’s is the first priority if open early; check current Express participation in the app.",
+    "tip": "Express works once per ride and starts at 9 AM, not during early admission. Hagrid’s no longer takes Express, so ride it standby first thing. Save your evening for standby repeats.",
     "sections": [
       {
-        "time": "7:15–7:30 AM",
+        "time": "6:30–8 AM · ~1½ HR",
         "name": "Beat the opening rush",
         "items": [
+          {
+            "id": "sun-breakfast",
+            "title": "Breakfast: Cosmos Cafe at the hotel",
+            "note": "Just off the Stella Nova lobby. Grab-and-go pastries and sandwiches, and the coffee counter serves Starbucks. Leave for the shuttle by 6:55.",
+            "tag": "",
+            "optional": false,
+            "food": "meal",
+            "est": "~20 min",
+            "photo": "photos/hotel-cosmos.jpg",
+            "photoAlt": "Cosmos Cafe dining room at Stella Nova",
+            "booked": "6:30 AM",
+            "bookedLabel": "MEET AT"
+          },
           {
             "id": "sun-gate",
             "title": "Arrive at the park entrance",
             "note": "Take the hotel shuttle; confirm its first departure the night before. Bring your room keys and park tickets.",
             "tag": "GET READY",
-            "optional": false
+            "optional": false,
+            "est": "~30–45 min"
           },
           {
             "id": "sun-button",
@@ -30,40 +44,43 @@ window.TRIP_DAYS = [
             "description": "",
             "note": "Ask Guest Services whether complimentary birthday buttons are available.",
             "tag": "BIRTHDAY MOMENT",
-            "optional": true
+            "optional": true,
+            "est": "~10 min"
           }
         ]
       },
       {
-        "time": "8 AM · EARLY ADMISSION",
+        "time": "8–9:30 AM · ~1½ HR · STANDBY",
         "name": "The big two",
         "items": [
           {
             "id": "sun-hagrid",
             "title": "Hagrid’s Motorbike Adventure",
-            "note": "Head here first if it is operating for early admission. If delayed, ride VelociCoaster and return.",
+            "note": "No Express on Hagrid’s, so ride it first at early admission when standby is shortest.",
             "tag": "PRIORITY",
             "optional": false,
-            "description": "A launch coaster through the Forbidden Forest with motorbike seats, a backward section, and a surprise drop.",
+            "description": "Motorbike launch coaster with a backward drop.",
             "kind": "ride",
             "photo": "photos/sun-hagrid.jpg",
-            "photoAlt": "People riding Hagrid's Magical Creatures Motorbike Adventure."
+            "photoAlt": "People riding Hagrid's Magical Creatures Motorbike Adventure.",
+            "est": "~45–60 min"
           },
           {
             "id": "sun-veloci",
             "title": "Jurassic World VelociCoaster",
-            "note": "If standby is short, save your Express entry for a later ride.",
+            "note": "Right after Hagrid’s, around 9 AM when Express starts. Standby 25 min or less? Ride standby and save Express for this afternoon. Longer? Use Express now.",
             "tag": "PRIORITY",
             "optional": false,
-            "description": "An intense launch coaster with big airtime, upside-down twists, and a roll over the lagoon.",
+            "description": "Intense launch coaster with airtime and inversions.",
             "kind": "ride",
             "photo": "photos/sun-veloci.jpg",
-            "photoAlt": "VelociCoaster"
+            "photoAlt": "VelociCoaster",
+            "est": "~15–25 min"
           }
         ]
       },
       {
-        "time": "LATE MORNING",
+        "time": "9:30–11:15 AM · ~1¾ HR",
         "name": "A little Hogwarts magic",
         "items": [
           {
@@ -72,8 +89,36 @@ window.TRIP_DAYS = [
             "note": "",
             "tag": "",
             "optional": false,
-            "description": "A sweeping indoor ride combining moving robot-arm seats, screens, creatures, and Hogwarts scenes.",
-            "kind": "ride"
+            "description": "Robot-arm ride through Hogwarts.",
+            "kind": "ride",
+            "est": "~20 min",
+            "express": true,
+            "photo": "photos/sun-forbidden.jpg",
+            "photoAlt": "Harry Potter and the Forbidden Journey"
+          },
+          {
+            "id": "sun-frog-choir",
+            "title": "Frog Choir",
+            "description": "Students and giant frogs sing wizarding songs.",
+            "note": "On the stage by the Hogwarts castle entrance, right as you leave Forbidden Journey. Check showtimes in the app.",
+            "tag": "",
+            "optional": true,
+            "kind": "show",
+            "show": true,
+            "est": "~15 min",
+            "maybe": true
+          },
+          {
+            "id": "sun-triwizard",
+            "title": "Triwizard Spirit Rally",
+            "description": "Acrobatics from the rival wizarding schools.",
+            "note": "Same stage as the Frog Choir, usually alternating with it.",
+            "tag": "",
+            "optional": true,
+            "kind": "show",
+            "show": true,
+            "est": "~15 min",
+            "maybe": true
           },
           {
             "id": "sun-hippo",
@@ -81,97 +126,140 @@ window.TRIP_DAYS = [
             "note": "",
             "tag": "",
             "optional": false,
-            "description": "A short outdoor family coaster with gentle drops and views of Hogwarts.",
-            "kind": "ride"
+            "description": "Short, gentle family coaster.",
+            "kind": "ride",
+            "est": "~15 min",
+            "express": true,
+            "photo": "photos/sun-hippo.jpg",
+            "photoAlt": "Flight of the Hippogriff"
           },
           {
             "id": "sun-wand",
             "title": "Ollivanders wand-shop stop",
-            "description": "",
-            "note": "Visit the Hogsmeade shop and watch the wand-selection experience if offered. Choose an interactive wand if you want to try spell locations; purchases cost extra. Being chosen for the ceremony is not guaranteed.",
-            "tag": "BIRTHDAY MOMENT",
+            "note": "",
+            "tag": "",
             "optional": false,
             "photo": "photos/sun-wand.jpg",
-            "photoAlt": "Family shopping at Ollivanders."
+            "photoAlt": "Family shopping at Ollivanders.",
+            "est": "~20–30 min"
           },
           {
             "id": "sun-spells",
             "title": "Try your first Hogsmeade spells",
-            "description": "",
-            "note": "Use the map included with your interactive wand and let everyone have a turn.",
-            "tag": "WAND TIME",
-            "optional": true
+            "note": "",
+            "tag": "",
+            "optional": true,
+            "est": "~20 min"
           },
           {
             "id": "sun-butterbeer",
             "title": "Must-try: frozen Butterbeer",
-            "note": "A sweet, frosty butterscotch-style treat in Hogsmeade. Share one to start, and take a birthday photo by the castle.",
-            "tag": "SNACK PICK",
+            "note": "",
+            "tag": "",
             "optional": true,
             "photo": "photos/sun-butterbeer.jpg",
-            "photoAlt": "A father and son sipping Butterbeer in Diagon Alley in Universal Studios Florida"
+            "photoAlt": "A father and son sipping Butterbeer in Diagon Alley in Universal Studios Florida",
+            "est": "~15 min",
+            "food": "snack"
           },
           {
             "id": "sun-frog",
-            "title": "Honeydukes: a Chocolate Frog",
+            "title": "Honeydukes",
             "description": "",
-            "note": "A classic souvenir sweet with a collectible wizard card. Save it for the hotel if you are full; chocolate can melt in the Florida heat.",
-            "tag": "SNACK PICK",
-            "optional": true
+            "note": "",
+            "tag": "",
+            "optional": true,
+            "est": "~10 min",
+            "food": "snack"
           }
         ]
       },
       {
-        "time": "11:30 AM",
+        "time": "11:15 AM–12 PM · ~45 MIN",
         "name": "Lunch before the rush",
         "items": [
           {
             "id": "sun-lunch",
             "title": "Lunch: Three Broomsticks",
-            "note": "A themed British-style lunch in Hogsmeade; roast chicken or fish and chips are good picks. Alternative: Mythos for a longer table-service break—check reservations.",
-            "tag": "LUNCH",
+            "note": "A themed British-style lunch in Hogsmeade; roast chicken or fish and chips are good picks. You’re at Mythos for dinner, so keep lunch light.",
+            "tag": "",
             "optional": false,
             "photo": "photos/sun-lunch.jpg",
-            "photoAlt": "A family dines at the Three Broomsticks in Universal Islands of Adventure"
+            "photoAlt": "A family dines at the Three Broomsticks in Universal Islands of Adventure",
+            "est": "~45 min",
+            "food": "meal"
           }
         ]
       },
       {
-        "time": "AFTERNOON",
-        "name": "Work your way around",
+        "time": "12–2:15 PM · ~2¼ HR · EXPRESS",
+        "name": "Jurassic Park → Skull Island → Toon Lagoon → Marvel",
         "items": [
+          {
+            "id": "sun-raptor",
+            "title": "Raptor Encounter",
+            "note": "",
+            "tag": "",
+            "optional": true,
+            "kind": "meet",
+            "est": "~20 min",
+            "meet": true,
+            "maybe": true
+          },
           {
             "id": "sun-kong",
             "title": "Skull Island: Reign of Kong",
-            "note": "",
+            "note": "Next door to Jurassic Park. Walk straight here after lunch.",
             "tag": "",
             "optional": false,
-            "description": "A large expedition truck enters Kong’s world, with giant screens, jolts, and creature encounters.",
+            "description": "Truck ride into Kong’s island.",
             "kind": "ride",
             "photo": "photos/sun-kong.jpg",
-            "photoAlt": "Woman posing with a frightened expression in front of Skull Island Reign of Kong."
-          },
-          {
-            "id": "sun-ripsaw",
-            "title": "Dudley Do-Right’s Ripsaw Falls",
-            "note": "You may get soaked. Keep your phone protected.",
-            "tag": "WATER RIDE",
-            "optional": false,
-            "description": "A cartoon-themed log flume with drops and a big, very wet finale.",
-            "kind": "ride",
-            "photo": "photos/sun-ripsaw.jpg",
-            "photoAlt": "People riding Dudley Do-Right’s RipSaw Falls. "
+            "photoAlt": "Woman posing with a frightened expression in front of Skull Island Reign of Kong.",
+            "est": "~20 min",
+            "express": true
           },
           {
             "id": "sun-popeye",
             "title": "Popeye & Bluto’s Bilge-Rat Barges",
-            "note": "Another very wet ride; group the water rides together.",
+            "note": "Very wet! Do both water rides back to back so you only dry off once.",
             "tag": "WATER RIDE",
-            "optional": false,
-            "description": "A round raft spins through choppy rapids, waterfalls, and plenty of soaking splashes.",
+            "optional": true,
+            "description": "Spinning raft ride. You will get soaked.",
             "kind": "ride",
             "photo": "photos/sun-popeye.jpg",
-            "photoAlt": "A raft splashing through Popeye & Bluto’s Bilge-Rat Barges."
+            "photoAlt": "A raft splashing through Popeye & Bluto’s Bilge-Rat Barges.",
+            "est": "~20 min",
+            "express": true,
+            "maybe": true
+          },
+          {
+            "id": "sun-ripsaw",
+            "title": "Dudley Do-Right’s Ripsaw Falls",
+            "note": "Right after Popeye’s. You may get soaked, so keep phones in a zip bag.",
+            "tag": "WATER RIDE",
+            "optional": true,
+            "description": "Log flume with a big, wet drop.",
+            "kind": "ride",
+            "photo": "photos/sun-ripsaw.jpg",
+            "photoAlt": "People riding Dudley Do-Right’s RipSaw Falls. ",
+            "est": "~20 min",
+            "express": true,
+            "maybe": true
+          },
+          {
+            "id": "sun-doom",
+            "title": "Doctor Doom’s Fearfall",
+            "note": "The first ride you reach in Marvel coming from Toon Lagoon.",
+            "tag": "",
+            "optional": true,
+            "description": "Launch tower that shoots you skyward.",
+            "kind": "ride",
+            "est": "~15 min",
+            "express": true,
+            "maybe": true,
+            "photo": "photos/sun-doom.jpg",
+            "photoAlt": "Doctor Doom's Fearfall"
           },
           {
             "id": "sun-spider",
@@ -179,113 +267,192 @@ window.TRIP_DAYS = [
             "note": "",
             "tag": "",
             "optional": false,
-            "description": "A moving 3-D dark ride that swings you into a comic-book battle with Spider-Man.",
-            "kind": "ride"
+            "description": "3-D dark ride with Spider-Man.",
+            "kind": "ride",
+            "est": "~20 min",
+            "express": true,
+            "photo": "photos/sun-spider.jpg",
+            "photoAlt": "Spider-Man outside The Amazing Adventures of Spider-Man"
+          },
+          {
+            "id": "sun-marvel-meet",
+            "title": "Marvel Super Heroes",
+            "note": "",
+            "tag": "",
+            "optional": true,
+            "kind": "meet",
+            "meet": true,
+            "est": "~15 min",
+            "maybe": true
           },
           {
             "id": "sun-hulk",
             "title": "The Incredible Hulk Coaster",
-            "note": "One of today’s must-do coasters.",
+            "note": "One of today’s must-do coasters, at the park-entrance end of Marvel.",
             "tag": "PRIORITY",
             "optional": false,
-            "description": "A powerful launch coaster packed with loops, corkscrews, and high-speed turns.",
+            "description": "Launch coaster packed with loops.",
             "kind": "ride",
             "photo": "photos/sun-hulk.jpg",
-            "photoAlt": "The Incredible Hulk Coaster at sunset."
-          },
-          {
-            "id": "sun-doom",
-            "title": "Doctor Doom’s Fearfall",
-            "note": "",
-            "tag": "",
-            "optional": false,
-            "description": "A tower ride that launches you skyward, then bounces and drops back down.",
-            "kind": "ride"
+            "photoAlt": "The Incredible Hulk Coaster at sunset.",
+            "est": "~20 min",
+            "express": true
           }
         ]
       },
       {
-        "time": "AS YOU PASS · OPTIONAL",
-        "name": "The smaller rides, too",
+        "time": "2:15–3:45 PM · ~1½ HR · EXPRESS",
+        "name": "Marvel → Seuss Landing, if time",
         "items": [
           {
             "id": "sun-storm",
             "title": "Storm Force Accelatron",
-            "description": "Spin your own teacup-style pod in a swirling superhero storm.",
+            "description": "Spinning teacup-style ride.",
             "note": "",
-            "tag": "IF TIME",
+            "tag": "",
             "optional": true,
-            "kind": "ride"
+            "kind": "ride",
+            "est": "~10 min",
+            "express": true,
+            "maybe": true,
+            "photo": "photos/sun-storm.jpg",
+            "photoAlt": "Storm Force Accelatron"
           },
           {
             "id": "sun-cat",
             "title": "The Cat in the Hat",
-            "description": "A playful indoor storybook ride with turns and spins through the Cat’s chaos.",
+            "description": "Storybook dark ride.",
             "note": "",
-            "tag": "IF TIME",
+            "tag": "",
             "optional": true,
             "kind": "ride",
             "photo": "photos/sun-cat.jpg",
-            "photoAlt": "Family riding The Cat in the Hat."
-          },
-          {
-            "id": "sun-trolley",
-            "title": "The High in the Sky Seuss Trolley Train Ride!",
-            "description": "A gentle elevated train ride with colorful scenes and views over Seuss Landing.",
-            "note": "",
-            "tag": "IF TIME",
-            "optional": true,
-            "kind": "ride",
-            "photo": "photos/sun-trolley.jpg",
-            "photoAlt": "SeussTrolleyRIde"
-          },
-          {
-            "id": "sun-caro",
-            "title": "Caro-Seuss-el",
-            "description": "A whimsical carousel with unusual creatures and moving features to control.",
-            "note": "",
-            "tag": "IF TIME",
-            "optional": true,
-            "kind": "ride"
+            "photoAlt": "Family riding The Cat in the Hat.",
+            "est": "~15 min",
+            "express": true,
+            "maybe": true
           },
           {
             "id": "sun-fish",
             "title": "One Fish, Two Fish, Red Fish, Blue Fish",
-            "description": "Steer your flying fish up and down to dodge splashing fountains.",
+            "description": "Steer your fish to dodge water jets.",
             "note": "",
-            "tag": "IF TIME",
+            "tag": "",
             "optional": true,
             "kind": "ride",
             "photo": "photos/sun-fish.jpg",
-            "photoAlt": "OneFishTwoFish"
+            "photoAlt": "OneFishTwoFish",
+            "est": "~10 min",
+            "express": true,
+            "maybe": true
+          },
+          {
+            "id": "sun-caro",
+            "title": "Caro-Seuss-el",
+            "description": "Carousel of Seuss creatures.",
+            "note": "",
+            "tag": "",
+            "optional": true,
+            "kind": "ride",
+            "est": "~10 min",
+            "express": true,
+            "maybe": true,
+            "photo": "photos/sun-caro.jpg",
+            "photoAlt": "Caro-Seuss-el"
+          },
+          {
+            "id": "sun-trolley",
+            "title": "The High in the Sky Seuss Trolley Train Ride!",
+            "description": "Gentle elevated train over Seuss Landing.",
+            "note": "",
+            "tag": "",
+            "optional": true,
+            "kind": "ride",
+            "photo": "photos/sun-trolley.jpg",
+            "photoAlt": "SeussTrolleyRIde",
+            "est": "~15 min",
+            "express": true,
+            "maybe": true
           },
           {
             "id": "sun-tots",
             "title": "Green Eggs and Ham Cafe: loaded tots",
             "description": "",
             "note": "A savory snack in Seuss Landing—try Green Eggs and Ham tots or choose a topping from the current menu. Easy to share.",
-            "tag": "SNACK PICK",
-            "optional": true
+            "tag": "",
+            "optional": true,
+            "est": "~15 min",
+            "food": "snack"
           }
         ]
       },
       {
-        "time": "EVENING · CLOSES 8 PM",
+        "time": "3:45–5:30 PM · FREE TIME",
         "name": "Birthday girl’s choice",
         "items": [
           {
-            "id": "sun-repeat",
-            "title": "Pick a favorite to ride again",
-            "note": "Use an unused Express entry where eligible, or the regular queue. Allow for queues closing before the park does.",
-            "tag": "YOUR CHOICE",
-            "optional": false
+            "id": "sun-veloci-2",
+            "title": "Optional: second VelociCoaster lap",
+            "note": "Only if you saved your Express this morning. Mid-afternoon is when standby is longest, so Express saves the most time then.",
+            "tag": "OPTIONAL",
+            "optional": true,
+            "kind": "ride",
+            "est": "~15 min",
+            "express": true,
+            "photo": "photos/sun-veloci.jpg",
+            "photoAlt": "VelociCoaster"
           },
           {
+            "id": "sun-repeat",
+            "title": "Pick a favorite to ride again",
+            "note": "Re-ride favourites standby or take a pool break at the hotel. Head to Mythos by about 5:20.",
+            "tag": "YOUR CHOICE",
+            "optional": false,
+            "est": "~1½ hr"
+          }
+        ]
+      },
+      {
+        "time": "5:30 PM · BOOKED · ~1¼ HR",
+        "name": "Dinner at Mythos",
+        "items": [
+          {
             "id": "sun-dinner",
-            "title": "Dinner: NBC Sports Grill & Brew",
-            "note": "Head to CityWalk for burgers, sandwiches, and a relaxed sit-down meal after Islands. Check reservations and current hours; allow time to walk out. Recharge for early entry tomorrow.",
-            "tag": "DINNER",
-            "optional": false
+            "title": "Dinner: Mythos",
+            "note": "Sit-down dining in a rock grotto overlooking the lagoon, between Seuss Landing and Hogsmeade. It closes in 2027, so this may be your last chance.",
+            "tag": "",
+            "optional": false,
+            "est": "~1¼ hr",
+            "food": "meal",
+            "booked": "5:30 PM"
+          }
+        ]
+      },
+      {
+        "time": "6:45–8 PM · ~1 HR",
+        "name": "One last ride & castle lights",
+        "items": [
+          {
+            "id": "sun-last",
+            "title": "Last ride: Hagrid’s or VelociCoaster",
+            "note": "Hagrid’s is about 5 minutes from Mythos. Evening standby is often shorter. Get in line before 8 PM and they’ll let you ride.",
+            "tag": "YOUR CHOICE",
+            "optional": true,
+            "kind": "ride",
+            "est": "~45 min",
+            "photo": "photos/sun-hagrid.jpg",
+            "photoAlt": "People riding Hagrid's Magical Creatures Motorbike Adventure."
+          },
+          {
+            "id": "sun-dark-arts",
+            "title": "Hogwarts Dark Arts",
+            "description": "Spooky light show projected onto the castle.",
+            "note": "Runs after dark on select nights in October, from about 7:30 PM. Check the app that day. Watch from the Hogsmeade path in front of the castle.",
+            "tag": "",
+            "optional": true,
+            "kind": "show",
+            "show": true,
+            "est": "~15 min"
           }
         ]
       },
@@ -296,7 +463,6 @@ window.TRIP_DAYS = [
           {
             "id": "sun-jurassic-closed",
             "title": "Jurassic Park River Adventure",
-            "description": "A dinosaur boat adventure ending in a steep splashdown.",
             "note": "Scheduled closed through November 19, 2026.",
             "tag": "CLOSED",
             "optional": true,
@@ -305,7 +471,6 @@ window.TRIP_DAYS = [
           {
             "id": "sun-pteranodon",
             "title": "Pteranodon Flyers",
-            "description": "A gentle suspended flight above Camp Jurassic.",
             "note": "Guests over 56 inches must accompany a child 36–56 inches tall. This usually rules out an all-teen/adult group.",
             "tag": "HEIGHT RESTRICTION",
             "optional": true,
@@ -314,7 +479,16 @@ window.TRIP_DAYS = [
         ]
       }
     ],
-    "alert": "Jurassic Park River Adventure is scheduled closed through November 19, 2026. Studios closes at 5 PM today for Halloween Horror Nights; this plan stays at Islands."
+    "alert": "Jurassic Park River Adventure is scheduled closed through November 19, 2026. Studios closes at 5 PM today for Halloween Horror Nights; this plan stays at Islands.",
+    "tabHours": [
+      "8 AM–8 PM"
+    ],
+    "logos": [
+      {
+        "src": "logos/islands.png",
+        "alt": "Universal Islands of Adventure logo"
+      }
+    ]
   },
   {
     "id": "mon",
@@ -328,23 +502,37 @@ window.TRIP_DAYS = [
     "early": "8 AM at Islands",
     "color": "coral",
     "intro": "Start with VelociCoaster, then take the Hogwarts Express to Studios once it is operating.",
-    "tip": "Studios has a shorter day, so favor your must-rides before an optional train ride back. Snack picks are for sharing; you do not need to try them all.",
+    "tip": "Express works once per ride and starts at park opening, not early admission. Your Monday pass covers Islands too, so ride VelociCoaster standby at 8 AM, then again with Express after 9.",
     "sections": [
       {
-        "time": "7:15–7:30 AM",
+        "time": "6:45–8 AM · ~1¼ HR",
         "name": "Back to Islands bright & early",
         "items": [
+          {
+            "id": "mon-coffee",
+            "title": "Coffee: Cosmos Cafe at the hotel",
+            "note": "Starbucks coffee to go from the coffee counter. Breakfast is later at Three Broomsticks, after VelociCoaster. Leave for the shuttle by 6:55.",
+            "tag": "",
+            "optional": false,
+            "food": "coffee",
+            "est": "~10 min",
+            "booked": "6:45 AM",
+            "bookedLabel": "MEET AT",
+            "photo": "photos/hotel-cosmos.jpg",
+            "photoAlt": "Cosmos Cafe dining room at Stella Nova"
+          },
           {
             "id": "mon-gate",
             "title": "Arrive at Islands of Adventure",
             "note": "Confirm the first hotel shuttle the night before. Bring your room keys and Park-to-Park tickets.",
             "tag": "GET READY",
-            "optional": false
+            "optional": false,
+            "est": "~30–45 min"
           }
         ]
       },
       {
-        "time": "8–9:15 AM · ISLANDS",
+        "time": "8–9:15 AM · ~1¼ HR · STANDBY + EXPRESS",
         "name": "VelociCoaster, again!",
         "items": [
           {
@@ -353,197 +541,201 @@ window.TRIP_DAYS = [
             "note": "Head straight here if it is operating during early admission. Check the official app that morning.",
             "tag": "PRIORITY",
             "optional": false,
-            "description": "An intense launch coaster with big airtime, upside-down twists, and a roll over the lagoon.",
+            "description": "Intense launch coaster with airtime and inversions.",
             "kind": "ride",
             "photo": "photos/sun-veloci.jpg",
-            "photoAlt": "VelociCoaster"
+            "photoAlt": "VelociCoaster",
+            "est": "~30–45 min"
           },
           {
             "id": "mon-veloci-repeat",
-            "title": "Optional: another VelociCoaster lap",
-            "note": "Repeat if the wait is manageable. Use a short standby queue to save your eligible Express entry. Skip a long Hagrid’s queue this morning.",
-            "tag": "OPTIONAL",
-            "optional": true,
-            "description": "An intense launch coaster with big airtime, upside-down twists, and a roll over the lagoon.",
+            "title": "Second VelociCoaster lap",
+            "note": "After 9 AM, when Express starts. Skip a long Hagrid’s queue this morning.",
+            "tag": "",
+            "optional": false,
+            "description": "Round two!",
             "kind": "ride",
             "photo": "photos/sun-veloci.jpg",
-            "photoAlt": "VelociCoaster"
+            "photoAlt": "VelociCoaster",
+            "est": "~15 min",
+            "express": true
           }
         ]
       },
       {
-        "time": "9:15–9:45 AM",
+        "time": "9:15–9:45 AM · ~30 MIN",
         "name": "A bite before the train",
         "items": [
           {
             "id": "mon-breakfast",
-            "title": "Breakfast or snack & Hogsmeade Station",
-            "note": "Refuel, then head toward the station. Ask a team member when the train begins boarding.",
+            "title": "Breakfast: Three Broomsticks",
+            "note": "Serves breakfast from early admission, and it’s a short walk from Hogsmeade Station. For something quicker, grab a pastry at Honeydukes.",
             "tag": "",
-            "optional": false
+            "optional": false,
+            "est": "~30 min",
+            "food": "meal"
           }
         ]
       },
       {
-        "time": "AROUND 10 AM ONWARD",
+        "time": "~10–10:45 AM · ~45 MIN",
         "name": "All aboard for Studios",
         "items": [
           {
             "id": "mon-train-to-studios",
             "title": "Hogwarts Express to Universal Studios",
-            "note": "Travel from Hogsmeade to King’s Cross. Your Park-to-Park tickets cover the train. Do not count on boarding before Studios opens at 10 AM; the exact train start time is unconfirmed. Allow time for the queue and journey.",
+            "note": "Travel from Hogsmeade to King’s Cross. Do not count on boarding before Studios opens at 10 AM; the exact train start time is unconfirmed.",
             "tag": "PARK HOP",
             "optional": false,
-            "description": "A themed train journey between parks, with a different wizarding story in each direction.",
+            "description": "Wizarding train ride between the parks.",
             "kind": "ride",
             "photo": "photos/mon-train-to-studios.jpg",
-            "photoAlt": "Hogwarts Express Train"
+            "photoAlt": "Hogwarts Express Train",
+            "est": "~30–45 min"
           }
         ]
       },
       {
-        "time": "AFTER THE TRAIN · LATE MORNING",
-        "name": "Diagon Alley & beyond",
+        "time": "10:45–11:45 AM · ~1 HR",
+        "name": "Diagon Alley",
         "items": [
           {
             "id": "mon-gringotts",
             "title": "Harry Potter and the Escape from Gringotts",
-            "note": "From King’s Cross, head into Diagon Alley for Gringotts. Train queues mean you may arrive after Studios opens.",
+            "note": "From King’s Cross, head into Diagon Alley.",
             "tag": "PRIORITY",
             "optional": false,
-            "description": "A coaster/dark-ride hybrid with spinning turns, a drop, and 3-D scenes beneath the wizard bank.",
+            "description": "Coaster and 3-D ride under the wizard bank.",
             "kind": "ride",
             "photo": "photos/mon-gringotts.jpg",
-            "photoAlt": "Harry Potter and the Escape from Gringotts"
+            "photoAlt": "Harry Potter and the Escape from Gringotts",
+            "est": "~20 min",
+            "express": true
+          },
+          {
+            "id": "mon-celestina",
+            "title": "Celestina Warbeck and the Banshees",
+            "description": "Jazzy wizarding diva and her band.",
+            "note": "Carkitt Market stage in Diagon Alley. Check showtimes in the app.",
+            "tag": "",
+            "optional": true,
+            "kind": "show",
+            "show": true,
+            "est": "~15 min",
+            "maybe": true
+          },
+          {
+            "id": "mon-beedle",
+            "title": "Tales of Beedle the Bard",
+            "description": "Wizarding fairy tales with puppets.",
+            "note": "Same stage as Celestina, alternating with it.",
+            "tag": "",
+            "optional": true,
+            "kind": "show",
+            "show": true,
+            "est": "~15 min",
+            "maybe": true
           },
           {
             "id": "mon-diagon",
             "title": "Explore Diagon Alley",
-            "note": "Look for the dragon, browse Ollivanders in Diagon Alley, and try more interactive wand locations. No need to buy a second wand.",
+            "note": "",
             "tag": "",
-            "optional": false
+            "optional": false,
+            "est": "~20 min"
+          }
+        ]
+      },
+      {
+        "time": "11:45 AM–12:30 PM · ~45 MIN",
+        "name": "Lunch in Diagon Alley",
+        "items": [
+          {
+            "id": "mon-lunch",
+            "title": "Lunch: Leaky Cauldron",
+            "note": "You’ll be in Diagon Alley right at lunchtime, so eat here. Running late? Louie’s Italian in New York is next on your route.",
+            "tag": "",
+            "optional": false,
+            "est": "~45 min",
+            "food": "meal"
           },
           {
             "id": "mon-icecream",
             "title": "Florean Fortescue’s ice-cream break",
             "description": "",
-            "note": "Stop in Diagon Alley for a cone; Butterbeer soft serve is a classic choice. Pick this or another sweet treat if you are pacing yourselves.",
-            "tag": "SNACK PICK",
-            "optional": true
-          },
-          {
-            "id": "mon-mib",
-            "title": "MEN IN BLACK Alien Attack",
-            "note": "",
+            "note": "Florean Fortescue’s is right by Leaky Cauldron. Butterbeer soft serve is the classic pick.",
             "tag": "",
-            "optional": false,
-            "description": "A spinning dark ride where you zap aliens and compete for the highest score.",
-            "kind": "ride",
-            "photo": "photos/mon-mib.jpg",
-            "photoAlt": "A group of guests riding Men in Black: Alien Attack in Universal Studios Florida"
-          },
-          {
-            "id": "mon-simpsons",
-            "title": "The Simpsons Ride",
-            "note": "",
-            "tag": "",
-            "optional": false,
-            "description": "A big-screen motion simulator following the Simpsons through a wildly chaotic theme park.",
-            "kind": "ride"
-          },
-          {
-            "id": "mon-kang",
-            "title": "Kang & Kodos’ Twirl ’n’ Hurl",
-            "description": "A gentle spinning saucer ride with up-and-down controls and alien banter.",
-            "note": "",
-            "tag": "IF TIME",
             "optional": true,
-            "kind": "ride",
-            "photo": "photos/mon-kang.jpg",
-            "photoAlt": "Guests spin past on Kang and Kodos' Twirl 'n' Hurl in Universal Studios Florida"
-          },
-          {
-            "id": "mon-donut",
-            "title": "Lard Lad: share the giant Big Pink donut",
-            "description": "",
-            "note": "Pink frosting, sprinkles, and a birthday-worthy photo in Springfield. Split this enormous donut between the three of you.",
-            "tag": "MUST-TRY SNACK",
-            "optional": true,
-            "photo": "photos/mon-donut.jpg",
-            "photoAlt": "Enjoy a giant pink donut in Springfield at Universal Studios Florida."
-          },
-          {
-            "id": "mon-et",
-            "title": "E.T. Adventure",
-            "note": "",
-            "tag": "",
-            "optional": false,
-            "description": "A gentle suspended bicycle ride through a forest and E.T.’s colorful home planet.",
-            "kind": "ride",
-            "photo": "photos/mon-et.jpg",
-            "photoAlt": "Guests smile and point on ET Adventure in Universal Studios Florida"
-          },
-          {
-            "id": "mon-trolls",
-            "title": "Trolls Trollercoaster",
-            "description": "A short, colorful family coaster with gentle hills and turns.",
-            "note": "",
-            "tag": "IF TIME",
-            "optional": true,
-            "kind": "ride",
-            "photo": "photos/mon-trolls.jpg",
-            "photoAlt": "A father and son riding Trolls Trollercoaster in DreamWorks Land"
-          },
-          {
-            "id": "mon-shrekzel",
-            "title": "Optional savory pick: a Shrekzel",
-            "description": "",
-            "note": "The ogre-shaped pretzel at Swamp Snacks in DreamWorks Land makes a fun shared bite.",
-            "tag": "SNACK PICK",
-            "optional": true,
-            "photo": "photos/mon-shrekzel.jpg",
-            "photoAlt": "A Shrekzel from Swamp Snacks"
+            "est": "~15 min",
+            "food": "snack"
           }
         ]
       },
       {
-        "time": "MIDDAY",
-        "name": "Lunch & a breather",
+        "time": "12:30–2 PM · ~1½ HR · EXPRESS",
+        "name": "London → New York → Minion Land",
         "items": [
           {
-            "id": "mon-lunch",
-            "title": "Lunch: Leaky Cauldron or Minion Cafe",
-            "note": "Choose Leaky Cauldron while in Diagon Alley for British pub-style food. If you reach Minion Land hungry later, use Minion Cafe instead. Move lunch earlier if needed.",
-            "tag": "LUNCH",
-            "optional": false
-          }
-        ]
-      },
-      {
-        "time": "AFTERNOON",
-        "name": "Movie-ride marathon",
-        "items": [
+            "id": "mon-knightbus",
+            "title": "Knight Bus conductor & Shrunken Head",
+            "note": "",
+            "tag": "",
+            "optional": true,
+            "kind": "meet",
+            "meet": true,
+            "est": "~10 min",
+            "maybe": true
+          },
           {
             "id": "mon-mummy",
             "title": "Revenge of the Mummy",
-            "note": "A must-do for this coaster-loving crew.",
+            "note": "Top priority, so it’s first after lunch. From Diagon Alley, walk through San Francisco into New York; it’s about 5 minutes.",
             "tag": "PRIORITY",
             "optional": false,
-            "description": "An indoor coaster with dark turns, launches, a backward section, and fiery effects.",
+            "description": "Indoor coaster with launches and fire.",
             "kind": "ride",
             "photo": "photos/mon-mummy.jpg",
-            "photoAlt": "Revenge of the Mummy"
+            "photoAlt": "Revenge of the Mummy",
+            "est": "~20 min",
+            "express": true
+          },
+          {
+            "id": "mon-fallon",
+            "title": "Race Through New York Starring Jimmy Fallon",
+            "description": "3-D race through New York.",
+            "note": "",
+            "tag": "",
+            "optional": true,
+            "kind": "ride",
+            "photo": "photos/mon-fallon.jpg",
+            "photoAlt": "Race Through New York Starring Jimmy Fallon",
+            "est": "~15 min",
+            "express": true,
+            "maybe": true
           },
           {
             "id": "mon-transformers",
             "title": "TRANSFORMERS: The Ride-3D",
-            "note": "",
+            "note": "In Production Central, between New York and Minion Land.",
             "tag": "",
             "optional": false,
-            "description": "A moving 3-D battle ride with sudden turns, shaking, and towering Transformers.",
+            "description": "3-D battle ride with giant robots.",
             "kind": "ride",
             "photo": "photos/mon-transformers.jpg",
-            "photoAlt": "Jets fly through the sky above Transformers The Ride in Universal Studios Florida"
+            "photoAlt": "Jets fly through the sky above Transformers The Ride in Universal Studios Florida",
+            "est": "~15 min",
+            "express": true
+          },
+          {
+            "id": "mon-optimus",
+            "title": "Optimus Prime, Bumblebee or Megatron",
+            "note": "",
+            "tag": "",
+            "optional": true,
+            "kind": "meet",
+            "meet": true,
+            "est": "~15 min",
+            "maybe": true
           },
           {
             "id": "mon-minions",
@@ -551,67 +743,189 @@ window.TRIP_DAYS = [
             "note": "",
             "tag": "",
             "optional": false,
-            "description": "A motion simulator that turns you into a Minion for a chaotic adventure with Gru.",
-            "kind": "ride"
+            "description": "Motion simulator with Gru and the Minions.",
+            "kind": "ride",
+            "est": "~15 min",
+            "express": true,
+            "photo": "photos/mon-minions.jpg",
+            "photoAlt": "Despicable Me Minion Mayhem"
+          },
+          {
+            "id": "mon-minion-meet",
+            "title": "Minions",
+            "note": "",
+            "tag": "",
+            "optional": true,
+            "kind": "meet",
+            "meet": true,
+            "est": "~15 min",
+            "maybe": true
           },
           {
             "id": "mon-villain",
             "title": "Illumination’s Villain-Con Minion Blast",
-            "description": "Stand on a moving walkway and blast targets in a competitive screen-based game.",
+            "description": "Moving-walkway blaster game.",
             "note": "",
             "tag": "IF TIME",
             "optional": true,
             "kind": "ride",
             "photo": "photos/mon-villain.jpg",
-            "photoAlt": "Illumination’s Villain-Con Minion Blast"
-          },
-          {
-            "id": "mon-fallon",
-            "title": "Race Through New York Starring Jimmy Fallon",
-            "description": "A motion-simulator race through New York with 3-D screens and Tonight Show jokes.",
-            "note": "",
-            "tag": "IF TIME",
-            "optional": true,
-            "kind": "ride",
-            "photo": "photos/mon-fallon.jpg",
-            "photoAlt": "Race Through New York Starring Jimmy Fallon"
+            "photoAlt": "Illumination’s Villain-Con Minion Blast",
+            "est": "~15 min",
+            "express": true
           }
         ]
       },
       {
-        "time": "LATE AFTERNOON",
+        "time": "2–4 PM · ~2 HR · EXPRESS",
+        "name": "Hollywood → E.T. → DreamWorks → Springfield",
+        "items": [
+          {
+            "id": "mon-bourne",
+            "title": "The Bourne Stuntacular",
+            "description": "Live stunts with giant screens.",
+            "note": "In Hollywood, just past Minion Land. Arrive 10–15 minutes early.",
+            "tag": "",
+            "optional": true,
+            "kind": "show",
+            "show": true,
+            "est": "~40 min",
+            "express": true
+          },
+          {
+            "id": "mon-et",
+            "title": "E.T. Adventure",
+            "note": "",
+            "tag": "",
+            "optional": false,
+            "description": "Flying bike ride to E.T.’s planet.",
+            "kind": "ride",
+            "photo": "photos/mon-et.jpg",
+            "photoAlt": "Guests smile and point on ET Adventure in Universal Studios Florida",
+            "est": "~15 min",
+            "express": true
+          },
+          {
+            "id": "mon-trolls",
+            "title": "Trolls Trollercoaster",
+            "description": "Short family coaster.",
+            "note": "",
+            "tag": "IF TIME",
+            "optional": true,
+            "kind": "ride",
+            "photo": "photos/mon-trolls.jpg",
+            "photoAlt": "A father and son riding Trolls Trollercoaster in DreamWorks Land",
+            "est": "~10 min",
+            "express": true
+          },
+          {
+            "id": "mon-shrek",
+            "title": "Shrek, Fiona & Donkey",
+            "note": "",
+            "tag": "",
+            "optional": true,
+            "kind": "meet",
+            "meet": true,
+            "est": "~15 min",
+            "maybe": true
+          },
+          {
+            "id": "mon-shrekzel",
+            "title": "Shrekzel",
+            "description": "",
+            "note": "The ogre-shaped pretzel at Swamp Snacks in DreamWorks Land makes a fun shared bite.",
+            "tag": "",
+            "optional": true,
+            "photo": "photos/mon-shrekzel.jpg",
+            "photoAlt": "A Shrekzel from Swamp Snacks",
+            "est": "~10 min",
+            "food": "snack"
+          },
+          {
+            "id": "mon-kang",
+            "title": "Kang & Kodos’ Twirl ’n’ Hurl",
+            "description": "Gentle spinning saucers.",
+            "note": "",
+            "tag": "",
+            "optional": true,
+            "kind": "ride",
+            "photo": "photos/mon-kang.jpg",
+            "photoAlt": "Guests spin past on Kang and Kodos' Twirl 'n' Hurl in Universal Studios Florida",
+            "est": "~10 min",
+            "express": true,
+            "maybe": true
+          },
+          {
+            "id": "mon-donut",
+            "title": "Lard Lad: share the giant Big Pink donut",
+            "description": "",
+            "note": "",
+            "tag": "",
+            "optional": true,
+            "photo": "photos/mon-donut.jpg",
+            "photoAlt": "Enjoy a giant pink donut in Springfield at Universal Studios Florida.",
+            "est": "~10 min",
+            "food": "snack"
+          },
+          {
+            "id": "mon-simpsons",
+            "title": "The Simpsons Ride",
+            "note": "",
+            "tag": "",
+            "optional": false,
+            "description": "Simulator ride with the Simpsons.",
+            "kind": "ride",
+            "est": "~15 min",
+            "express": true,
+            "photo": "photos/mon-simpsons.jpg",
+            "photoAlt": "The Simpsons Ride"
+          },
+          {
+            "id": "mon-mib",
+            "title": "MEN IN BLACK Alien Attack",
+            "note": "Last stop, right next to London if you want the train back to Islands.",
+            "tag": "",
+            "optional": false,
+            "description": "Spinning shooter ride. Compete for points.",
+            "kind": "ride",
+            "photo": "photos/mon-mib.jpg",
+            "photoAlt": "A group of guests riding Men in Black: Alien Attack in Universal Studios Florida",
+            "est": "~15 min",
+            "express": true
+          }
+        ]
+      },
+      {
+        "time": "4–7 PM · FREE TIME",
         "name": "Choose your finish",
         "items": [
           {
             "id": "mon-train",
             "title": "Optional: Hogwarts Express back to Islands",
-            "note": "Only hop once your Studios priorities are done. Allow time for the train queue; Islands closes at 8 PM.",
+            "note": "Only if you’ll be out of Islands by about 7:10. Walking from Islands to Toothsome takes about 15 minutes, and your reservation is at 7:30.",
             "tag": "OPTIONAL",
             "optional": true,
-            "description": "A themed train journey between parks, with a different wizarding story in each direction.",
+            "description": "Wizarding train ride between the parks.",
             "kind": "ride",
             "photo": "photos/mon-train-to-studios.jpg",
-            "photoAlt": "Hogwarts Express Train"
-          },
-          {
-            "id": "mon-repeat",
-            "title": "Optional: one more favorite at Islands",
-            "note": "Use standby or an eligible unused Express entry. Do not count on a last-minute queue staying open.",
-            "tag": "OPTIONAL",
-            "optional": true
+            "photoAlt": "Hogwarts Express Train",
+            "est": "~30–45 min"
           }
         ]
       },
       {
-        "time": "AFTER THE PARKS",
+        "time": "7:30 PM · BOOKED · ~1½ HR",
         "name": "Make a birthday night of it",
         "items": [
           {
             "id": "mon-dinner",
             "title": "Birthday dinner: Toothsome Chocolate Emporium",
-            "note": "CityWalk’s whimsical steampunk restaurant is a fun celebration pick. Reserve ahead if available; dinner is not booked. Save room to share a signature milkshake.",
+            "note": "Toothsome is at the Studios end of CityWalk, about a 10–15 minute walk from the back of the park. Leave by about 7:10.",
             "tag": "BIRTHDAY MOMENT",
-            "optional": false
+            "optional": false,
+            "est": "~1–1½ hr",
+            "food": "meal",
+            "booked": "7:30 PM"
           },
           {
             "id": "mon-shake",
@@ -621,37 +935,28 @@ window.TRIP_DAYS = [
             "tag": "BIRTHDAY MOMENT",
             "optional": true,
             "photo": "photos/mon-shake.jpg",
-            "photoAlt": "Share a Toothsome signature milkshake"
-          }
-        ]
-      },
-      {
-        "time": "REFERENCE · NOT IN YOUR RIDE TOTAL",
-        "name": "Retired attractions",
-        "items": [
-          {
-            "id": "mon-fast-closed",
-            "title": "Fast & Furious – Supercharged",
-            "description": "A former tram-style screen adventure through a high-speed chase.",
-            "note": "Permanently closed in August 2026.",
-            "tag": "CLOSED",
-            "optional": true,
-            "unavailable": true
-          },
-          {
-            "id": "mon-rockit-closed",
-            "title": "Hollywood Rip Ride Rockit",
-            "description": "A former outdoor music coaster with a vertical lift.",
-            "note": "Permanently closed; its replacement is not part of this trip.",
-            "tag": "CLOSED",
-            "optional": true,
-            "unavailable": true
+            "photoAlt": "Share a Toothsome signature milkshake",
+            "est": "~15 min",
+            "food": "snack"
           }
         ]
       }
     ],
     "alert": "Islands early admission begins at 8 AM; Studios opens at 10 AM with no early admission. Train boarding time is unconfirmed—check that morning. Studios closes at 7 PM; Islands closes at 8 PM. No Halloween Horror Nights tonight.",
-    "hoursExtra": "Islands 9 AM – 8 PM"
+    "hoursExtra": "Islands 9 AM – 8 PM",
+    "tabHours": [
+      "10 AM–7 PM"
+    ],
+    "logos": [
+      {
+        "src": "logos/islands.png",
+        "alt": "Universal Islands of Adventure logo"
+      },
+      {
+        "src": "logos/studios.png",
+        "alt": "Universal Studios Florida logo"
+      }
+    ]
   },
   {
     "id": "tue",
@@ -664,36 +969,51 @@ window.TRIP_DAYS = [
     "hours": "10 AM – 8 PM",
     "early": "9 AM",
     "color": "blue",
-    "intro": "Stay at Epic all day. Group rides by world and make the two biggest priorities your morning focus.",
-    "tip": "Confirm that your Express pass includes Epic Universe on October 6. Park admission and Express coverage are separate.",
+    "intro": "Loop through the worlds one at a time: Ministry of Magic, Isle of Berk, Super Nintendo World for lunch, then Dark Universe for dinner.",
+    "tip": "Express works once per ride at Epic and covers every ride except Dragon Racer’s Rally. It doesn’t work during early admission, so Battle at the Ministry is standby first thing.",
     "sections": [
       {
-        "time": "8:15–8:30 AM",
+        "time": "7:30–9 AM · ~1½ HR",
         "name": "Ready for a new universe",
         "items": [
+          {
+            "id": "tue-breakfast",
+            "title": "Breakfast: Cosmos Cafe at the hotel",
+            "note": "Just off the Stella Nova lobby. Grab-and-go pastries and sandwiches, and the coffee counter serves Starbucks. Leave for the shuttle by 7:55.",
+            "tag": "",
+            "optional": false,
+            "food": "meal",
+            "est": "~20 min",
+            "photo": "photos/hotel-cosmos.jpg",
+            "photoAlt": "Cosmos Cafe dining room at Stella Nova",
+            "booked": "7:30 AM",
+            "bookedLabel": "MEET AT"
+          },
           {
             "id": "tue-gate",
             "title": "Arrive at the park entrance",
             "note": "Bring hotel room keys for early admission. Check today’s participating early-entry rides in the official app.",
             "tag": "GET READY",
-            "optional": false
+            "optional": false,
+            "est": "~30–45 min"
           }
         ]
       },
       {
-        "time": "9 AM · EARLY ADMISSION",
-        "name": "Start with a headliner",
+        "time": "9–10:15 AM · ~1¼ HR · STANDBY",
+        "name": "Wizarding World: Ministry of Magic",
         "items": [
           {
             "id": "tue-ministry",
             "title": "Harry Potter and the Battle at the Ministry",
-            "note": "Start here or at Mine-Cart Madness, depending on early-entry availability and operating status.",
+            "note": "Ride standby at early admission. Your Express entry still works later, so you can ride twice.",
             "tag": "PRIORITY",
             "optional": false,
-            "description": "A dramatic indoor adventure with moving lift-style ride vehicles, elaborate sets, and screen effects.",
+            "description": "Epic Harry Potter dark ride.",
             "kind": "ride",
             "photo": "photos/tue-ministry.jpg",
-            "photoAlt": "The interior of Battle at the Ministry at Epic Universe"
+            "photoAlt": "The interior of Battle at the Ministry at Epic Universe",
+            "est": "~45–60 min"
           },
           {
             "id": "tue-wand",
@@ -703,119 +1023,62 @@ window.TRIP_DAYS = [
             "tag": "WAND TIME",
             "optional": true,
             "photo": "photos/tue-wand.jpg",
-            "photoAlt": "The exterior of Cosme Acajor Baguettes Magique in Epic Universe"
-          },
-          {
-            "id": "tue-mine",
-            "title": "Mine-Cart Madness",
-            "note": "Make this the next major priority once available; keep the order flexible.",
-            "tag": "PRIORITY",
-            "optional": false,
-            "description": "A family coaster that creates the illusion of jumping gaps in Donkey Kong’s broken track.",
-            "kind": "ride",
-            "photo": "photos/tue-mine.jpg",
-            "photoAlt": "A family riding Mine-Cart Madness in SUPER NINTENDO WORLD"
+            "photoAlt": "The exterior of Cosme Acajor Baguettes Magique in Epic Universe",
+            "est": "~20 min"
           }
         ]
       },
       {
-        "time": "MORNING",
-        "name": "Play your way through Nintendo",
+        "time": "10:15 AM–12 PM · ~1¾ HR",
+        "name": "Isle of Berk",
         "items": [
-          {
-            "id": "tue-mario",
-            "title": "Mario Kart: Bowser’s Challenge",
-            "note": "",
-            "tag": "",
-            "optional": false,
-            "description": "A slow-moving interactive dark ride using augmented-reality goggles to race and throw shells.",
-            "kind": "ride",
-            "photo": "photos/tue-mario.jpg",
-            "photoAlt": "Two girls smile and ride Mario Kart: Bowser's Challenge in SUPER NINTENDO WORLD at Epic Universe"
-          },
-          {
-            "id": "tue-yoshi",
-            "title": "Yoshi’s Adventure",
-            "note": "",
-            "tag": "",
-            "optional": false,
-            "description": "A gentle elevated ride on Yoshi, with colorful scenery and an egg-spotting game.",
-            "kind": "ride"
-          }
-        ]
-      },
-      {
-        "time": "MIDDAY",
-        "name": "Refuel in your current world",
-        "items": [
-          {
-            "id": "tue-lunch",
-            "title": "Lunch: Toadstool Cafe",
-            "note": "A playful Nintendo-themed meal while you are in this world. Check today’s entry/booking process in the official app. Alternative: Cafe L’air de la Sirène if you are still in wizarding Paris.",
-            "tag": "LUNCH",
-            "optional": false,
-            "photo": "photos/tue-lunch.jpg",
-            "photoAlt": "The interior of Toadstool Cafe in SUPER NINTENDO WORLD"
-          }
-        ]
-      },
-      {
-        "time": "AFTERNOON",
-        "name": "Monsters, then dragons",
-        "items": [
-          {
-            "id": "tue-monsters",
-            "title": "Monsters Unchained: The Frankenstein Experiment",
-            "note": "A Dark Universe priority.",
-            "tag": "PRIORITY",
-            "optional": false,
-            "description": "An intense indoor robot-arm ride with huge monster figures, darkness, and sudden movements.",
-            "kind": "ride",
-            "photo": "photos/tue-monsters.jpg",
-            "photoAlt": "Monsters Unchained: The Frankenstein Experiment in Dark Universe at Epic Universe"
-          },
-          {
-            "id": "tue-werewolf",
-            "title": "Curse of the Werewolf",
-            "note": "",
-            "tag": "",
-            "optional": false,
-            "description": "A family spinning coaster with twisting turns and a different view as your car rotates.",
-            "kind": "ride",
-            "photo": "photos/tue-werewolf.jpg",
-            "photoAlt": "Two people laughing and riding Curse of the Werewolf at Universal Epic Universe."
-          },
-          {
-            "id": "tue-pretzel",
-            "title": "Dark Universe: Frankenstein pretzel",
-            "description": "",
-            "note": "A fun savory photo snack at De Lacey’s Cottage. Pick this or the Berk cone if you only want one extra bite.",
-            "tag": "SNACK PICK",
-            "optional": true,
-            "photo": "photos/tue-pretzel.jpg",
-            "photoAlt": "Frankenstein pretzel from De Lacy's Cottage."
-          },
           {
             "id": "tue-hiccup",
             "title": "Hiccup’s Wing Gliders",
             "note": "",
             "tag": "",
             "optional": false,
-            "description": "A family launch coaster swooping over and around Berk like a dragon in flight.",
+            "description": "Family launch coaster over Berk.",
             "kind": "ride",
             "photo": "photos/tue-hiccup.jpg",
-            "photoAlt": "Guests riding Hiccup's Wing Gliders in Epic Universe"
+            "photoAlt": "Guests riding Hiccup's Wing Gliders in Epic Universe",
+            "est": "~15 min",
+            "express": true
+          },
+          {
+            "id": "tue-toothless",
+            "title": "Hiccup, Astrid & Toothless",
+            "note": "",
+            "tag": "",
+            "optional": true,
+            "kind": "meet",
+            "meet": true,
+            "est": "~15–20 min",
+            "maybe": true
           },
           {
             "id": "tue-rally",
             "title": "Dragon Racer’s Rally",
-            "note": "",
+            "note": "The only Epic ride without Express, so this one is standby.",
             "tag": "",
             "optional": false,
-            "description": "A spinning aerial ride where your wing controls can add tilts and full barrel rolls.",
+            "description": "Spinning flyer you can barrel-roll.",
             "kind": "ride",
             "photo": "photos/tue-rally.jpg",
-            "photoAlt": "Dragon Racers Rally in Epic Universe"
+            "photoAlt": "Dragon Racers Rally in Epic Universe",
+            "est": "~25 min"
+          },
+          {
+            "id": "tue-dragon",
+            "title": "The Untrainable Dragon",
+            "description": "Stage show with a giant flying dragon.",
+            "note": "Catch a morning showtime while you’re in Berk. If none fits, skip it or come back in the afternoon.",
+            "tag": "",
+            "optional": true,
+            "kind": "show",
+            "show": true,
+            "est": "~40 min",
+            "express": true
           },
           {
             "id": "tue-fyre",
@@ -823,37 +1086,43 @@ window.TRIP_DAYS = [
             "note": "",
             "tag": "OPTIONAL",
             "optional": true,
-            "description": "A slow boat ride with water cannons for soaking targets and fellow riders.",
+            "description": "Boat ride with water cannons.",
             "kind": "ride",
             "photo": "photos/tue-fyre.jpg",
-            "photoAlt": "Fyre Drill in Epic Universe"
+            "photoAlt": "Fyre Drill in Epic Universe",
+            "est": "~10 min",
+            "express": true
           },
           {
             "id": "tue-cone",
             "title": "Berk: a mac-and-cheese cone",
             "description": "",
-            "note": "Find this savory snack at Hooligan’s Grog & Gruel. Choose from the current toppings; share one if dinner is soon.",
-            "tag": "MUST-TRY SNACK",
+            "note": "Hooligan’s Grog & Gruel. Share one; lunch is coming up.",
+            "tag": "",
             "optional": true,
             "photo": "photos/tue-cone.jpg",
-            "photoAlt": "Mac and Cheese cones from Hooligan's Grog and Gruel at Epic Universe"
+            "photoAlt": "Mac and Cheese cones from Hooligan's Grog and Gruel at Epic Universe",
+            "est": "~10 min",
+            "food": "snack"
           }
         ]
       },
       {
-        "time": "EVENING · CLOSES 8 PM",
-        "name": "One last star-filled lap",
+        "time": "12–12:30 PM · ~30 MIN · EXPRESS",
+        "name": "Celestial Park",
         "items": [
           {
             "id": "tue-stardust",
             "title": "Stardust Racers",
-            "note": "Ride earlier if weather looks uncertain. An evening repeat is a bonus, not a reason to miss the first ride.",
+            "note": "Use Express now, in case weather closes it later.",
             "tag": "PRIORITY",
             "optional": false,
-            "description": "A fast dueling launch coaster with airtime, inversions, and intertwined racing tracks.",
+            "description": "Dueling launch coaster.",
             "kind": "ride",
             "photo": "photos/tue-stardust.jpg",
-            "photoAlt": "Guests smile as they ride Stardust Racers in Celestial Park"
+            "photoAlt": "Guests smile as they ride Stardust Racers in Celestial Park",
+            "est": "~20 min",
+            "express": true
           },
           {
             "id": "tue-carousel",
@@ -861,23 +1130,214 @@ window.TRIP_DAYS = [
             "note": "",
             "tag": "OPTIONAL",
             "optional": true,
-            "description": "A gentle celestial carousel with animal figures that rise and rotate beneath a starry canopy.",
+            "description": "Starry spinning carousel.",
             "kind": "ride",
             "photo": "photos/tue-carousel.jpg",
-            "photoAlt": "Constellation Carousel in Celestial Park at Epic Universe"
+            "photoAlt": "Constellation Carousel in Celestial Park at Epic Universe",
+            "est": "~10 min",
+            "express": true
+          }
+        ]
+      },
+      {
+        "time": "12:30–2:30 PM · ~2 HR · EXPRESS",
+        "name": "Super Nintendo World",
+        "items": [
+          {
+            "id": "tue-lunch",
+            "title": "Lunch: Toadstool Cafe",
+            "note": "Join the Toadstool Cafe waitlist in the Universal app first thing in the morning. Aim to eat around 12:30.",
+            "tag": "",
+            "optional": false,
+            "photo": "photos/tue-lunch.jpg",
+            "photoAlt": "The interior of Toadstool Cafe in SUPER NINTENDO WORLD",
+            "est": "~1 hr",
+            "food": "meal"
           },
           {
-            "id": "tue-finale",
-            "title": "Dinner: Pizza Moon & one last birthday photo",
-            "note": "A quick pizza dinner in Celestial Park keeps the evening flexible. Prefer a sit-down finale? Try Blue Dragon Pan-Asian Restaurant and check reservations ahead. Eat before closing, then enjoy the lights.",
+            "id": "tue-mario-meet",
+            "title": "Mario, Luigi & Toad",
+            "note": "",
+            "tag": "",
+            "optional": true,
+            "kind": "meet",
+            "meet": true,
+            "est": "~20 min",
+            "maybe": true
+          },
+          {
+            "id": "tue-peach",
+            "title": "Princess Peach",
+            "note": "",
+            "tag": "",
+            "optional": true,
+            "kind": "meet",
+            "meet": true,
+            "est": "~15–20 min",
+            "maybe": true
+          },
+          {
+            "id": "tue-mine",
+            "title": "Mine-Cart Madness",
+            "note": "The longest standby in the park, so definitely use Express here.",
+            "tag": "PRIORITY",
+            "optional": false,
+            "description": "Coaster that seems to jump broken track.",
+            "kind": "ride",
+            "photo": "photos/tue-mine.jpg",
+            "photoAlt": "A family riding Mine-Cart Madness in SUPER NINTENDO WORLD",
+            "est": "~25 min",
+            "express": true
+          },
+          {
+            "id": "tue-dk",
+            "title": "Donkey Kong",
+            "note": "",
+            "tag": "",
+            "optional": true,
+            "kind": "meet",
+            "meet": true,
+            "est": "~15 min",
+            "maybe": true
+          },
+          {
+            "id": "tue-mario",
+            "title": "Mario Kart: Bowser’s Challenge",
+            "note": "",
+            "tag": "",
+            "optional": false,
+            "description": "Mario Kart with AR goggles.",
+            "kind": "ride",
+            "photo": "photos/tue-mario.jpg",
+            "photoAlt": "Two girls smile and ride Mario Kart: Bowser's Challenge in SUPER NINTENDO WORLD at Epic Universe",
+            "est": "~20 min",
+            "express": true
+          },
+          {
+            "id": "tue-yoshi",
+            "title": "Yoshi’s Adventure",
+            "note": "",
+            "tag": "",
+            "optional": false,
+            "description": "Gentle ride on Yoshi’s back.",
+            "kind": "ride",
+            "est": "~15 min",
+            "express": true,
+            "photo": "photos/tue-yoshi.jpg",
+            "photoAlt": "Yoshi's Adventure"
+          }
+        ]
+      },
+      {
+        "time": "2:30–3:45 PM · ~1¼ HR · EXPRESS",
+        "name": "Dark Universe",
+        "items": [
+          {
+            "id": "tue-monsters",
+            "title": "Monsters Unchained: The Frankenstein Experiment",
+            "note": "",
+            "tag": "PRIORITY",
+            "optional": false,
+            "description": "Intense robot-arm ride with monsters.",
+            "kind": "ride",
+            "photo": "photos/tue-monsters.jpg",
+            "photoAlt": "Monsters Unchained: The Frankenstein Experiment in Dark Universe at Epic Universe",
+            "est": "~20 min",
+            "express": true
+          },
+          {
+            "id": "tue-werewolf",
+            "title": "Curse of the Werewolf",
+            "note": "",
+            "tag": "",
+            "optional": false,
+            "description": "Spinning family coaster.",
+            "kind": "ride",
+            "photo": "photos/tue-werewolf.jpg",
+            "photoAlt": "Two people laughing and riding Curse of the Werewolf at Universal Epic Universe.",
+            "est": "~15 min",
+            "express": true
+          },
+          {
+            "id": "tue-frank",
+            "title": "Frankenstein’s Monster & the Bride",
+            "note": "",
+            "tag": "",
+            "optional": true,
+            "kind": "meet",
+            "meet": true,
+            "est": "~15 min",
+            "maybe": true
+          },
+          {
+            "id": "tue-pretzel",
+            "title": "Dark Universe: Frankenstein pretzel",
+            "description": "",
+            "note": "De Lacey’s Cottage. Skip it if you’re saving room for dinner.",
+            "tag": "",
+            "optional": true,
+            "photo": "photos/tue-pretzel.jpg",
+            "photoAlt": "Frankenstein pretzel from De Lacy's Cottage.",
+            "est": "~10 min",
+            "food": "snack"
+          }
+        ]
+      },
+      {
+        "time": "3:45–5:30 PM · FREE TIME",
+        "name": "Ministry of Magic: show & second ride",
+        "items": [
+          {
+            "id": "tue-cirque",
+            "title": "Le Cirque Arcanus",
+            "description": "Magical circus with Fantastic Beasts puppets.",
+            "note": "In Ministry of Magic, right next to Dark Universe. Check showtimes in the app.",
+            "tag": "",
+            "optional": true,
+            "kind": "show",
+            "show": true,
+            "est": "~40 min",
+            "express": true
+          },
+          {
+            "id": "tue-repeat",
+            "title": "Optional: ride Battle at the Ministry again",
+            "note": "Use your Express entry, or pick another favourite. Waits for Ministry often drop late in the day.",
+            "tag": "YOUR CHOICE",
+            "optional": true,
+            "kind": "ride",
+            "est": "~30–45 min",
+            "photo": "photos/tue-ministry.jpg",
+            "photoAlt": "The interior of Battle at the Ministry at Epic Universe"
+          }
+        ]
+      },
+      {
+        "time": "5:30–6:30 PM · ~1 HR",
+        "name": "Birthday dinner in Dark Universe",
+        "items": [
+          {
+            "id": "tue-dinner",
+            "title": "Birthday dinner: Das Stakehaus",
+            "note": "Vampire-themed steakhouse in Dark Universe. Grab a table and order by QR code or mobile order in the app. Aim for about 5:30–6 PM.",
             "tag": "BIRTHDAY MOMENT",
             "optional": false,
-            "photo": "photos/tue-finale.jpg",
-            "photoAlt": "The exterior of Pizza Moon in Celestial Park"
+            "description": "Candlelit vampire steakhouse.",
+            "est": "~1 hr",
+            "food": "meal"
           }
         ]
       }
     ],
-    "alert": "No Halloween Horror Nights is scheduled tonight. All times are flexible targets; ride availability and Express participation can change."
+    "alert": "No Halloween Horror Nights is scheduled tonight. All times are flexible targets; ride availability and Express participation can change.",
+    "tabHours": [
+      "9 AM–8 PM"
+    ],
+    "logos": [
+      {
+        "src": "logos/epic.png",
+        "alt": "Universal Epic Universe logo"
+      }
+    ]
   }
 ];

@@ -109,3 +109,5 @@ html{background:#fffafc}
 .sticky-nav.stuck::before{background:#fffafc;-webkit-backdrop-filter:none;backdrop-filter:none}
 .top-cover{position:fixed;top:0;left:0;right:0;height:env(safe-area-inset-top);background:#fffafc;z-index:20;pointer-events:none}
 .top-cover::before{content:"";position:absolute;left:0;right:0;bottom:100%;height:300px;background:#fffafc}
+.tag.express,.item .tag.express-tag{background:#ffd23f;color:#4a3300}
+.tag.no-express-tag{background:#fff;color:#b3261e;border:1.5px solid #e46a62}

@@ -60,3 +60,4 @@
 .item-description{color:var(--muted)}.item-description+.item-note{margin-top:2px}
 .booked{display:flex;width:fit-content;overflow:hidden}
 .booked{white-space:nowrap}
+.reset-button{background:transparent;border:1px solid #e0b9ca;color:var(--muted);border-radius:999px;padding:9px 16px;font-size:13px;font-weight:600}

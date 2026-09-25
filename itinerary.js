@@ -153,12 +153,10 @@ window.TRIP_DAYS = [
         "items": [
           {
             "id": "sun-lunch",
-            "title": "Lunch: Three Broomsticks",
-            "note": "A themed British-style lunch in Hogsmeade. You’re at Mythos for dinner, so keep lunch light.",
+            "title": "Lunch: The Burger Digs",
+            "note": "Upstairs in the Jurassic Park Discovery Center, on your way to Kong. Air-conditioned. Keep it light: Mythos is dinner.",
             "tag": "",
             "optional": false,
-            "photo": "photos/sun-lunch.jpg",
-            "photoAlt": "A family dines at the Three Broomsticks in Universal Islands of Adventure",
             "est": "~45 min",
             "food": "meal",
             "mobileOrder": true

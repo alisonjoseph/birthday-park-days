@@ -136,3 +136,8 @@ body{min-height:100dvh;background-image:radial-gradient(ellipse 45% 30% at 100% 
 @media(min-width:800px){.sticky-nav.stuck{clip-path:none}}
 .park-heading .eyebrow{margin-bottom:4px}
 .sticky-nav .days,.sticky-nav .filters{background:transparent}
+.hero{align-items:flex-end;padding-top:14px}
+.hero-side{display:flex;flex-direction:column;align-items:flex-end;flex-shrink:0;gap:4px}
+.hero-side .help-button{margin-right:0}
+.topbar:empty{display:none}
+.park-title{align-items:flex-start}.park-heading .eyebrow{line-height:1.2;margin-bottom:2px}.park-logos{margin-top:-4px}

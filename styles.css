@@ -78,3 +78,7 @@
 .hero-photo{width:122px}@media(min-width:600px){.hero-photo{width:140px}}
 .hero{align-items:flex-end}.hero .trip-heading h1,.hero h1{margin-bottom:0}.hero-photo{margin-bottom:0}
 .brand-cake{width:52px;height:52px}
+.trip-eyebrow{display:flex;flex-wrap:wrap;column-gap:1.4em;overflow:hidden}
+.trip-eyebrow span{white-space:nowrap}
+.trip-eyebrow .dot-sep{position:relative}
+.trip-eyebrow .dot-sep::before{content:"·";position:absolute;left:-.95em}

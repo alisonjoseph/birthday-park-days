@@ -124,3 +124,7 @@ body{background-color:#fffafc}
 .top-cover{display:none}
 body.nav-stuck .top-cover{display:block}
 .item-body .tag{margin-right:6px}
+html,body{background-color:#fffafc}
+body{min-height:100dvh;background-image:radial-gradient(ellipse 45% 30% at 100% 6%,#fde3ee 0,transparent 70%),radial-gradient(ellipse 45% 30% at 0% 32%,#fde8f1 0,transparent 70%),radial-gradient(ellipse 45% 30% at 100% 60%,#fce4ef 0,transparent 70%),radial-gradient(ellipse 45% 30% at 0% 88%,#fde8f1 0,transparent 70%);background-attachment:fixed}
+.app{background:transparent;box-shadow:none;border-radius:0}
+@media(min-width:800px){.app{margin:0 auto}.sticky-nav.stuck{clip-path:inset(-100vmax -100vmax 0 -100vmax)}}

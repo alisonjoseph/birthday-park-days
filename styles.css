@@ -111,3 +111,6 @@ html{background:#fffafc}
 .top-cover::before{content:"";position:absolute;left:0;right:0;bottom:100%;height:300px;background:#fffafc}
 .tag.express,.item .tag.express-tag{background:#ffd23f;color:#4a3300}
 .tag.no-express-tag{background:#fff;color:#b3261e;border:1.5px solid #e46a62}
+.top-cover{height:max(env(safe-area-inset-top),6px);background-color:#fffafc}
+body{background-color:#fffafc}
+.topbar{align-items:last baseline}

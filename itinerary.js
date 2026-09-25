@@ -420,7 +420,9 @@ window.TRIP_DAYS = [
             "optional": false,
             "est": "~1¼ hr",
             "food": "meal",
-            "booked": "5:30 PM"
+            "booked": "5:30 PM",
+            "photo": "photos/sun-dinner.jpg",
+            "photoAlt": "Family dining at Mythos"
           }
         ]
       },
@@ -570,7 +572,9 @@ window.TRIP_DAYS = [
             "tag": "",
             "optional": false,
             "est": "~30 min",
-            "food": "meal"
+            "food": "meal",
+            "photo": "photos/mon-breakfast.jpg",
+            "photoAlt": "Family eating at Three Broomsticks"
           }
         ]
       },
@@ -653,7 +657,9 @@ window.TRIP_DAYS = [
             "tag": "",
             "optional": false,
             "est": "~45 min",
-            "food": "meal"
+            "food": "meal",
+            "photo": "photos/mon-lunch.jpg",
+            "photoAlt": "Inside the Leaky Cauldron"
           },
           {
             "id": "mon-icecream",
@@ -663,7 +669,9 @@ window.TRIP_DAYS = [
             "tag": "",
             "optional": true,
             "est": "~15 min",
-            "food": "snack"
+            "food": "snack",
+            "photo": "photos/mon-icecream.jpg",
+            "photoAlt": "Butterbeer soft serve at Florean Fortescue's"
           }
         ]
       },
@@ -785,7 +793,9 @@ window.TRIP_DAYS = [
             "kind": "show",
             "show": true,
             "est": "~40 min",
-            "express": true
+            "express": true,
+            "photo": "photos/mon-bourne.jpg",
+            "photoAlt": "The Bourne Stuntacular theater"
           },
           {
             "id": "mon-et",
@@ -919,7 +929,9 @@ window.TRIP_DAYS = [
             "optional": false,
             "est": "~1–1½ hr",
             "food": "meal",
-            "booked": "7:30 PM"
+            "booked": "7:30 PM",
+            "photo": "photos/mon-dinner.jpg",
+            "photoAlt": "A Toothsome milkshake with a birthday candle"
           },
           {
             "id": "mon-shake",

@@ -82,3 +82,8 @@
 .trip-eyebrow span{white-space:nowrap}
 .trip-eyebrow .dot-sep{position:relative}
 .trip-eyebrow .dot-sep::before{content:"·";position:absolute;left:-.95em}
+.item.maybe{outline:none;border-top:1.5px dashed #dcb6c8;border-bottom:1.5px dashed #dcb6c8}
+.item.maybe+.item.maybe{border-top:0}
+.item:not(.maybe):has(+.item.maybe){border-bottom:0}
+.items>.item.maybe:first-child{border-top:0}
+.items>.item.maybe:last-child{border-bottom:0}

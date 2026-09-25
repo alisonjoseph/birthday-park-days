@@ -62,7 +62,8 @@ window.TRIP_DAYS = [
             "kind": "ride",
             "photo": "photos/sun-hagrid.jpg",
             "photoAlt": "People riding Hagrid's Magical Creatures Motorbike Adventure.",
-            "est": "~45–60 min"
+            "est": "~45–60 min",
+            "noExpress": true
           },
           {
             "id": "sun-veloci",
@@ -1072,7 +1073,8 @@ window.TRIP_DAYS = [
             "kind": "ride",
             "photo": "photos/tue-rally.jpg",
             "photoAlt": "Dragon Racers Rally in Epic Universe",
-            "est": "~25 min"
+            "est": "~25 min",
+            "noExpress": true
           },
           {
             "id": "tue-dragon",

@@ -87,3 +87,4 @@
 .item:not(.maybe):has(+.item.maybe){border-bottom:0}
 .items>.item.maybe:first-child{border-top:0}
 .items>.item.maybe:last-child{border-bottom:0}
+.tag.no-express-tag{background:#fff4d6;color:#8a4b00;border:1.5px solid #e0a43a;margin-right:6px}

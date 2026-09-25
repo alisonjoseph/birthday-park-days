@@ -65,3 +65,12 @@
 .hero-text{flex:1;min-width:0}
 .hero-photo{width:150px;height:auto;flex-shrink:0;mix-blend-mode:multiply;margin:-10px -8px -6px 0}
 @media(min-width:600px){.hero-photo{width:200px}}
+.item.food{background:#f1f7fd;box-shadow:inset 4px 0 0 #5b9bd5}
+.item.food-snack{box-shadow:inset 4px 0 0 #9cc4e8}
+.tag.food-tag{background:#5b9bd5;color:#fff}
+.item.food-snack .tag.food-tag{background:#d6e7f7;color:#1f4d78}
+.item.food.is-booked{box-shadow:inset 5px 0 0 #52253d;background:#f1f7fd}
+.hero-photo{margin-bottom:4px}@media(min-width:600px){.hero-photo{width:170px}}
+.hero-photo{-webkit-mask-image:linear-gradient(to bottom,#000 55%,transparent 98%);mask-image:linear-gradient(to bottom,#000 55%,transparent 98%)}
+.item.done .item-description,.item.done .item-note,.item.done .item-est,.item.done .tag,.item.done .booked,.item.done .item-photo{display:none}
+.item.done{padding-top:14px;padding-bottom:14px}

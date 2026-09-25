@@ -951,7 +951,7 @@ window.TRIP_DAYS = [
           {
             "id": "mon-train",
             "title": "Optional: Hogwarts Express back to Islands",
-            "note": "Only if you’ll be out of Islands by about 7:10. Walking from Islands to Toothsome takes about 15 minutes, and your reservation is at 7:30.",
+            "note": "Only if you’ll be out of Islands by about 7:25. Walking from Islands to Toothsome takes about 15 minutes, and your reservation is at 7:45.",
             "tag": "OPTIONAL",
             "optional": true,
             "kind": "ride",
@@ -963,18 +963,18 @@ window.TRIP_DAYS = [
         ]
       },
       {
-        "time": "7:30 PM · BOOKED · ~1½ HR",
+        "time": "7:45 PM · BOOKED · ~1½ HR",
         "name": "Make a birthday night of it",
         "items": [
           {
             "id": "mon-dinner",
             "title": "Birthday dinner: Toothsome Chocolate Emporium",
-            "note": "Toothsome is at the Studios end of CityWalk, about a 10–15 minute walk from the back of the park. Leave by about 7:10.",
+            "note": "Toothsome is at the Studios end of CityWalk, about a 10–15 minute walk from the back of the park. Leave by about 7:25.",
             "tag": "BIRTHDAY MOMENT",
             "optional": false,
             "est": "~1–1½ hr",
             "food": "meal",
-            "booked": "7:30 PM",
+            "booked": "7:45 PM",
             "photo": "photos/mon-dinner.jpg",
             "photoAlt": "A Toothsome milkshake with a birthday candle"
           },

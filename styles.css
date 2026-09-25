@@ -74,3 +74,5 @@
 .hero-photo{-webkit-mask-image:linear-gradient(to bottom,#000 55%,transparent 98%);mask-image:linear-gradient(to bottom,#000 55%,transparent 98%)}
 .item.done .item-description,.item.done .item-note,.item.done .item-est,.item.done .tag,.item.done .booked,.item.done .item-photo{display:none}
 .item.done{padding-top:14px;padding-bottom:14px}
+.reset-button.armed{background:#b12f71;border-color:#b12f71;color:#fff}
+.hero-photo{width:122px}@media(min-width:600px){.hero-photo{width:140px}}

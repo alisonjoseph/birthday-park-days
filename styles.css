@@ -148,3 +148,13 @@ body{min-height:100dvh;background-image:radial-gradient(ellipse 45% 30% at 100% 
 .park-heading .eyebrow{white-space:nowrap}
 @media(max-width:480px){.park-logo{height:44px;max-width:74px}.park-logos{gap:4px}}
 .hero-text .brand{align-self:flex-start}
+body{background-color:transparent;background-image:none}
+body::before{content:"";position:fixed;inset:-12%;z-index:-1;pointer-events:none;background-image:radial-gradient(ellipse 45% 30% at 95% 10%,#fcdce9 0,transparent 70%),radial-gradient(ellipse 45% 30% at 5% 36%,#fde4ee 0,transparent 70%),radial-gradient(ellipse 45% 30% at 95% 62%,#fbdfeb 0,transparent 70%),radial-gradient(ellipse 45% 30% at 5% 88%,#fde4ee 0,transparent 70%);animation:cloud-drift 40s ease-in-out infinite alternate;will-change:transform}
+@keyframes cloud-drift{0%{transform:translate3d(-3%,-2%,0) scale(1)}50%{transform:translate3d(2%,1.5%,0) scale(1.04)}100%{transform:translate3d(4%,-1%,0) scale(1.02)}}
+@media(prefers-reduced-motion:reduce){body::before{animation:none}}
+:root{background:#fffafc}
+.sticky-nav{transition:background-color .3s ease}
+.sticky-nav::before{content:"";position:absolute;top:-100vmax;bottom:0;left:-100vmax;right:-100vmax;background:#fffafc;z-index:-1;opacity:0;transition:opacity .3s ease;pointer-events:none}
+.sticky-nav::after{content:"";position:absolute;top:100%;left:-100vmax;right:-100vmax;height:10px;background:linear-gradient(rgba(82,37,61,.07),rgba(82,37,61,0));pointer-events:none;opacity:0;transition:opacity .3s ease}
+.sticky-nav.stuck::before,.sticky-nav.stuck::after{opacity:1}
+@media(prefers-reduced-motion:reduce){.sticky-nav,.sticky-nav::before,.sticky-nav::after{transition:none}}

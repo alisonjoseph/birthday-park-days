@@ -20,7 +20,7 @@ window.TRIP_DAYS = [
           {
             "id": "sun-breakfast",
             "title": "Breakfast: Cosmos Cafe at the hotel",
-            "note": "Just off the Stella Nova lobby. Grab-and-go pastries and sandwiches, and the coffee counter serves Starbucks. Leave for the shuttle by 6:55.",
+            "note": "Leave for the shuttle by 6:55.",
             "tag": "",
             "optional": false,
             "food": "meal",
@@ -33,7 +33,7 @@ window.TRIP_DAYS = [
           {
             "id": "sun-gate",
             "title": "Arrive at the park entrance",
-            "note": "Take the hotel shuttle; confirm its first departure the night before. Bring your room keys and park tickets.",
+            "note": "Take the hotel shuttle. Bring your room keys and park tickets.",
             "tag": "GET READY",
             "optional": false,
             "est": "~30–45 min"
@@ -59,7 +59,6 @@ window.TRIP_DAYS = [
             "note": "No Express on Hagrid’s, so ride it first at early admission when standby is shortest.",
             "tag": "PRIORITY",
             "optional": false,
-            "description": "Motorbike launch coaster with a backward drop.",
             "kind": "ride",
             "photo": "photos/sun-hagrid.jpg",
             "photoAlt": "People riding Hagrid's Magical Creatures Motorbike Adventure.",
@@ -71,7 +70,6 @@ window.TRIP_DAYS = [
             "note": "Right after Hagrid’s, around 9 AM when Express starts. Standby 25 min or less? Ride standby and save Express for this afternoon. Longer? Use Express now.",
             "tag": "PRIORITY",
             "optional": false,
-            "description": "Intense launch coaster with airtime and inversions.",
             "kind": "ride",
             "photo": "photos/sun-veloci.jpg",
             "photoAlt": "VelociCoaster",
@@ -181,7 +179,7 @@ window.TRIP_DAYS = [
           {
             "id": "sun-lunch",
             "title": "Lunch: Three Broomsticks",
-            "note": "A themed British-style lunch in Hogsmeade; roast chicken or fish and chips are good picks. You’re at Mythos for dinner, so keep lunch light.",
+            "note": "A themed British-style lunch in Hogsmeade. You’re at Mythos for dinner, so keep lunch light.",
             "tag": "",
             "optional": false,
             "photo": "photos/sun-lunch.jpg",
@@ -212,7 +210,6 @@ window.TRIP_DAYS = [
             "note": "Next door to Jurassic Park. Walk straight here after lunch.",
             "tag": "",
             "optional": false,
-            "description": "Truck ride into Kong’s island.",
             "kind": "ride",
             "photo": "photos/sun-kong.jpg",
             "photoAlt": "Woman posing with a frightened expression in front of Skull Island Reign of Kong.",
@@ -236,7 +233,7 @@ window.TRIP_DAYS = [
           {
             "id": "sun-ripsaw",
             "title": "Dudley Do-Right’s Ripsaw Falls",
-            "note": "Right after Popeye’s. You may get soaked, so keep phones in a zip bag.",
+            "note": "Right after Popeye’s. You may get soaked.",
             "tag": "WATER RIDE",
             "optional": true,
             "description": "Log flume with a big, wet drop.",
@@ -288,7 +285,6 @@ window.TRIP_DAYS = [
           {
             "id": "sun-hulk",
             "title": "The Incredible Hulk Coaster",
-            "note": "One of today’s must-do coasters, at the park-entrance end of Marvel.",
             "tag": "PRIORITY",
             "optional": false,
             "description": "Launch coaster packed with loops.",
@@ -452,7 +448,9 @@ window.TRIP_DAYS = [
             "optional": true,
             "kind": "show",
             "show": true,
-            "est": "~15 min"
+            "est": "~15 min",
+            "photo": "photos/sun-dark-arts.jpg",
+            "photoAlt": "Hogwarts Castle lit up for Dark Arts"
           }
         ]
       },
@@ -541,7 +539,6 @@ window.TRIP_DAYS = [
             "note": "Head straight here if it is operating during early admission. Check the official app that morning.",
             "tag": "PRIORITY",
             "optional": false,
-            "description": "Intense launch coaster with airtime and inversions.",
             "kind": "ride",
             "photo": "photos/sun-veloci.jpg",
             "photoAlt": "VelociCoaster",
@@ -550,7 +547,7 @@ window.TRIP_DAYS = [
           {
             "id": "mon-veloci-repeat",
             "title": "Second VelociCoaster lap",
-            "note": "After 9 AM, when Express starts. Skip a long Hagrid’s queue this morning.",
+            "note": "After 9 AM, when Express starts.",
             "tag": "",
             "optional": false,
             "description": "Round two!",
@@ -587,7 +584,6 @@ window.TRIP_DAYS = [
             "note": "Travel from Hogsmeade to King’s Cross. Do not count on boarding before Studios opens at 10 AM; the exact train start time is unconfirmed.",
             "tag": "PARK HOP",
             "optional": false,
-            "description": "Wizarding train ride between the parks.",
             "kind": "ride",
             "photo": "photos/mon-train-to-studios.jpg",
             "photoAlt": "Hogwarts Express Train",
@@ -692,7 +688,6 @@ window.TRIP_DAYS = [
             "note": "Top priority, so it’s first after lunch. From Diagon Alley, walk through San Francisco into New York; it’s about 5 minutes.",
             "tag": "PRIORITY",
             "optional": false,
-            "description": "Indoor coaster with launches and fire.",
             "kind": "ride",
             "photo": "photos/mon-mummy.jpg",
             "photoAlt": "Revenge of the Mummy",
@@ -905,7 +900,6 @@ window.TRIP_DAYS = [
             "note": "Only if you’ll be out of Islands by about 7:10. Walking from Islands to Toothsome takes about 15 minutes, and your reservation is at 7:30.",
             "tag": "OPTIONAL",
             "optional": true,
-            "description": "Wizarding train ride between the parks.",
             "kind": "ride",
             "photo": "photos/mon-train-to-studios.jpg",
             "photoAlt": "Hogwarts Express Train",
@@ -979,7 +973,7 @@ window.TRIP_DAYS = [
           {
             "id": "tue-breakfast",
             "title": "Breakfast: Cosmos Cafe at the hotel",
-            "note": "Just off the Stella Nova lobby. Grab-and-go pastries and sandwiches, and the coffee counter serves Starbucks. Leave for the shuttle by 7:55.",
+            "note": "Leave for the shuttle by 7:55.",
             "tag": "",
             "optional": false,
             "food": "meal",
@@ -992,7 +986,7 @@ window.TRIP_DAYS = [
           {
             "id": "tue-gate",
             "title": "Arrive at the park entrance",
-            "note": "Bring hotel room keys for early admission. Check today’s participating early-entry rides in the official app.",
+            "note": "Bring hotel room keys for early admission.",
             "tag": "GET READY",
             "optional": false,
             "est": "~30–45 min"
@@ -1082,16 +1076,17 @@ window.TRIP_DAYS = [
           },
           {
             "id": "tue-fyre",
-            "title": "Optional: Fyre Drill",
+            "title": "Fyre Drill",
             "note": "",
-            "tag": "OPTIONAL",
+            "tag": "",
             "optional": true,
             "description": "Boat ride with water cannons.",
             "kind": "ride",
             "photo": "photos/tue-fyre.jpg",
             "photoAlt": "Fyre Drill in Epic Universe",
             "est": "~10 min",
-            "express": true
+            "express": true,
+            "maybe": true
           },
           {
             "id": "tue-cone",
@@ -1114,7 +1109,6 @@ window.TRIP_DAYS = [
           {
             "id": "tue-stardust",
             "title": "Stardust Racers",
-            "note": "Use Express now, in case weather closes it later.",
             "tag": "PRIORITY",
             "optional": false,
             "description": "Dueling launch coaster.",
@@ -1179,7 +1173,6 @@ window.TRIP_DAYS = [
           {
             "id": "tue-mine",
             "title": "Mine-Cart Madness",
-            "note": "The longest standby in the park, so definitely use Express here.",
             "tag": "PRIORITY",
             "optional": false,
             "description": "Coaster that seems to jump broken track.",
@@ -1297,7 +1290,9 @@ window.TRIP_DAYS = [
             "kind": "show",
             "show": true,
             "est": "~40 min",
-            "express": true
+            "express": true,
+            "photo": "photos/tue-cirque.jpg",
+            "photoAlt": "An aerialist at Le Cirque Arcanus"
           },
           {
             "id": "tue-repeat",
@@ -1324,7 +1319,9 @@ window.TRIP_DAYS = [
             "optional": false,
             "description": "Candlelit vampire steakhouse.",
             "est": "~1 hr",
-            "food": "meal"
+            "food": "meal",
+            "photo": "photos/tue-dinner.jpg",
+            "photoAlt": "Inside Das Stakehaus"
           }
         ]
       }

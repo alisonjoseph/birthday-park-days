@@ -51,3 +51,6 @@ Small attraction, exterior, food, and shop photos from Universal Orlando’s Dis
 - [photos/mon-minions.jpg](https://blog.discoveruniversal.com/) · [Original](https://blog.discoveruniversal.com/wp-content/uploads/2024/07/minion-mayhem-guests-1.jpg)
 - [photos/mon-simpsons.jpg](https://blog.discoveruniversal.com/) · [Original](https://blog.discoveruniversal.com/wp-content/uploads/2025/04/The-Simpsons-Ride.jpg)
 - [photos/tue-yoshi.jpg](https://blog.discoveruniversal.com/) · [Original](https://blog.discoveruniversal.com/wp-content/uploads/2024/05/SNW-Yoshis-Adventure-904x705-1.jpg)
+- [photos/sun-dark-arts.jpg](https://blog.discoveruniversal.com/) · [Original](https://blog.discoveruniversal.com/wp-content/uploads/2026/08/Dark-Arts-Hogwarts-Castle.jpg)
+- [photos/tue-dinner.jpg](https://blog.discoveruniversal.com/) · [Original](https://blog.discoveruniversal.com/wp-content/uploads/2026/04/Das-Stakehaus-Interior.jpg)
+- [photos/tue-cirque.jpg](https://blog.discoveruniversal.com/) · [Original](https://blog.discoveruniversal.com/wp-content/uploads/2026/07/Cirque-Arcanus-Aerialist.jpg)

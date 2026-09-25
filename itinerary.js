@@ -28,7 +28,7 @@ window.TRIP_DAYS = [
             "photo": "photos/hotel-cosmos.jpg",
             "photoAlt": "Cosmos Cafe dining room at Stella Nova",
             "booked": "6:30 AM",
-            "bookedLabel": "MEET AT"
+            "bookedLabel": ""
           },
           {
             "id": "sun-gate",
@@ -518,7 +518,7 @@ window.TRIP_DAYS = [
             "food": "coffee",
             "est": "~10 min",
             "booked": "6:45 AM",
-            "bookedLabel": "MEET AT",
+            "bookedLabel": "",
             "photo": "photos/hotel-cosmos.jpg",
             "photoAlt": "Cosmos Cafe dining room at Stella Nova"
           },
@@ -994,7 +994,7 @@ window.TRIP_DAYS = [
             "photo": "photos/hotel-cosmos.jpg",
             "photoAlt": "Cosmos Cafe dining room at Stella Nova",
             "booked": "7:30 AM",
-            "bookedLabel": "MEET AT"
+            "bookedLabel": ""
           },
           {
             "id": "tue-gate",

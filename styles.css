@@ -187,3 +187,6 @@ body::before{content:"";position:fixed;inset:-12%;z-index:-1;pointer-events:none
 .map-extras::before{content:'○ ';}.map-extras[aria-pressed="true"]::before{content:'✓ '}
 .map-head .map-extras{width:auto;height:auto;min-height:40px;border-radius:999px;font-size:13px}
 .map-dialog[open]{position:fixed;inset:0}.map-stage{flex:1}.map-dialog .map-sheet{position:absolute;left:0;right:0;bottom:0;z-index:2}.map-dialog{position:relative}
+.wait{display:block;width:max-content;font-size:13px;font-weight:750;margin-top:4px;padding:3px 8px;border-radius:999px}.wait-short{background:#dff3e4;color:#23633a}.wait-mid{background:#fdf0cf;color:#7a5500}.wait-long{background:#fbdcdc;color:#8f2525}.wait-down{background:#ececec;color:#555}.item.done .wait{display:none}
+.hours .changed{outline:2px solid #52253d;font-weight:700}
+.forecast{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin-top:10px;font-size:14px}.forecast[hidden]{display:none}.fc-icon{font-size:18px}.fc-temp{font-weight:750}.fc-rain{color:var(--muted)}

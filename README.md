@@ -18,4 +18,6 @@ In repository Settings → Pages choose **Deploy from a branch**, `main`, `/ (ro
 
 Run a static server (for example `python3 -m http.server 8765`) to preview; service workers need localhost or HTTPS. No build is required.
 
-The site is a planning aid, not a live queue or booking service. Hours were checked September 24, 2026; confirm current hours and attraction availability with Universal. Express coverage remains conditional on the passes purchased. Meals are suggestions, not reservations.
+On trip days, ride items and the Near you card show live standby waits from themeparks.wiki (fetched by the phone every few minutes; hidden when offline or stale). Park hours in the day header refresh from the same source and are outlined when they differ from the plan. The weather line comes from Open-Meteo. The last good hours and forecast are kept for offline use.
+
+The site is a planning aid, not a booking service. Hours were checked September 24, 2026; confirm current hours and attraction availability with Universal. Express coverage remains conditional on the passes purchased. Meals are suggestions, not reservations.

@@ -422,8 +422,7 @@ progress::-webkit-progress-value{transition:width .55s cubic-bezier(.3,.9,.3,1)}
 .add-dialog[open]{height:85dvh}
 .map-sheet-body{cursor:pointer;-webkit-tap-highlight-color:transparent}
 .app{position:relative;overflow-x:clip}
-.day-ghost{position:absolute;z-index:0;margin:0;pointer-events:none}
-#days{position:relative}
-#days>.day-button{position:relative;z-index:1}
+.nav-row{position:relative}
+#days{position:relative;z-index:1}
 .tab-pill{position:absolute;z-index:0;box-sizing:border-box;border-radius:14px;background:#f8c5dd;border:1px solid #bf6f93;pointer-events:none}
 .day-button.tab-waiting{background:transparent!important;border-color:transparent!important;transition:none!important}

@@ -295,3 +295,6 @@ body.map-mode .map-legend button{padding:4px 5px;margin:0}
 .map-check-box input:checked{background:#a13b70;border-color:#a13b70}
 .map-check-box input:checked:after{content:'✓';font-size:24px;color:#fff3f7;font-weight:700}
 .map-check-box.done{color:#a13b70}
+.map-check-box{min-width:0;padding:4px}
+.map-check-box input{width:26px;height:26px;border-width:1.5px;border-radius:8px}
+.map-check-box input:checked:after{font-size:19px}

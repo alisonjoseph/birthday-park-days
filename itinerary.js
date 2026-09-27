@@ -143,6 +143,7 @@ window.TRIP_DAYS = [
           },
           {
             "id": "sun-wand",
+            "locs": [[28.472809, -81.473077]],
             "title": "Ollivanders wand-shop stop",
             "note": "",
             "tag": "",
@@ -159,6 +160,7 @@ window.TRIP_DAYS = [
         "items": [
           {
             "id": "sun-lunch",
+            "locs": [[28.471482, -81.472866]],
             "title": "Lunch: The Burger Digs",
             "note": "Upstairs in the Jurassic Park Discovery Center, on your way to Kong. Air-conditioned. Keep it light: Mythos is dinner.",
             "tag": "",
@@ -366,6 +368,7 @@ window.TRIP_DAYS = [
           },
           {
             "id": "sun-tots",
+            "locs": [[28.472545, -81.469835]],
             "title": "Green Eggs and Ham Cafe: loaded tots",
             "description": "",
             "note": "A savory snack in Seuss Landing—try Green Eggs and Ham tots or choose a topping from the current menu. Easy to share.",
@@ -410,6 +413,7 @@ window.TRIP_DAYS = [
         "items": [
           {
             "id": "sun-dinner",
+            "locs": [[28.472533, -81.4714996]],
             "title": "Dinner: Mythos",
             "note": "Sit-down dining in a rock grotto overlooking the lagoon, between Seuss Landing and Hogsmeade. It closes in 2027, so this may be your last chance.",
             "tag": "",
@@ -449,6 +453,7 @@ window.TRIP_DAYS = [
           },
           {
             "id": "sun-butterbeer",
+            "locs": [[28.472888, -81.472737]],
             "title": "Must-try: frozen Butterbeer",
             "note": "",
             "tag": "",
@@ -584,6 +589,7 @@ window.TRIP_DAYS = [
         "items": [
           {
             "id": "mon-breakfast",
+            "locs": [[28.472888, -81.472737]],
             "title": "Breakfast: Three Broomsticks",
             "note": "Opens at early admission, a short walk from VelociCoaster. Express doesn’t start until 9, so eat now.",
             "tag": "",
@@ -682,6 +688,7 @@ window.TRIP_DAYS = [
           },
           {
             "id": "mon-diagon",
+            "locs": [[28.47964, -81.46973]],
             "title": "Explore Diagon Alley",
             "note": "",
             "tag": "",
@@ -690,6 +697,7 @@ window.TRIP_DAYS = [
           },
           {
             "id": "mon-dragon",
+            "locs": [[28.479719, -81.469922]],
             "title": "Watch the Gringotts dragon breathe fire",
             "note": "Every 10–20 minutes, on top of the bank.",
             "tag": "",
@@ -724,6 +732,7 @@ window.TRIP_DAYS = [
         "items": [
           {
             "id": "mon-lunch",
+            "locs": [[28.479469, -81.469505]],
             "title": "Lunch: Leaky Cauldron",
             "note": "You’ll be in Diagon Alley right at lunchtime, so eat here. Running late? Louie’s Italian in New York is next on your route.",
             "tag": "",
@@ -736,6 +745,7 @@ window.TRIP_DAYS = [
           },
           {
             "id": "mon-icecream",
+            "locs": [[28.479613, -81.469838]],
             "title": "Florean Fortescue’s ice-cream break",
             "description": "",
             "note": "Florean Fortescue’s is right by Leaky Cauldron. Butterbeer soft serve is the classic pick.",
@@ -920,6 +930,7 @@ window.TRIP_DAYS = [
           },
           {
             "id": "mon-shrekzel",
+            "locs": [[28.4781786, -81.4670725]],
             "title": "Shrekzel",
             "description": "",
             "note": "The ogre-shaped pretzel at Swamp Snacks in DreamWorks Land makes a fun shared bite.",
@@ -947,6 +958,7 @@ window.TRIP_DAYS = [
           },
           {
             "id": "mon-donut",
+            "locs": [[28.47869, -81.46814]],
             "title": "Lard Lad: share the giant Big Pink donut",
             "description": "",
             "note": "",
@@ -1198,6 +1210,7 @@ window.TRIP_DAYS = [
           },
           {
             "id": "tue-cone",
+            "locs": [[28.44116, -81.44579]],
             "title": "Berk: a mac-and-cheese cone",
             "description": "",
             "note": "Hooligan’s Grog & Gruel. Share one; lunch is coming up.",
@@ -1260,6 +1273,7 @@ window.TRIP_DAYS = [
           },
           {
             "id": "tue-lunch",
+            "locs": [[28.43909, -81.447962]],
             "title": "Lunch: Toadstool Cafe",
             "note": "No reservations or waitlist. Grab a table, scan the QR code and order in the app. Aim for about 12:30.",
             "tag": "",
@@ -1396,6 +1410,7 @@ window.TRIP_DAYS = [
           },
           {
             "id": "tue-pretzel",
+            "locs": [[28.44013, -81.45054]],
             "title": "Dark Universe: Frankenstein pretzel",
             "description": "",
             "note": "De Lacey’s Cottage. Skip it if you’re saving room for dinner.",
@@ -1447,6 +1462,7 @@ window.TRIP_DAYS = [
         "items": [
           {
             "id": "tue-dinner",
+            "locs": [[28.44071, -81.44992]],
             "title": "Birthday dinner: Das Stakehaus",
             "note": "Vampire-themed steakhouse in Dark Universe. Grab a table and order by QR code or mobile order in the app. Aim for about 5:30–6 PM.",
             "tag": "BIRTHDAY MOMENT",

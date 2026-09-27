@@ -11,9 +11,9 @@ On iPhone: Safari → Share → Add to Home Screen. On Android: Chrome → Insta
 In repository Settings → Pages choose **Deploy from a branch**, `main`, `/ (root)`. All asset paths are relative so project sites work under their repository subdirectory.
 
 ## Edit
-- `itinerary.js`: day plans and official-source notes. `locs` holds `[lat, lng]` pins (from Universal’s attraction data via themeparks.wiki) that the opt-in Near you card matches against.
+- `itinerary.js`: day plans and official-source notes. `locs` holds `[lat, lng]` pins (from Universal’s attraction data via themeparks.wiki) that the opt-in Near you card matches against and the route map draws. Required stops with pins form the day’s numbered route, in plan order; optional ones show as small dots. Meal and treat pins come from the same data. Land shapes and labels for the map are in `LANDS` in `app.js`.
 - `styles.css`: appearance.
-- `app.js`: checklist and saving.
+- `app.js`: checklist, saving (including when each item was checked off), the route map and the trip recap.
 - `sw.js`: offline cache. Bump CACHE when releasing an update.
 
 Run a static server (for example `python3 -m http.server 8765`) to preview; service workers need localhost or HTTPS. No build is required.

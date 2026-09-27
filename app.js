@@ -79,7 +79,7 @@ function routeLabel(day){const today=new Intl.DateTimeFormat('en-CA',{timeZone:'
 function renderRoute(){const card=document.querySelector('#route-card');if(!card)return;const day=days.find(d=>d.id===state.day),mini=document.querySelector('#route-mini');
  const {route,next}=drawMap(mini,day,{pad:14,scale:.85,labels:true,you:true}),main=route.filter(s=>!s.extra),done=main.filter(stopDone).length;
  const lbl=routeLabel(day);document.querySelector('#route-label').textContent=lbl;document.querySelector('#route-open').setAttribute('aria-label','Open '+lbl.replace('Today’s','today’s')+' map');document.querySelector('#route-sum').textContent=next?`${done} of ${main.length} main stops · next: ${next.items[0].title}`:`All ${route.length} stops done`;
- if(mapView?.open)renderFullMap();}
+ if(mapView?.open){if(mapDay!==state.day){mapDay=state.day;mapPick=null;mapType=null;paintLegend();sheetDir=0;sheetKey='';Object.assign(mapZoom,{z:1,dx:0,dy:0});}renderFullMap();}}
 let lastMap=null,sheetDir=0,sheetKey='';
 // The map redraws often (location fixes, pinch frames); the stop card only rebuilds when what it shows changes, so it never flickers.
 function drawFullMap(){const day=days.find(d=>d.id===state.day),svg=document.querySelector('#route-full');
@@ -94,7 +94,7 @@ function renderSheet(){const day=days.find(d=>d.id===state.day),route=routeFor(d
  const nextOf=nextOfType(route,next);
  const picked=mapPick&&mapStops(day).find(i=>i.id===mapPick),stop=picked?route.find(s=>s.items.includes(picked)):nextOf,item=picked||(nextOf&&(nextOf.items.find(i=>!checked.has(i.id)&&typeMatch(i))||nextOf.items.find(i=>!checked.has(i.id))));
  const key=[day.id,mapType,mapExtras,item?.id,item&&checked.has(item.id),stop===next,route.length,trail.map(i=>i.id).join(),item&&waitFor(item)?.text].join('|');if(key===sheetKey)return;sheetKey=key;
- const sheet=document.querySelector('#map-sheet');sheet.replaceChildren();
+ const sheet=document.querySelector('#map-sheet');sheet.replaceChildren();sheet.className='map-sheet'+(item?(item.food?' food food-'+item.food:'')+(item.kind==='ride'?' ride':'')+(item.show||item.kind==='show'?' show':'')+(item.meet?' meet':'')+(item.booked?' is-booked':'')+(checked.has(item.id)?' done':''):'');
  if(!item){sheet.append(el('p','map-sheet-empty',route.length?'Every stop on this route is checked off. Tap any pin, or use the arrows, to look back.':'No map stops for this day.'));sheet.append(mapNav(route,-1));return;}
  const n=stop?route.indexOf(stop)+1:0,done=checked.has(item.id),last=trail.filter(i=>i.id!==item.id).at(-1);
  const body=el('div','map-sheet-body'+(sheetDir>0?' from-right':sheetDir<0?' from-left':''));
@@ -116,11 +116,19 @@ function goStop(s,dir){if(!s)return;const item=s.items.find(i=>!checked.has(i.id
  if(lastMap&&mapZoom.z>1){const [x,y]=lastMap.B(s.at),W=lastMap.W,H=lastMap.H,sx=(x-W/2)*mapZoom.z+W/2+mapZoom.dx,sy=(y-H/2)*mapZoom.z+H/2+mapZoom.dy;if(sx<40||sx>W-40||sy<40||sy>H-40){mapZoom.dx=-(x-W/2)*mapZoom.z;mapZoom.dy=-(y-H/2)*mapZoom.z;}}
  renderFullMap();}
 function stepFromSheet(dir){if(!lastMap)return;const day=days.find(d=>d.id===state.day),picked=mapPick&&mapStops(day).find(i=>i.id===mapPick),{route,next}=lastMap,stop=picked?route.find(s=>s.items.includes(picked)):nextOfType(route,next);goStop(mapStep(route,stop?route.indexOf(stop):-1,picked,dir),dir);}
-const mapView=document.querySelector('#map-view');
+const mapView=document.querySelector('#map-view');let mapDay=null;
 function openMap(){mapPick=null;mapType=null;paintLegend();sheetDir=0;sheetKey='';Object.assign(mapZoom,{z:1,dx:0,dy:0});mapView.showModal();document.body.classList.add('modal-open');requestAnimationFrame(renderFullMap);}
 document.querySelector('#route-open').onclick=openMap;document.querySelector('#route-expand').onclick=openMap;
 document.querySelector('#map-close').onclick=()=>mapView.close();mapView.addEventListener('close',()=>{document.body.classList.remove('modal-open');mapPick=null;});
 document.querySelector('#map-extras').onclick=()=>{mapExtras=!mapExtras;try{localStorage.setItem(extrasKey,mapExtras?'on':'off');}catch{}render();};
+const viewKey='park-days-view';let view='list';try{if(localStorage.getItem(viewKey)==='map')view='map';}catch{}
+function placeMap(){const nav=document.querySelector('.sticky-nav');document.documentElement.style.setProperty('--nav-h',Math.max(0,Math.round(nav.getBoundingClientRect().bottom))+'px');}
+function setView(v){view=v;try{localStorage.setItem(viewKey,v);}catch{}document.querySelectorAll('.view-switch button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.view===v)));const on=v==='map',ex=document.querySelector('#map-extras');
+ if(on){document.body.classList.add('map-mode');const sen=document.querySelector('#nav-sentinel');scrollTo({top:sen.getBoundingClientRect().top+scrollY,behavior:'auto'});document.documentElement.classList.add('map-mode');updateStuck();document.querySelector('.map-legend').append(ex);if(mapView.open)mapView.close();mapView.classList.add('inline');mapPick=null;mapType=null;paintLegend();sheetDir=0;sheetKey='';mapDay=state.day;Object.assign(mapZoom,{z:1,dx:0,dy:0});placeMap();mapView.show();requestAnimationFrame(()=>{placeMap();renderFullMap();});}
+ else{document.documentElement.classList.remove('map-mode');document.body.classList.remove('map-mode');document.querySelector('.map-head-actions').prepend(ex);if(mapView.open)mapView.close();mapView.classList.remove('inline');updateStuck();render();}}
+document.querySelectorAll('.view-switch button').forEach(b=>b.onclick=()=>{if(b.dataset.view!==view)setView(b.dataset.view);});
+window.addEventListener('resize',()=>{if(view==='map')placeMap();});
+document.querySelector('#map-add').onclick=()=>openAdd();
 document.querySelector('#map-fit').onclick=()=>{Object.assign(mapZoom,{z:1,dx:0,dy:0});drawFullMap();};
 document.querySelectorAll('[data-zoom]').forEach(b=>b.onclick=()=>{const svg=document.querySelector('#route-full').getBoundingClientRect();zoomAt(svg.width/2,svg.height/2,mapZoom.z*Number(b.dataset.zoom));});
 // Pinch to zoom, drag to pan, double-tap to zoom in. Pins stay the same size; the map spreads out under them.
@@ -263,7 +271,7 @@ function paintForecast(){const box=document.querySelector('#forecast');if(!box)r
 function liveTick(){refreshWaits();}
 setInterval(()=>{if(!document.hidden)liveTick();},3*60e3);setInterval(()=>{if(!document.hidden)refreshWeather();},60*60e3);
 document.addEventListener('visibilitychange',()=>{if(!document.hidden&&(!live.at||Date.now()-live.at>60e3))liveTick();});window.addEventListener('online',()=>{liveTick();refreshWeather();});
-render();
+render();if(view==='map')requestAnimationFrame(()=>setView('map'));
 refreshHours();refreshWeather();liveTick();
 if(document.modelContext?.registerTool){try{document.modelContext.registerTool({name:'get_itinerary',description:'Read the three-day itinerary and current checked items on this device.',inputSchema:{type:'object',properties:{},additionalProperties:false},annotations:{readOnlyHint:true},execute:()=>({days,checked:[...checked]})});document.modelContext.registerTool({name:'set_itinerary_item_checked',description:'Check or uncheck one itinerary item and save progress on this device.',inputSchema:{type:'object',properties:{id:{type:'string'},checked:{type:'boolean'}},required:['id','checked'],additionalProperties:false},annotations:{readOnlyHint:false},execute:input=>setChecked(input.id,input.checked)});}catch{}}
 })();

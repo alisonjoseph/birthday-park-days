@@ -365,3 +365,40 @@ body.map-mode .map-legend{left:12px}
 #map-view.inline .map-sheet{margin-bottom:calc(8px + env(safe-area-inset-bottom))}
 #map-view.inline .map-nav{justify-content:flex-start;padding-right:104px;min-height:40px}
 #map-view.inline .map-nav-hint{display:none}
+/* Motion. Everything here is off under Reduce Motion (last rule). */
+.item-title .strike{background:linear-gradient(currentColor,currentColor) no-repeat 0 60%/0 2px;-webkit-box-decoration-break:clone;box-decoration-break:clone;transition:background-size .38s cubic-bezier(.6,0,.2,1),color .3s}
+.item.done .item-title,.item.struck .item-title{text-decoration:none}
+.item.done .item-title .strike,.item.struck .item-title .strike{background-size:100% 2px}
+.item.struck .item-title{color:#835d70}
+.item .item-body>*{transition:opacity .17s ease}
+.item.fading :is(.item-description,.item-note,.item-est,.tag,.booked,.item-photo,.wait){opacity:0}
+.item input{position:relative;transition:background-color .18s,border-color .18s}
+.item input.pop{animation:check-pop .45s cubic-bezier(.3,1.5,.5,1)}
+.item input.unpop{animation:check-unpop .3s ease-out}
+.item input.pop:checked:after{animation:tick-in .32s .06s cubic-bezier(.3,1.4,.5,1) both}
+.item input.pop:checked:before{content:"";position:absolute;inset:-2px;border-radius:10px;border:2px solid #e58db3;animation:ring-out .45s ease-out forwards;pointer-events:none}
+@keyframes check-pop{0%{transform:scale(1)}30%{transform:scale(.78)}65%{transform:scale(1.14)}100%{transform:scale(1)}}
+@keyframes check-unpop{0%{transform:scale(1)}40%{transform:scale(.86)}100%{transform:scale(1)}}
+@keyframes tick-in{from{clip-path:inset(0 100% 0 0);transform:scale(.6) rotate(-12deg)}to{clip-path:inset(0 0 0 0);transform:none}}
+@keyframes ring-out{from{transform:scale(1);opacity:.9}to{transform:scale(1.9);opacity:0}}
+.fx-layer{position:fixed;inset:0;pointer-events:none;z-index:40;overflow:hidden}
+.fx-bit{position:absolute;width:7px;height:7px;border-radius:50%;will-change:transform,opacity}
+.fx-bit.strip{width:4px;height:10px;border-radius:2px}
+.fx-bit.star{width:11px;height:11px;border-radius:0;clip-path:polygon(50% 0,61% 38%,100% 50%,61% 62%,50% 100%,39% 62%,0 50%,39% 38%)}
+#all-done.party{animation:party-in .6s cubic-bezier(.3,1.5,.5,1)}
+@keyframes party-in{0%{transform:scale(.85) rotate(-2deg);opacity:0}60%{transform:scale(1.04) rotate(1deg);opacity:1}100%{transform:none}}
+progress::-webkit-progress-value{transition:width .55s cubic-bezier(.3,.9,.3,1)}
+#day-progress{display:inline-block;transform-origin:left center}
+.save-status{transform:translate(-50%,14px) scale(.94);transition:opacity .2s ease,transform .38s cubic-bezier(.3,1.5,.5,1)}
+.save-status.visible{transform:translate(-50%,0) scale(1)}
+.day-button{transition:background-color .25s ease,border-color .25s ease,color .25s ease,transform .2s cubic-bezier(.3,1.5,.5,1)}
+.filter-chip{transition:background-color .2s ease,border-color .2s ease,color .2s ease,transform .2s cubic-bezier(.3,1.5,.5,1)}
+:is(.day-button,.filter-chip,.recap-button,.near-check,.help-button,.route-expand,.reset-button,#filter,.view-switch button):active{transform:scale(.95)}
+:is(.recap-button,.near-check,.help-button,.route-expand,.reset-button,#filter,.view-switch button){transition:transform .2s cubic-bezier(.3,1.5,.5,1)}
+:is(#help,#recap,#add-dialog)[open]{animation:sheet-in .42s cubic-bezier(.2,.9,.3,1.1)}
+:is(#help,#recap,#add-dialog)[open]::backdrop{animation:fade-in .3s ease}
+#map-view:not(.inline)[open]{animation:fade-in .25s ease}
+@keyframes sheet-in{from{opacity:0;transform:translateY(24px) scale(.97)}to{opacity:1;transform:none}}
+@keyframes fade-in{from{opacity:0}}
+.recap-tile :is(.map-pin,.map-extra){transform-box:fill-box;transform-origin:center}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after,::backdrop{animation:none!important;transition:none!important}.fx-layer{display:none}}

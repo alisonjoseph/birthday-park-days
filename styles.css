@@ -361,3 +361,7 @@ html.map-mode .view-switch.view-fab button{min-height:48px;padding:0 18px 0 14px
 html.map-mode .view-switch.view-fab button .vs-ico rect{fill:#fff}
 body.map-mode .map-legend{left:12px}
 #map-view.inline .map-sheet{margin-bottom:calc(78px + env(safe-area-inset-bottom))}
+/* Map view: the card stays at the bottom and the List pill docks into its arrow row (right side). */
+#map-view.inline .map-sheet{margin-bottom:calc(8px + env(safe-area-inset-bottom))}
+#map-view.inline .map-nav{justify-content:flex-start;padding-right:104px;min-height:40px}
+#map-view.inline .map-nav-hint{display:none}

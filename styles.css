@@ -393,8 +393,9 @@ progress::-webkit-progress-value{transition:width .55s cubic-bezier(.3,.9,.3,1)}
 .save-status.visible{transform:translate(-50%,0) scale(1)}
 .day-button{transition:background-color .25s ease,border-color .25s ease,color .25s ease,transform .2s cubic-bezier(.3,1.5,.5,1)}
 .filter-chip{transition:background-color .2s ease,border-color .2s ease,color .2s ease,transform .2s cubic-bezier(.3,1.5,.5,1)}
-:is(.day-button,.filter-chip,.recap-button,.near-check,.help-button,.route-expand,.reset-button,#filter,.view-switch button):active{transform:scale(.95)}
-:is(.recap-button,.near-check,.help-button,.route-expand,.reset-button,#filter,.view-switch button){transition:transform .2s cubic-bezier(.3,1.5,.5,1)}
+/* Every tappable control gives the same small press. */
+:is(.day-button,.filter-chip,.recap-button,.recap-replay,.near-check,.near-add,.near-enable,.near-off,.help-button,.route-expand,.reset-button,#filter,.view-switch button,.added-add,.added-del,.add-pick,.add-save,.map-nav-btn,.map-extras,.map-zoom button,.dialog-head button):not(:disabled):active{transform:scale(.95)}
+:is(.recap-button,.recap-replay,.near-check,.near-add,.near-enable,.near-off,.help-button,.route-expand,.reset-button,#filter,.view-switch button,.added-add,.added-del,.add-pick,.add-save,.map-nav-btn,.map-extras,.map-zoom button,.dialog-head button){transition:transform .2s cubic-bezier(.3,1.5,.5,1)}
 :is(#help,#recap,#add-dialog)[open]{animation:sheet-in .42s cubic-bezier(.2,.9,.3,1.1)}
 :is(#help,#recap,#add-dialog)[open]::backdrop{animation:fade-in .3s ease}
 #map-view:not(.inline)[open]{animation:fade-in .25s ease}
@@ -403,7 +404,6 @@ progress::-webkit-progress-value{transition:width .55s cubic-bezier(.3,.9,.3,1)}
 .recap-tile :is(.map-pin,.map-extra){transform-box:fill-box;transform-origin:center}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after,::backdrop{animation:none!important;transition:none!important}.fx-layer{display:none}}
 .recap-replay{position:absolute;top:10px;left:10px;z-index:2;display:inline-flex;align-items:center;gap:5px;min-height:44px;padding:0 14px;border:1px solid #e6bdd0;border-radius:999px;background:transparent;color:var(--ink);font:inherit;font-size:13px;font-weight:700;cursor:pointer;transition:transform .2s cubic-bezier(.3,1.5,.5,1)}
-.recap-replay:active{transform:scale(.95)}
 .recap-replay span{font-size:16px;line-height:1}
 @media(max-width:400px){.recap-replay{top:8px;left:8px}}
 .recap-dialog .recap-body{padding-top:62px}

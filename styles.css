@@ -298,3 +298,4 @@ body.map-mode .map-legend button{padding:4px 5px;margin:0}
 .map-check-box{min-width:0;padding:4px}
 .map-check-box input{width:26px;height:26px;border-width:1.5px;border-radius:8px}
 .map-check-box input:checked:after{font-size:19px}
+.item input:disabled{display:none}

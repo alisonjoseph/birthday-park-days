@@ -241,3 +241,13 @@ body:not(.map-mode) #route-card .near-you{border-top:0}
 .map-dialog .map-sheet.food.is-booked{background:#f1f7fd}
 body.map-mode .map-legend{gap:2px 2px;padding:5px 6px;max-width:calc(100% - 72px)}
 body.map-mode .map-legend button{padding:4px 5px;margin:0}
+
+/* sliding List / Map pill */
+.view-switch{position:relative}
+.view-switch::before{content:"";position:absolute;top:4px;bottom:4px;left:4px;width:calc(50% - 6px);border-radius:999px;background:#fff;box-shadow:0 1px 3px rgba(82,37,61,.18);transition:transform .32s cubic-bezier(.3,.8,.3,1)}
+.view-switch.is-map::before{transform:translateX(calc(100% + 4px))}
+.view-switch button,.view-switch button[aria-pressed=true]{position:relative;z-index:1;background:transparent;box-shadow:none;transition:color .25s ease}
+#map-view.inline[open]{animation:view-in .3s ease both}
+#main.view-in{animation:view-in .3s ease both}
+@keyframes view-in{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion: reduce){.view-switch::before{transition:none}#map-view.inline[open],#main.view-in{animation:none}}

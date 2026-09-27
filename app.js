@@ -94,8 +94,12 @@ function renderRoute(){const card=document.querySelector('#route-card');if(!card
 let lastMap=null,sheetDir=0,sheetKey='';
 // The map redraws often (location fixes, pinch frames); the stop card only rebuilds when what it shows changes, so it never flickers.
 function drawFullMap(){const day=days.find(d=>d.id===state.day),svg=document.querySelector('#route-full');
- lastMap=drawMap(svg,day,{pad:30,top:44,bottom:document.querySelector('#map-sheet').offsetHeight+12,you:true,view:mapZoom,onPick:id=>{mapPick=mapPick===id?null:id;sheetDir=0;renderFullMap();}});
+ lastMap=drawMap(svg,day,{pad:30,top:44,bottom:document.querySelector('#map-sheet').offsetHeight+12,you:true,view:mapZoom,onPick:id=>{mapPick=mapPick===id?null:id;sheetDir=0;renderFullMap();if(mapPick)focusMap(id);}});
  document.querySelector('#map-fit').hidden=mapZoom.z<=1.01&&!mapZoom.dx&&!mapZoom.dy;}
+let zoomAnim=0;
+// Zoom in on a tapped stop and center it in the open space between the legend and the card.
+function focusMap(id){const day=days.find(d=>d.id===state.day),it=mapStops(day).find(i=>i.id===id)||addedFor(day).find(i=>i.id===id);if(!lastMap||!it?.locs)return;const [x,y]=lastMap.B(it.locs[0]),W=lastMap.W,H=lastMap.H,sheetH=document.querySelector('#map-sheet').offsetHeight,cy=(56+H-sheetH-12)/2,z=Math.max(mapZoom.z,2.6),to={z,dx:-(x-W/2)*z,dy:cy-H/2-(y-H/2)*z},from={...mapZoom},t0=performance.now(),dur=matchMedia('(prefers-reduced-motion: reduce)').matches?0:380,run=++zoomAnim;
+ const step=now=>{if(run!==zoomAnim)return;const t=dur?Math.min(1,(now-t0)/dur):1,e=1-Math.pow(1-t,3);mapZoom.z=from.z+(to.z-from.z)*e;mapZoom.dx=from.dx+(to.dx-from.dx)*e;mapZoom.dy=from.dy+(to.dy-from.dy)*e;clampPan();drawFullMap();if(t<1)requestAnimationFrame(step);};requestAnimationFrame(step);}
 function renderFullMap(){renderSheet();drawFullMap();}
 function nextOfType(route,next){return mapType?(route.slice(Math.max(0,route.indexOf(next))).find(s=>stopMatch(s)&&!stopDone(s))||route.find(s=>stopMatch(s)&&!stopDone(s))):next;}
 function renderSheet(){const day=days.find(d=>d.id===state.day),route=routeFor(day),next=nextStop(route),trail=trailFor(day);
@@ -151,7 +155,7 @@ function zoomAt(mx,my,z2){const s=document.querySelector('#route-full').getBound
 (()=>{const svg=document.querySelector('#route-full'),ptrs=new Map();let start=null,lastTap=0;
  const pos=e=>{const r=svg.getBoundingClientRect();return {x:e.clientX-r.left,y:e.clientY-r.top};};
  const snap=()=>{const p=[...ptrs.values()];start={z:mapZoom.z,dx:mapZoom.dx,dy:mapZoom.dy,p,mid:p.length>1?{x:(p[0].x+p[1].x)/2,y:(p[0].y+p[1].y)/2}:p[0],dist:p.length>1?Math.hypot(p[0].x-p[1].x,p[0].y-p[1].y):0};};
- svg.addEventListener('pointerdown',e=>{if(e.isPrimary)ptrs.clear();if(!ptrs.size)mapDragged=false;ptrs.set(e.pointerId,pos(e));snap();});
+ svg.addEventListener('pointerdown',e=>{zoomAnim++;if(e.isPrimary)ptrs.clear();if(!ptrs.size)mapDragged=false;ptrs.set(e.pointerId,pos(e));snap();});
  svg.addEventListener('pointermove',e=>{if(!ptrs.has(e.pointerId)||!start)return;ptrs.set(e.pointerId,pos(e));const p=[...ptrs.values()],s=svg.getBoundingClientRect(),C=[s.width/2,s.height/2];
   if(p.length>1&&start.dist){const mid={x:(p[0].x+p[1].x)/2,y:(p[0].y+p[1].y)/2},z2=Math.max(1,Math.min(7,start.z*Math.hypot(p[0].x-p[1].x,p[0].y-p[1].y)/start.dist)),bx=(start.mid.x-C[0]-start.dx)/start.z,by=(start.mid.y-C[1]-start.dy)/start.z;mapZoom.z=z2;mapZoom.dx=mid.x-C[0]-bx*z2;mapZoom.dy=mid.y-C[1]-by*z2;if(!mapDragged){mapDragged=true;p.length&&[...ptrs.keys()].forEach(id=>{try{svg.setPointerCapture(id);}catch{}});}}
   else{const ddx=p[0].x-start.mid.x,ddy=p[0].y-start.mid.y;if(!mapDragged&&Math.hypot(ddx,ddy)>8){mapDragged=true;try{svg.setPointerCapture(e.pointerId);}catch{}}if(mapDragged){mapZoom.dx=start.dx+ddx;mapZoom.dy=start.dy+ddy;}}

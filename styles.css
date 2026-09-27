@@ -256,3 +256,8 @@ body.map-mode .map-legend button{padding:4px 5px;margin:0}
 .map-land{stroke:#ffffff99;stroke-width:1}
 .map-land-label{fill:#8a5a73;stroke:#fff;stroke-width:3.4px;stroke-opacity:.92;pointer-events:none}
 .map-arrow{fill:#b12f71;opacity:.8;pointer-events:none}
+
+.view-switch button{display:inline-flex;align-items:center;justify-content:center;gap:7px}
+.vs-ico{width:22px;height:20px;flex:none;transition:transform .3s cubic-bezier(.3,1.6,.5,1)}
+.view-switch button[aria-pressed=true] .vs-ico{transform:scale(1.12) rotate(-6deg)}
+@media (prefers-reduced-motion: reduce){.vs-ico{transition:none}}

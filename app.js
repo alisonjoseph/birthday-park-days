@@ -294,7 +294,10 @@ function openAdd(){const body=document.querySelector('#add-body');body.replaceCh
  const pickBtn=p=>{const planned=plan.find(i=>i.locs.some(l=>metres(l,p.loc)<4)),b=el('button','add-pick'),where=here?' · '+distText(metres(here.loc,p.loc)):'';b.type='button';
   b.append(el('span','add-pick-name',p.name),el('span','add-pick-meta',planned?(checked.has(planned.id)?'Checked off · tap to add another go':'In the plan · tap to check off')+where:ADD_TYPES.find(t=>t[0]===p.type)[1]+where));
   b.onclick=()=>{if(planned&&!checked.has(planned.id)){setChecked(planned.id,true);addDlg.close();toast(`${planned.title} is in the plan, so it’s checked off there`);return;}addItem(p.name,p.type,p.loc);};return b;};
- const places=scope=>{const seen=new Set(),keys=scope==='all'?Object.keys(PARK):[addPark];return keys.flatMap(k=>live.places?.[k]||[]).map(([,name,type,lat,lng])=>({name,type,loc:[lat,lng]})).concat(PLAN_PLACES.filter(p=>keys.includes(p.park))).filter(p=>!seen.has(p.name)&&seen.add(p.name));};
+ // The feed files some meet and greets as rides, and some of its places are our own plan stops, so fold those together.
+ const places=scope=>{const keys=scope==='all'?Object.keys(PARK):[addPark],mine=PLAN_PLACES.filter(p=>keys.includes(p.park)),same=(a,b)=>{const x=norm(a),y=norm(b);return x===y||(Math.min(x.length,y.length)>=6&&(x.includes(y)||y.includes(x)));};
+  const feed=keys.flatMap(k=>live.places?.[k]||[]).map(([,name,type,lat,lng])=>({name,type:/\b(meet|greet|encounter|character)/i.test(name)?'meet':type,loc:[lat,lng]})).filter(f=>!mine.some(p=>metres(p.loc,f.loc)<4||same(p.name,f.name)));
+  const seen=new Set();return feed.concat(mine).filter(p=>{const k=norm(p.name);return !seen.has(k)&&seen.add(k);});};
  const byDistance=list=>here?list.map(p=>({p,d:metres(here.loc,p.loc)})).sort((a,b)=>a.d-b.d).map(x=>x.p):list.sort((a,b)=>a.name.localeCompare(b.name));
  const fillNear=()=>{nearBox.replaceChildren();if(!here&&locating)nearBox.append(el('p','add-label','Finding what’s close…'));};
  const input=el('input','add-input');input.type='text';input.placeholder='e.g. Churro at Toon Lagoon';input.maxLength=80;input.setAttribute('aria-label','What did you do?');

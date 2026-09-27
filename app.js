@@ -32,8 +32,6 @@ const LANDS={sun:[['Hogsmeade',28.4729,-81.4731,90],['Jurassic Park',28.4712,-81
  tue:[['Ministry of Magic',28.4429,-81.4478,80],['Celestial Park',28.4410,-81.4475,95],['Isle of Berk',28.4406,-81.4452,90],['Nintendo World',28.4389,-81.4481,90],['Dark Universe',28.4402,-81.4502,80]]};
 const SVGNS='http://www.w3.org/2000/svg';
 const LAND_TINT={'Hogsmeade':'#e2eaf6','Jurassic Park':'#d9eed3','Skull Island':'#e5e0d9','Toon Lagoon':'#fde8cc','Marvel':'#f8d9d9','Seuss Landing':'#fbefbd','Lost Continent':'#eee2cd','Diagon Alley':'#e6dfef','New York':'#ebe5df','Production Central':'#e0e7f1','Minion Land':'#fbefb4','DreamWorks Land':'#d9efe6','Springfield':'#fbe3c3','World Expo':'#dde8f5','Ministry of Magic':'#e6dfef','Celestial Park':'#e1e3f8','Isle of Berk':'#d8ece2','Nintendo World':'#fbdcd6','Dark Universe':'#e5dce7'};
-// Rough centers of each park's lagoon, drawn as soft water under the lands.
-const LAGOONS={sun:[[28.4718,-81.4708,95]],mon:[[28.4718,-81.4708,95],[28.4779,-81.4683,70]]};
 function blob(cx,cy,rx,ry,seed=0){const w=[1,.88,1.07,.93,1.05,.86,1.09,.95],n=w.length,pt=j=>{const a=j/n*Math.PI*2+seed;return [cx+Math.cos(a)*rx*w[(j+seed*3|0)%n],cy+Math.sin(a)*ry*w[(j+seed*3|0)%n]];};const f=q=>q.map(v=>v.toFixed(1)).join(','),mid=(a,b)=>[(a[0]+b[0])/2,(a[1]+b[1])/2];let d='M'+f(mid(pt(n-1),pt(0)));for(let j=0;j<n;j++)d+='Q'+f(pt(j))+' '+f(mid(pt(j),pt(j+1)));return d+'Z';}
 function sv(tag,attrs,parent){const e=document.createElementNS(SVGNS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);if(parent)parent.append(e);return e;}
 const extrasKey='park-days-map-extras';let mapExtras=true;try{mapExtras=localStorage.getItem(extrasKey)!=='off';}catch{}
@@ -60,7 +58,6 @@ function drawMap(svg,day,o={}){
  // B places a point on the fitted map; P adds the pinch zoom and drag on top.
  const B=([la,ln])=>[ox+(ln*cl-x0)*k,oy+(-la-y0)*k],P=p=>{const [x,y]=B(p);return [(x-W/2)*z+W/2+v.dx,(y-H/2)*z+H/2+v.dy];},pxPerM=k*z/111320;
  let sc=o.scale||1;if(pxPerM<.5)sc*=.75;// Monday spans two parks, so pins shrink to stay apart
- (LAGOONS[day.id]||[]).forEach(([la,ln,r],j)=>{const [x,y]=P([la,ln]),rr=Math.max(r*pxPerM,8);sv('path',{d:blob(x,y,rr*1.2,rr,j+.4),class:'map-water'},svg);});
  const labels=[];lands.forEach(([n,la,ln,r],j)=>{const [x,y]=P([la,ln]),rr=Math.max(r*pxPerM,10);sv('path',{d:blob(x,y,rr*1.15,rr*.9,j*.7),class:'map-land',style:LAND_TINT[n]?`fill:${LAND_TINT[n]}`:''},svg);if(o.labels!==false&&n.length*5.4*sc<rr*2.3)labels.push({n,x,y,rr});});
  // Spread pins that would sit on top of each other, then run the lines through where they end up.
  const pos=new Map(route.map(s=>[s,P(s.at)]));{const R=(o.pin||10)*sc*1.85,arr=[...pos.values()],orig=arr.map(p=>[...p]);for(let it=0;it<8;it++)for(let a=0;a<arr.length;a++)for(let b=a+1;b<arr.length;b++){const pa=arr[a],pb=arr[b],dx=pb[0]-pa[0],dy=pb[1]-pa[1],d=Math.hypot(dx,dy);if(d<R){const push=(R-d)/2,ux=d>.01?dx/d:Math.cos(a+b),uy=d>.01?dy/d:Math.sin(a+b);pa[0]-=ux*push;pa[1]-=uy*push;pb[0]+=ux*push;pb[1]+=uy*push;}}
@@ -151,11 +148,11 @@ function zoomAt(mx,my,z2){const s=document.querySelector('#route-full').getBound
 (()=>{const svg=document.querySelector('#route-full'),ptrs=new Map();let start=null,lastTap=0;
  const pos=e=>{const r=svg.getBoundingClientRect();return {x:e.clientX-r.left,y:e.clientY-r.top};};
  const snap=()=>{const p=[...ptrs.values()];start={z:mapZoom.z,dx:mapZoom.dx,dy:mapZoom.dy,p,mid:p.length>1?{x:(p[0].x+p[1].x)/2,y:(p[0].y+p[1].y)/2}:p[0],dist:p.length>1?Math.hypot(p[0].x-p[1].x,p[0].y-p[1].y):0};};
- svg.addEventListener('pointerdown',e=>{if(!ptrs.size)mapDragged=false;ptrs.set(e.pointerId,pos(e));snap();});
+ svg.addEventListener('pointerdown',e=>{if(e.isPrimary)ptrs.clear();if(!ptrs.size)mapDragged=false;ptrs.set(e.pointerId,pos(e));snap();});
  svg.addEventListener('pointermove',e=>{if(!ptrs.has(e.pointerId)||!start)return;ptrs.set(e.pointerId,pos(e));const p=[...ptrs.values()],s=svg.getBoundingClientRect(),C=[s.width/2,s.height/2];
-  if(p.length>1&&start.dist){const mid={x:(p[0].x+p[1].x)/2,y:(p[0].y+p[1].y)/2},z2=Math.max(1,Math.min(7,start.z*Math.hypot(p[0].x-p[1].x,p[0].y-p[1].y)/start.dist)),bx=(start.mid.x-C[0]-start.dx)/start.z,by=(start.mid.y-C[1]-start.dy)/start.z;mapZoom.z=z2;mapZoom.dx=mid.x-C[0]-bx*z2;mapZoom.dy=mid.y-C[1]-by*z2;mapDragged=true;}
-  else{const ddx=p[0].x-start.mid.x,ddy=p[0].y-start.mid.y;if(Math.hypot(ddx,ddy)>6)mapDragged=true;if(mapDragged){mapZoom.dx=start.dx+ddx;mapZoom.dy=start.dy+ddy;}}
-  clampPan();redrawSoon();});
+  if(p.length>1&&start.dist){const mid={x:(p[0].x+p[1].x)/2,y:(p[0].y+p[1].y)/2},z2=Math.max(1,Math.min(7,start.z*Math.hypot(p[0].x-p[1].x,p[0].y-p[1].y)/start.dist)),bx=(start.mid.x-C[0]-start.dx)/start.z,by=(start.mid.y-C[1]-start.dy)/start.z;mapZoom.z=z2;mapZoom.dx=mid.x-C[0]-bx*z2;mapZoom.dy=mid.y-C[1]-by*z2;if(!mapDragged){mapDragged=true;p.length&&[...ptrs.keys()].forEach(id=>{try{svg.setPointerCapture(id);}catch{}});}}
+  else{const ddx=p[0].x-start.mid.x,ddy=p[0].y-start.mid.y;if(!mapDragged&&Math.hypot(ddx,ddy)>8){mapDragged=true;try{svg.setPointerCapture(e.pointerId);}catch{}}if(mapDragged){mapZoom.dx=start.dx+ddx;mapZoom.dy=start.dy+ddy;}}
+  if(mapDragged){clampPan();redrawSoon();}});
  const end=e=>{if(!ptrs.has(e.pointerId))return;const p=ptrs.get(e.pointerId);ptrs.delete(e.pointerId);if(ptrs.size)snap();else{start=null;
    if(e.type==='pointerup'&&!mapDragged&&!e.target.closest('.map-tap')){const now=Date.now();if(now-lastTap<320){lastTap=0;if(mapZoom.z>1.5)Object.assign(mapZoom,{z:1,dx:0,dy:0}),redrawSoon();else zoomAt(p.x,p.y,mapZoom.z*2.2);}else lastTap=now;}}};
  ['pointerup','pointercancel','pointerleave'].forEach(t=>svg.addEventListener(t,end));

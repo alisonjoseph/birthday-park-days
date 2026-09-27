@@ -253,7 +253,6 @@ body.map-mode .map-legend button{padding:4px 5px;margin:0}
 @media (prefers-reduced-motion: reduce){.view-switch::before{transition:none}#map-view.inline[open],#main.view-in{animation:none}}
 
 /* map polish */
-.map-water{fill:#d4e9f4;stroke:#bcdbeb;stroke-width:1.2}
 .map-land{stroke:#ffffff99;stroke-width:1}
 .map-land-label{fill:#8a5a73;stroke:#fff;stroke-width:3.4px;stroke-opacity:.92;pointer-events:none}
 .map-arrow{fill:#b12f71;opacity:.8;pointer-events:none}

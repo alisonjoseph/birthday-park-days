@@ -284,6 +284,9 @@ function renderAdded(day,list){const items=addedFor(day).filter(passes),section=
 function addItem(title,type,loc){title=title.trim().slice(0,80);if(!title)return;const day=days.find(d=>d.date===etToday())||days.find(d=>d.id===state.day);const id='added-'+Date.now().toString(36);added.push({id,day:day.id,title,type,loc:loc||null,at:Date.now()});// A filter left on from the map would hide the new row, so drop it.
 if(activeFilter&&!passes(addedFor(day).find(a=>a.id===id)))activeFilter=null;const ok=saveAdded();if(state.day!==day.id){state.day=day.id;persist();}addDlg.close();render();toast(ok?'Added · saved on this phone':'Added here · not saved');requestAnimationFrame(()=>requestAnimationFrame(()=>landAdded(id)));}
 const addDlg=document.querySelector('#add-dialog');let addType=null;
+// The park feed has no meet and greets or other spots, so those come from the plan's own stops.
+const parkAt=([la])=>la<28.455?'epic':la<28.4745?'ioa':'usf';
+const PLAN_PLACES=days.flatMap(d=>d.sections.flatMap(s=>s.items)).filter(i=>i.locs&&!/-gate$/.test(i.id)&&!/^Arrive/.test(i.title)&&(i.meet||!(i.kind==='ride'||i.food||i.show||i.kind==='show'))).map(i=>({name:i.title,type:i.meet?'meet':'other',loc:i.locs[0],park:parkAt(i.locs[0])}));
 function openAdd(){const body=document.querySelector('#add-body');body.replaceChildren();addType=null;const addDay=days.find(d=>d.date===etToday())||days.find(d=>d.id===state.day);let addPark=ADD_PARK_DEFAULT[addDay.id];
  let here=nearOn&&nearFix&&nearFix.acc<=NEAR_MAX_ACC?{loc:[nearFix.lat,nearFix.lng],acc:nearFix.acc}:null,locating=false;const nearBox=el('div'),plan=mapStops(addDay);
  const distText=d=>d<25?'right here':d<1000?Math.round(d/5)*5+' m':(d/1609).toFixed(1)+' mi';
@@ -291,7 +294,7 @@ function openAdd(){const body=document.querySelector('#add-body');body.replaceCh
  const pickBtn=p=>{const planned=plan.find(i=>i.locs.some(l=>metres(l,p.loc)<4)),b=el('button','add-pick'),where=here?' · '+distText(metres(here.loc,p.loc)):'';b.type='button';
   b.append(el('span','add-pick-name',p.name),el('span','add-pick-meta',planned?(checked.has(planned.id)?'Checked off · tap to add another go':'In the plan · tap to check off')+where:ADD_TYPES.find(t=>t[0]===p.type)[1]+where));
   b.onclick=()=>{if(planned&&!checked.has(planned.id)){setChecked(planned.id,true);addDlg.close();toast(`${planned.title} is in the plan, so it’s checked off there`);return;}addItem(p.name,p.type,p.loc);};return b;};
- const places=scope=>{const seen=new Set();return (scope==='all'?Object.keys(PARK):[addPark]).flatMap(k=>live.places?.[k]||[]).map(([,name,type,lat,lng])=>({name,type,loc:[lat,lng]})).filter(p=>!seen.has(p.name)&&seen.add(p.name));};
+ const places=scope=>{const seen=new Set(),keys=scope==='all'?Object.keys(PARK):[addPark];return keys.flatMap(k=>live.places?.[k]||[]).map(([,name,type,lat,lng])=>({name,type,loc:[lat,lng]})).concat(PLAN_PLACES.filter(p=>keys.includes(p.park))).filter(p=>!seen.has(p.name)&&seen.add(p.name));};
  const byDistance=list=>here?list.map(p=>({p,d:metres(here.loc,p.loc)})).sort((a,b)=>a.d-b.d).map(x=>x.p):list.sort((a,b)=>a.name.localeCompare(b.name));
  const fillNear=()=>{nearBox.replaceChildren();if(!here&&locating)nearBox.append(el('p','add-label','Finding what’s close…'));};
  const input=el('input','add-input');input.type='text';input.placeholder='e.g. Churro at Toon Lagoon';input.maxLength=80;input.setAttribute('aria-label','What did you do?');

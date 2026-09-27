@@ -69,9 +69,10 @@ function drawMap(svg,day,o={}){
  if(o.you&&nearFix&&nearFix.acc<=NEAR_MAX_ACC){const [x,y]=P([nearFix.lat,nearFix.lng]);if(x>-10&&x<W+10&&y>-10&&y<H+10){sv('circle',{cx:x,cy:y,r:Math.max(nearFix.acc*pxPerM,9),class:'map-you-acc'},svg);sv('circle',{cx:x,cy:y,r:6,class:'map-you'},svg);}}
  return {route,next,trail,B,W,H};
 }
+function routeLabel(day){const today=new Intl.DateTimeFormat('en-CA',{timeZone:'America/New_York'}).format(new Date());return day.date===today?'Today’s route':`${{sun:'Sunday',mon:'Monday',tue:'Tuesday'}[day.id]||day.name}’s route`;}
 function renderRoute(){const card=document.querySelector('#route-card');if(!card)return;const day=days.find(d=>d.id===state.day),mini=document.querySelector('#route-mini');
  const {route,next}=drawMap(mini,day,{pad:14,scale:.85,labels:true,you:true}),main=route.filter(s=>!s.extra),done=main.filter(stopDone).length;
- document.querySelector('#route-sum').textContent=next?`${done} of ${main.length} main stops · next: ${next.items[0].title}`:`All ${route.length} stops done`;
+ const lbl=routeLabel(day);document.querySelector('#route-label').textContent=lbl;document.querySelector('#route-open').setAttribute('aria-label','Open '+lbl.replace('Today’s','today’s')+' map');document.querySelector('#route-sum').textContent=next?`${done} of ${main.length} main stops · next: ${next.items[0].title}`:`All ${route.length} stops done`;
  if(mapView?.open)renderFullMap();}
 let lastMap=null,sheetDir=0,sheetKey='';
 // The map redraws often (location fixes, pinch frames); the stop card only rebuilds when what it shows changes, so it never flickers.
@@ -80,12 +81,12 @@ function drawFullMap(){const day=days.find(d=>d.id===state.day),svg=document.que
  document.querySelector('#map-fit').hidden=mapZoom.z<=1.01&&!mapZoom.dx&&!mapZoom.dy;}
 function renderFullMap(){renderSheet();drawFullMap();}
 function renderSheet(){const day=days.find(d=>d.id===state.day),route=routeFor(day),next=nextStop(route),trail=trailFor(day);
- document.querySelector('#map-title').textContent=day.name;
+ document.querySelector('#map-title').textContent=day.name;document.querySelector('#map-eyebrow').textContent=routeLabel(day).toUpperCase();
  document.querySelector('#map-extras').setAttribute('aria-pressed',String(mapExtras));
  const picked=mapPick&&mapStops(day).find(i=>i.id===mapPick),stop=picked?route.find(s=>s.items.includes(picked)):next,item=picked||(next&&next.items.find(i=>!checked.has(i.id)));
  const key=[day.id,mapExtras,item?.id,item&&checked.has(item.id),stop===next,route.length,trail.map(i=>i.id).join()].join('|');if(key===sheetKey)return;sheetKey=key;
  const sheet=document.querySelector('#map-sheet');sheet.replaceChildren();
- if(!item){sheet.append(el('p','map-sheet-empty',route.length?'Every stop on today’s route is checked off. Tap any pin, or use the arrows, to look back.':'No map stops for this day.'));sheet.append(mapNav(route,-1));return;}
+ if(!item){sheet.append(el('p','map-sheet-empty',route.length?'Every stop on this route is checked off. Tap any pin, or use the arrows, to look back.':'No map stops for this day.'));sheet.append(mapNav(route,-1));return;}
  const n=stop?route.indexOf(stop)+1:0,done=checked.has(item.id),last=trail.filter(i=>i.id!==item.id).at(-1);
  const body=el('div','map-sheet-body'+(sheetDir>0?' from-right':sheetDir<0?' from-left':''));
  const badge=el('span','map-sheet-no t-'+pinType(item)+(done?' done':'')+(item.optional&&!done?' extra':''),done?'✓':n?String(n):'+');badge.setAttribute('aria-hidden','true');

@@ -84,14 +84,14 @@ function renderSheet(){const day=days.find(d=>d.id===state.day),route=routeFor(d
  document.querySelector('#map-title').textContent=day.name;document.querySelector('#map-eyebrow').textContent=routeLabel(day).toUpperCase();
  document.querySelector('#map-extras').setAttribute('aria-pressed',String(mapExtras));
  const picked=mapPick&&mapStops(day).find(i=>i.id===mapPick),stop=picked?route.find(s=>s.items.includes(picked)):next,item=picked||(next&&next.items.find(i=>!checked.has(i.id)));
- const key=[day.id,mapExtras,item?.id,item&&checked.has(item.id),stop===next,route.length,trail.map(i=>i.id).join()].join('|');if(key===sheetKey)return;sheetKey=key;
+ const key=[day.id,mapExtras,item?.id,item&&checked.has(item.id),stop===next,route.length,trail.map(i=>i.id).join(),item&&waitFor(item)?.text].join('|');if(key===sheetKey)return;sheetKey=key;
  const sheet=document.querySelector('#map-sheet');sheet.replaceChildren();
  if(!item){sheet.append(el('p','map-sheet-empty',route.length?'Every stop on this route is checked off. Tap any pin, or use the arrows, to look back.':'No map stops for this day.'));sheet.append(mapNav(route,-1));return;}
  const n=stop?route.indexOf(stop)+1:0,done=checked.has(item.id),last=trail.filter(i=>i.id!==item.id).at(-1);
  const body=el('div','map-sheet-body'+(sheetDir>0?' from-right':sheetDir<0?' from-left':''));
  const badge=el('span','map-sheet-no t-'+pinType(item)+(done?' done':'')+(item.optional&&!done?' extra':''),done?'✓':n?String(n):'+');badge.setAttribute('aria-hidden','true');
  const eyebrow=[];if(stop&&stop===next&&!done)eyebrow.push('NEXT UP');if(item.optional)eyebrow.push('OPTIONAL');if(n)eyebrow.push(`STOP ${n} OF ${route.length}`);
- const txt=el('div','map-sheet-text');txt.append(el('span','map-sheet-eyebrow',eyebrow.join(' · ')),el('span','map-sheet-title',item.title));
+ const txt=el('div','map-sheet-text');txt.append(el('span','map-sheet-eyebrow',eyebrow.join(' · ')),el('span','map-sheet-title',item.title));{const w=!done&&waitFor(item);if(w)txt.append(el('span','wait wait-'+w.cls,(w.cls==='down'?'⚠️ ':'⏳ ')+w.text));}
  const meta=[];if(last&&!done)meta.push(`About ${walkMins(last.locs[0],item.locs[0])} min walk`);if(meta.length)txt.append(el('span','map-sheet-meta',meta.join(' · ')));
  const btn=el('button','map-check'+(done?' done':''),done?'✓ Done':'Check off');btn.type='button';btn.setAttribute('aria-label',(done?'Uncheck ':'Check off ')+item.title);btn.onclick=()=>{mapPick=picked&&!done?null:picked?item.id:null;sheetDir=0;setChecked(item.id,!done);};
  const go=el('a','map-go','Walk ↗');go.href=`https://maps.apple.com/?daddr=${item.locs[0][0]},${item.locs[0][1]}&dirflg=w`;go.target='_blank';go.rel='noopener';go.setAttribute('aria-label','Walking directions to '+item.title+' in Maps');
@@ -191,7 +191,7 @@ async function loadRides(park){if(live.rides[park])return;const data=await getJS
 function ridesAt(loc){const found=[];Object.values(live.rides).forEach(list=>list.forEach(([id,lat,lng])=>{if(metres(loc,[lat,lng])<4)found.push(id);}));return found;}
 async function refreshWaits(){if(document.hidden||!navigator.onLine){paintWaits();return;}
  const waits={};try{for(const p of Object.keys(PARK)){await loadRides(p);const data=await getJSON(WIKI+PARK[p]+'/live');const rows=data.liveData||[],newest=Math.max(0,...rows.map(e=>Date.parse(e.lastUpdated)||0));if(Date.now()-newest<3*3600e3)rows.forEach(e=>{waits[e.id]={status:e.status,wait:e.queue?.STANDBY?.waitTime};});}live.waits=waits;live.at=Date.now();}catch{}
- paintWaits();renderNear();}
+ paintWaits();renderNear();if(mapView.open)renderSheet();}
 function waitFor(i){if(i.kind!=='ride'||!i.locs||live.at===undefined||Date.now()-live.at>20*60e3)return null;const parts=i.locs.map(l=>ridesAt(l).map(id=>live.waits[id]).find(Boolean)).filter(Boolean);if(!parts.length)return null;
  if(parts.some(w=>w.status==='DOWN'))return{text:'Down right now',cls:'down'};if(parts.every(w=>w.status==='REFURBISHMENT'))return{text:'Closed for refurb',cls:'down'};
  const mins=parts.filter(w=>w.status==='OPERATING'&&Number.isFinite(w.wait)).map(w=>w.wait);if(!mins.length)return null;const lo=Math.min(...mins);return{text:(mins.length>1?mins.join(' / '):lo)+' min wait',cls:lo<30?'short':lo<=45?'mid':'long'};}

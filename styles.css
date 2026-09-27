@@ -411,3 +411,12 @@ progress::-webkit-progress-value{transition:width .55s cubic-bezier(.3,.9,.3,1)}
 .map-check-box input.pop{animation:check-pop .45s cubic-bezier(.3,1.5,.5,1)}
 .map-check-box input.pop:checked:after{animation:tick-in .32s .06s cubic-bezier(.3,1.4,.5,1) both}
 .add-input+.add-save{margin-top:10px}
+
+/* Add sheet: controls stay put, only the place list scrolls */
+.add-dialog[open]{display:flex;flex-direction:column;overflow:hidden}
+.add-dialog .dialog-head{flex:none}
+#add-body{flex:1;min-height:0;display:flex;flex-direction:column;padding-bottom:0}
+.add-top{flex:none;padding-bottom:12px;border-bottom:1px solid var(--line)}
+.add-top>*+*{margin-top:10px}
+#add-body .add-suggest{flex:1;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;margin:0 -22px;padding:4px 22px 22px;align-content:start}
+.add-dialog[open]{height:85dvh}

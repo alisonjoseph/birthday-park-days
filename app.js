@@ -305,7 +305,7 @@ function openAdd(){const body=document.querySelector('#add-body');body.replaceCh
  if(!here&&'geolocation' in navigator){locating=true;navigator.geolocation.getCurrentPosition(pos=>{locating=false;if(pos.coords.accuracy<=NEAR_MAX_ACC*2)here={loc:[pos.coords.latitude,pos.coords.longitude],acc:pos.coords.accuracy};fillNear();suggest();},()=>{locating=false;fillNear();suggest();},{enableHighAccuracy:true,timeout:15000,maximumAge:30000});}
  let listLoaded=false;input.oninput=suggest;Promise.all(Object.keys(PARK).map(p=>loadRides(p).catch(()=>{}))).then(()=>{listLoaded=true;suggest();fillNear();});
  const parkSel=el('select','add-park');parkSel.setAttribute('aria-label','Park');Object.entries(PARK_NAMES).forEach(([k,n])=>{const op=el('option','',n);op.value=k;op.selected=k===addPark;parkSel.append(op);});parkSel.onchange=()=>{addPark=parkSel.value;suggest();};const parkRow=el('label','add-park-row');parkRow.append(el('span','add-label','Park'),parkSel);
- fillNear();suggest();body.append(parkRow,chips,input,save,nearBox,sug);addDlg.showModal();document.body.classList.add('modal-open');}
+ fillNear();suggest();const top=el('div','add-top');top.append(parkRow,chips,input,save,nearBox);body.append(top,sug);addDlg.showModal();document.body.classList.add('modal-open');}
 document.querySelector('#add-close').onclick=()=>addDlg.close();addDlg.addEventListener('close',()=>document.body.classList.remove('modal-open'));
 // Live data from the phone: ride waits and park hours (ThemeParks.wiki), weather (Open-Meteo). Last good copy is kept for offline.
 const WIKI='https://api.themeparks.wiki/v1/entity/',PARK={ioa:'267615cc-8943-4c2a-ae2c-5da728ca591f',usf:'eb3f4560-2383-4a36-9152-6b3e5ed6bc57',epic:'12dbb85b-265f-44e6-bccf-f1faa17211fc'};

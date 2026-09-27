@@ -278,3 +278,11 @@ body.map-mode .map-legend button{padding:4px 5px;margin:0}
 .map-pin.picked .map-dot{stroke:#52253d;stroke-width:3.6}
 .map-pin.picked{filter:drop-shadow(0 0 3px #52253d66)}
 .t-food{--pc:#c99400}
+/* maybes: softer version of their type color */
+.item.ride.maybe{background:#f4f8fe;box-shadow:inset 3px 0 0 #a9c9ec}
+.item.ride.maybe .tag.ride-tag{background:#d6e6f7;color:#2f5a8a}
+.item.food.maybe{background:#fffcee;box-shadow:inset 3px 0 0 #f1d777}
+.item.food.maybe .tag.food-tag{background:#f8e7a6;color:#5a4400}
+.item.show.maybe{background:#faf7ff;box-shadow:inset 3px 0 0 #c9b8ea}
+.item.meet.maybe{background:#f1f8f5;box-shadow:inset 3px 0 0 #9fd1c3}
+.item.show.maybe .tag.show-tag{background:#e6dcf6;color:#5b3f96}

@@ -355,3 +355,9 @@ body.map-mode .map-legend{left:104px}
 .hours span{white-space:nowrap;flex:none;padding:8px 9px}
 .park-logos:has(.park-logo+.park-logo){gap:2px}
 .park-logos:has(.park-logo+.park-logo) .park-logo{height:36px;max-width:54px}
+/* The List/Map pill stays in the same bottom-right spot on both views; the map's stop card sits above it. */
+html.map-mode .view-switch.view-fab{top:auto;left:auto;right:max(16px,calc(50% - 344px));bottom:calc(18px + env(safe-area-inset-bottom));box-shadow:0 6px 18px -6px rgba(82,37,61,.55)}
+html.map-mode .view-switch.view-fab button{min-height:48px;padding:0 18px 0 14px;background:#52253d;color:#fff;border:0;font-size:15px}
+html.map-mode .view-switch.view-fab button .vs-ico rect{fill:#fff}
+body.map-mode .map-legend{left:12px}
+#map-view.inline .map-sheet{margin-bottom:calc(78px + env(safe-area-inset-bottom))}

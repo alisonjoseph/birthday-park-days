@@ -103,12 +103,14 @@ function renderRoute(){const card=document.querySelector('#route-card');if(!card
  if(mapView?.open){if(mapDay!==state.day){mapDay=state.day;mapPick=null;sheetDir=0;sheetKey='';Object.assign(mapZoom,{z:1,dx:0,dy:0});}renderFullMap();}}
 let lastMap=null,sheetDir=0,sheetKey='';
 // The map redraws often (location fixes, pinch frames); the stop card only rebuilds when what it shows changes, so it never flickers.
+// How much of the map's bottom edge the stop card (and the space under it) covers.
+function sheetSpace(){const svg=document.querySelector('#route-full').getBoundingClientRect(),sh=document.querySelector('#map-sheet').getBoundingClientRect();return sh.height?Math.max(0,svg.bottom-sh.top):0;}
 function drawFullMap(){const day=days.find(d=>d.id===state.day),svg=document.querySelector('#route-full');
- lastMap=drawMap(svg,day,{pad:30,top:44,bottom:document.querySelector('#map-sheet').offsetHeight+12,you:true,view:mapZoom,onPick:id=>{mapPick=mapPick===id?null:id;sheetDir=0;renderFullMap();if(mapPick)focusMap(id);}});
+ lastMap=drawMap(svg,day,{pad:30,top:44,bottom:sheetSpace()+12,you:true,view:mapZoom,onPick:id=>{mapPick=mapPick===id?null:id;sheetDir=0;renderFullMap();if(mapPick)focusMap(id);}});
  document.querySelector('#map-fit').hidden=mapZoom.z<=1.01&&!mapZoom.dx&&!mapZoom.dy;}
 let zoomAnim=0;
 // Zoom in on a tapped stop and center it in the open space between the legend and the card.
-function focusMap(id){const day=days.find(d=>d.id===state.day),it=mapStops(day).find(i=>i.id===id)||addedFor(day).find(i=>i.id===id);if(!lastMap||!it?.locs)return;const [x,y]=lastMap.B(it.locs[0]),W=lastMap.W,H=lastMap.H,sheetH=document.querySelector('#map-sheet').offsetHeight,cy=(56+H-sheetH-12)/2,z=Math.max(mapZoom.z,2.6),to={z,dx:-(x-W/2)*z,dy:cy-H/2-(y-H/2)*z},from={...mapZoom},t0=performance.now(),dur=matchMedia('(prefers-reduced-motion: reduce)').matches?0:380,run=++zoomAnim;
+function focusMap(id){const day=days.find(d=>d.id===state.day),it=mapStops(day).find(i=>i.id===id)||addedFor(day).find(i=>i.id===id);if(!lastMap||!it?.locs)return;const [x,y]=lastMap.B(it.locs[0]),W=lastMap.W,H=lastMap.H,sheetH=sheetSpace(),cy=(56+H-sheetH-12)/2,z=Math.max(mapZoom.z,2.6),to={z,dx:-(x-W/2)*z,dy:cy-H/2-(y-H/2)*z},from={...mapZoom},t0=performance.now(),dur=matchMedia('(prefers-reduced-motion: reduce)').matches?0:380,run=++zoomAnim;
  const step=now=>{if(run!==zoomAnim)return;const t=dur?Math.min(1,(now-t0)/dur):1,e=1-Math.pow(1-t,3);mapZoom.z=from.z+(to.z-from.z)*e;mapZoom.dx=from.dx+(to.dx-from.dx)*e;mapZoom.dy=from.dy+(to.dy-from.dy)*e;clampPan();drawFullMap();if(t<1)requestAnimationFrame(step);};requestAnimationFrame(step);}
 function renderFullMap(){renderSheet();drawFullMap();}
 function nextOfType(route,next){return activeFilter?(route.slice(Math.max(0,route.indexOf(next))).find(s=>stopMatch(s)&&!stopDone(s))||route.find(s=>stopMatch(s)&&!stopDone(s))):next;}

@@ -420,3 +420,4 @@ progress::-webkit-progress-value{transition:width .55s cubic-bezier(.3,.9,.3,1)}
 .add-top>*+*{margin-top:10px}
 #add-body .add-suggest{flex:1;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;margin:0 -22px;padding:4px 22px 22px;align-content:start}
 .add-dialog[open]{height:85dvh}
+.map-sheet-body{cursor:pointer;-webkit-tap-highlight-color:transparent}

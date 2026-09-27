@@ -186,7 +186,9 @@ function zoomAt(mx,my,z2){const s=document.querySelector('#route-full').getBound
  // Swipe the stop card left or right to move through the route.
  const sheet=document.querySelector('#map-sheet');let sw=null;
  sheet.addEventListener('pointerdown',e=>{if(e.target.closest('button,a'))return;sw={x:e.clientX,y:e.clientY};});
- sheet.addEventListener('pointerup',e=>{if(!sw)return;const dx=e.clientX-sw.x,dy=e.clientY-sw.y;sw=null;if(Math.abs(dx)>40&&Math.abs(dx)>Math.abs(dy)*1.5)stepFromSheet(dx<0?1:-1);});
+ sheet.addEventListener('pointerup',e=>{if(!sw)return;const dx=e.clientX-sw.x,dy=e.clientY-sw.y;sw=null;if(Math.abs(dx)>40&&Math.abs(dx)>Math.abs(dy)*1.5)stepFromSheet(dx<0?1:-1);
+  // A tap (no swipe) on the card itself checks the stop off, like tapping a row in the list.
+  else if(Math.hypot(dx,dy)<10&&!sheetHold&&e.target.closest('.map-sheet-body')&&!e.target.closest('button,a,label,input'))sheet.querySelector('.map-check-box input')?.click();});
  sheet.addEventListener('pointercancel',()=>sw=null);
 })();
 window.addEventListener('resize',()=>{renderRoute();});

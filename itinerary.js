@@ -64,7 +64,8 @@ window.TRIP_DAYS = [
             "photoAlt": "People riding Hagrid's Magical Creatures Motorbike Adventure.",
             "est": "~45–60 min",
             "noExpress": true,
-            "lockers": true
+            "lockers": true,
+            "locs": [[28.47308, -81.472862]]
           },
           {
             "id": "sun-veloci",
@@ -76,7 +77,8 @@ window.TRIP_DAYS = [
             "photo": "photos/sun-veloci.jpg",
             "photoAlt": "VelociCoaster",
             "est": "~15–25 min",
-            "lockers": true
+            "lockers": true,
+            "locs": [[28.471429, -81.472284]]
           }
         ]
       },
@@ -96,7 +98,8 @@ window.TRIP_DAYS = [
             "express": true,
             "photo": "photos/sun-forbidden.jpg",
             "photoAlt": "Harry Potter and the Forbidden Journey",
-            "lockers": true
+            "lockers": true,
+            "locs": [[28.472265, -81.4735195]]
           },
           {
             "id": "sun-frog-choir",
@@ -108,7 +111,8 @@ window.TRIP_DAYS = [
             "kind": "show",
             "show": true,
             "est": "~15 min",
-            "maybe": true
+            "maybe": true,
+            "locs": [[28.472635, -81.473392]]
           },
           {
             "id": "sun-triwizard",
@@ -120,7 +124,8 @@ window.TRIP_DAYS = [
             "kind": "show",
             "show": true,
             "est": "~15 min",
-            "maybe": true
+            "maybe": true,
+            "locs": [[28.4725985, -81.473455]]
           },
           {
             "id": "sun-hippo",
@@ -133,7 +138,8 @@ window.TRIP_DAYS = [
             "est": "~15 min",
             "express": true,
             "photo": "photos/sun-hippo.jpg",
-            "photoAlt": "Flight of the Hippogriff"
+            "photoAlt": "Flight of the Hippogriff",
+            "locs": [[28.472416, -81.473636]]
           },
           {
             "id": "sun-wand",
@@ -176,7 +182,8 @@ window.TRIP_DAYS = [
             "kind": "meet",
             "est": "~20 min",
             "meet": true,
-            "maybe": true
+            "maybe": true,
+            "locs": [[28.470963, -81.473359]]
           },
           {
             "id": "sun-kong",
@@ -188,7 +195,8 @@ window.TRIP_DAYS = [
             "photo": "photos/sun-kong.jpg",
             "photoAlt": "Woman posing with a frightened expression in front of Skull Island Reign of Kong.",
             "est": "~20 min",
-            "express": true
+            "express": true,
+            "locs": [[28.469317, -81.473013]]
           },
           {
             "id": "sun-popeye",
@@ -202,7 +210,8 @@ window.TRIP_DAYS = [
             "photoAlt": "A raft splashing through Popeye & Bluto’s Bilge-Rat Barges.",
             "est": "~20 min",
             "express": true,
-            "maybe": true
+            "maybe": true,
+            "locs": [[28.470448, -81.471401]]
           },
           {
             "id": "sun-ripsaw",
@@ -216,7 +225,8 @@ window.TRIP_DAYS = [
             "photoAlt": "People riding Dudley Do-Right’s RipSaw Falls. ",
             "est": "~20 min",
             "express": true,
-            "maybe": true
+            "maybe": true,
+            "locs": [[28.4695018, -81.4714998]]
           },
           {
             "id": "sun-doom",
@@ -230,7 +240,8 @@ window.TRIP_DAYS = [
             "express": true,
             "maybe": true,
             "photo": "photos/sun-doom.jpg",
-            "photoAlt": "Doctor Doom's Fearfall"
+            "photoAlt": "Doctor Doom's Fearfall",
+            "locs": [[28.470678, -81.469502]]
           },
           {
             "id": "sun-spider",
@@ -243,7 +254,8 @@ window.TRIP_DAYS = [
             "est": "~20 min",
             "express": true,
             "photo": "photos/sun-spider.jpg",
-            "photoAlt": "Spider-Man outside The Amazing Adventures of Spider-Man"
+            "photoAlt": "Spider-Man outside The Amazing Adventures of Spider-Man",
+            "locs": [[28.4705456, -81.469852]]
           },
           {
             "id": "sun-marvel-meet",
@@ -254,7 +266,8 @@ window.TRIP_DAYS = [
             "kind": "meet",
             "meet": true,
             "est": "~15 min",
-            "maybe": true
+            "maybe": true,
+            "locs": [[28.470814, -81.46975]]
           },
           {
             "id": "sun-hulk",
@@ -267,7 +280,8 @@ window.TRIP_DAYS = [
             "photoAlt": "The Incredible Hulk Coaster at sunset.",
             "est": "~20 min",
             "express": true,
-            "lockers": true
+            "lockers": true,
+            "locs": [[28.471195, -81.468946]]
           }
         ]
       },
@@ -287,7 +301,8 @@ window.TRIP_DAYS = [
             "express": true,
             "maybe": true,
             "photo": "photos/sun-storm.jpg",
-            "photoAlt": "Storm Force Accelatron"
+            "photoAlt": "Storm Force Accelatron",
+            "locs": [[28.471007, -81.468794]]
           },
           {
             "id": "sun-cat",
@@ -301,7 +316,8 @@ window.TRIP_DAYS = [
             "photoAlt": "Family riding The Cat in the Hat.",
             "est": "~15 min",
             "express": true,
-            "maybe": true
+            "maybe": true,
+            "locs": [[28.472969, -81.46928]]
           },
           {
             "id": "sun-fish",
@@ -315,7 +331,8 @@ window.TRIP_DAYS = [
             "photoAlt": "OneFishTwoFish",
             "est": "~10 min",
             "express": true,
-            "maybe": true
+            "maybe": true,
+            "locs": [[28.473197, -81.469351]]
           },
           {
             "id": "sun-caro",
@@ -329,7 +346,8 @@ window.TRIP_DAYS = [
             "express": true,
             "maybe": true,
             "photo": "photos/sun-caro.jpg",
-            "photoAlt": "Caro-Seuss-el"
+            "photoAlt": "Caro-Seuss-el",
+            "locs": [[28.472913, -81.469544]]
           },
           {
             "id": "sun-trolley",
@@ -343,7 +361,8 @@ window.TRIP_DAYS = [
             "photoAlt": "SeussTrolleyRIde",
             "est": "~15 min",
             "express": true,
-            "maybe": true
+            "maybe": true,
+            "locs": [[28.473011, -81.470178]]
           },
           {
             "id": "sun-tots",
@@ -372,7 +391,8 @@ window.TRIP_DAYS = [
             "express": true,
             "photo": "photos/sun-veloci.jpg",
             "photoAlt": "VelociCoaster",
-            "lockers": true
+            "lockers": true,
+            "locs": [[28.471429, -81.472284]]
           },
           {
             "id": "sun-repeat",
@@ -416,7 +436,8 @@ window.TRIP_DAYS = [
             "est": "~45 min",
             "photo": "photos/sun-hagrid.jpg",
             "photoAlt": "People riding Hagrid's Magical Creatures Motorbike Adventure.",
-            "lockers": true
+            "lockers": true,
+            "locs": [[28.47308, -81.472862], [28.471429, -81.472284]]
           },
           {
             "id": "sun-spells",
@@ -458,7 +479,8 @@ window.TRIP_DAYS = [
             "show": true,
             "est": "~15 min",
             "photo": "photos/sun-dark-arts.jpg",
-            "photoAlt": "Hogwarts Castle lit up for Dark Arts"
+            "photoAlt": "Hogwarts Castle lit up for Dark Arts",
+            "locs": [[28.47231, -81.47375]]
           }
         ]
       },
@@ -551,7 +573,8 @@ window.TRIP_DAYS = [
             "photo": "photos/sun-veloci.jpg",
             "photoAlt": "VelociCoaster",
             "est": "~30–45 min",
-            "lockers": true
+            "lockers": true,
+            "locs": [[28.471429, -81.472284]]
           }
         ]
       },
@@ -589,7 +612,8 @@ window.TRIP_DAYS = [
             "photoAlt": "VelociCoaster",
             "est": "~15 min",
             "express": true,
-            "lockers": true
+            "lockers": true,
+            "locs": [[28.471429, -81.472284]]
           }
         ]
       },
@@ -607,7 +631,8 @@ window.TRIP_DAYS = [
             "photo": "photos/mon-train-to-studios.jpg",
             "photoAlt": "Hogwarts Express Train",
             "est": "~30–45 min",
-            "express": true
+            "express": true,
+            "locs": [[28.473354, -81.472466]]
           }
         ]
       },
@@ -626,7 +651,8 @@ window.TRIP_DAYS = [
             "photo": "photos/mon-gringotts.jpg",
             "photoAlt": "Harry Potter and the Escape from Gringotts",
             "est": "~20 min",
-            "express": true
+            "express": true,
+            "locs": [[28.479719, -81.469922]]
           },
           {
             "id": "mon-celestina",
@@ -638,7 +664,8 @@ window.TRIP_DAYS = [
             "kind": "show",
             "show": true,
             "est": "~15 min",
-            "maybe": true
+            "maybe": true,
+            "locs": [[28.479902, -81.469456]]
           },
           {
             "id": "mon-beedle",
@@ -650,7 +677,8 @@ window.TRIP_DAYS = [
             "kind": "show",
             "show": true,
             "est": "~15 min",
-            "maybe": true
+            "maybe": true,
+            "locs": [[28.479921, -81.469499]]
           },
           {
             "id": "mon-diagon",
@@ -685,7 +713,8 @@ window.TRIP_DAYS = [
             "kind": "meet",
             "meet": true,
             "est": "~10 min",
-            "maybe": true
+            "maybe": true,
+            "locs": [[28.479579, -81.469605]]
           }
         ]
       },
@@ -732,7 +761,8 @@ window.TRIP_DAYS = [
             "kind": "meet",
             "meet": true,
             "est": "~10 min",
-            "maybe": true
+            "maybe": true,
+            "locs": [[28.479407, -81.469107]]
           },
           {
             "id": "mon-mummy",
@@ -744,7 +774,8 @@ window.TRIP_DAYS = [
             "photo": "photos/mon-mummy.jpg",
             "photoAlt": "Revenge of the Mummy",
             "est": "~20 min",
-            "express": true
+            "express": true,
+            "locs": [[28.4766, -81.46954]]
           },
           {
             "id": "mon-fallon",
@@ -758,7 +789,8 @@ window.TRIP_DAYS = [
             "photoAlt": "Race Through New York Starring Jimmy Fallon",
             "est": "~15 min",
             "express": true,
-            "maybe": true
+            "maybe": true,
+            "locs": [[28.475881, -81.469363]]
           },
           {
             "id": "mon-transformers",
@@ -771,7 +803,8 @@ window.TRIP_DAYS = [
             "photo": "photos/mon-transformers.jpg",
             "photoAlt": "Jets fly through the sky above Transformers The Ride in Universal Studios Florida",
             "est": "~15 min",
-            "express": true
+            "express": true,
+            "locs": [[28.47669, -81.46856]]
           },
           {
             "id": "mon-optimus",
@@ -782,7 +815,8 @@ window.TRIP_DAYS = [
             "kind": "meet",
             "meet": true,
             "est": "~15 min",
-            "maybe": true
+            "maybe": true,
+            "locs": [[28.476183, -81.468079]]
           },
           {
             "id": "mon-minions",
@@ -795,7 +829,8 @@ window.TRIP_DAYS = [
             "est": "~15 min",
             "express": true,
             "photo": "photos/mon-minions.jpg",
-            "photoAlt": "Despicable Me Minion Mayhem"
+            "photoAlt": "Despicable Me Minion Mayhem",
+            "locs": [[28.475428, -81.467926]]
           },
           {
             "id": "mon-minion-meet",
@@ -819,7 +854,8 @@ window.TRIP_DAYS = [
             "photo": "photos/mon-villain.jpg",
             "photoAlt": "Illumination’s Villain-Con Minion Blast",
             "est": "~15 min",
-            "express": true
+            "express": true,
+            "locs": [[28.475647, -81.467967]]
           }
         ]
       },
@@ -839,7 +875,8 @@ window.TRIP_DAYS = [
             "est": "~40 min",
             "express": true,
             "photo": "photos/mon-bourne.jpg",
-            "photoAlt": "The Bourne Stuntacular theater"
+            "photoAlt": "The Bourne Stuntacular theater",
+            "locs": [[28.475976, -81.466979]]
           },
           {
             "id": "mon-et",
@@ -852,7 +889,8 @@ window.TRIP_DAYS = [
             "photo": "photos/mon-et.jpg",
             "photoAlt": "Guests smile and point on ET Adventure in Universal Studios Florida",
             "est": "~15 min",
-            "express": true
+            "express": true,
+            "locs": [[28.4779505, -81.4670917]]
           },
           {
             "id": "mon-trolls",
@@ -865,7 +903,8 @@ window.TRIP_DAYS = [
             "photo": "photos/mon-trolls.jpg",
             "photoAlt": "A father and son riding Trolls Trollercoaster in DreamWorks Land",
             "est": "~10 min",
-            "express": true
+            "express": true,
+            "locs": [[28.4785148, -81.4663856]]
           },
           {
             "id": "mon-shrek",
@@ -876,7 +915,8 @@ window.TRIP_DAYS = [
             "kind": "meet",
             "meet": true,
             "est": "~15 min",
-            "maybe": true
+            "maybe": true,
+            "locs": [[28.4781559, -81.4669]]
           },
           {
             "id": "mon-shrekzel",
@@ -902,7 +942,8 @@ window.TRIP_DAYS = [
             "photoAlt": "Guests spin past on Kang and Kodos' Twirl 'n' Hurl in Universal Studios Florida",
             "est": "~10 min",
             "express": true,
-            "maybe": true
+            "maybe": true,
+            "locs": [[28.479352, -81.467877]]
           },
           {
             "id": "mon-donut",
@@ -927,7 +968,8 @@ window.TRIP_DAYS = [
             "est": "~15 min",
             "express": true,
             "photo": "photos/mon-simpsons.jpg",
-            "photoAlt": "The Simpsons Ride"
+            "photoAlt": "The Simpsons Ride",
+            "locs": [[28.479604, -81.467788]]
           },
           {
             "id": "mon-mib",
@@ -940,7 +982,8 @@ window.TRIP_DAYS = [
             "photo": "photos/mon-mib.jpg",
             "photoAlt": "A group of guests riding Men in Black: Alien Attack in Universal Studios Florida",
             "est": "~15 min",
-            "express": true
+            "express": true,
+            "locs": [[28.480441, -81.468043]]
           }
         ]
       },
@@ -958,7 +1001,8 @@ window.TRIP_DAYS = [
             "photo": "photos/mon-train-to-studios.jpg",
             "photoAlt": "Hogwarts Express Train",
             "est": "~30–45 min",
-            "express": true
+            "express": true,
+            "locs": [[28.479079, -81.46944]]
           }
         ]
       },
@@ -1064,7 +1108,8 @@ window.TRIP_DAYS = [
             "kind": "ride",
             "photo": "photos/tue-ministry.jpg",
             "photoAlt": "The interior of Battle at the Ministry at Epic Universe",
-            "est": "~45–60 min"
+            "est": "~45–60 min",
+            "locs": [[28.4429, -81.44809]]
           },
           {
             "id": "tue-wand",
@@ -1094,7 +1139,8 @@ window.TRIP_DAYS = [
             "photo": "photos/tue-hiccup.jpg",
             "photoAlt": "Guests riding Hiccup's Wing Gliders in Epic Universe",
             "est": "~15 min",
-            "express": true
+            "express": true,
+            "locs": [[28.44114, -81.44518]]
           },
           {
             "id": "tue-toothless",
@@ -1105,7 +1151,8 @@ window.TRIP_DAYS = [
             "kind": "meet",
             "meet": true,
             "est": "~15–20 min",
-            "maybe": true
+            "maybe": true,
+            "locs": [[28.44, -81.44511]]
           },
           {
             "id": "tue-rally",
@@ -1118,7 +1165,8 @@ window.TRIP_DAYS = [
             "photo": "photos/tue-rally.jpg",
             "photoAlt": "Dragon Racers Rally in Epic Universe",
             "est": "~25 min",
-            "noExpress": true
+            "noExpress": true,
+            "locs": [[28.44122, -81.44549]]
           },
           {
             "id": "tue-dragon",
@@ -1130,7 +1178,8 @@ window.TRIP_DAYS = [
             "kind": "show",
             "show": true,
             "est": "~40 min",
-            "express": true
+            "express": true,
+            "locs": [[28.44004, -81.44463]]
           },
           {
             "id": "tue-fyre",
@@ -1144,7 +1193,8 @@ window.TRIP_DAYS = [
             "photoAlt": "Fyre Drill in Epic Universe",
             "est": "~10 min",
             "express": true,
-            "maybe": true
+            "maybe": true,
+            "locs": [[28.44061, -81.44545]]
           },
           {
             "id": "tue-cone",
@@ -1176,7 +1226,8 @@ window.TRIP_DAYS = [
             "photoAlt": "Guests smile as they ride Stardust Racers in Celestial Park",
             "est": "~20 min",
             "express": true,
-            "lockers": true
+            "lockers": true,
+            "locs": [[28.441622, -81.447095]]
           },
           {
             "id": "tue-carousel",
@@ -1189,7 +1240,8 @@ window.TRIP_DAYS = [
             "photo": "photos/tue-carousel.jpg",
             "photoAlt": "Constellation Carousel in Celestial Park at Epic Universe",
             "est": "~10 min",
-            "express": true
+            "express": true,
+            "locs": [[28.44033, -81.44805]]
           }
         ]
       },
@@ -1227,7 +1279,8 @@ window.TRIP_DAYS = [
             "kind": "meet",
             "meet": true,
             "est": "~20 min",
-            "maybe": true
+            "maybe": true,
+            "locs": [[28.43913, -81.44807]]
           },
           {
             "id": "tue-peach",
@@ -1238,7 +1291,8 @@ window.TRIP_DAYS = [
             "kind": "meet",
             "meet": true,
             "est": "~15–20 min",
-            "maybe": true
+            "maybe": true,
+            "locs": [[28.439343, -81.447997]]
           },
           {
             "id": "tue-mine",
@@ -1250,7 +1304,8 @@ window.TRIP_DAYS = [
             "photo": "photos/tue-mine.jpg",
             "photoAlt": "A family riding Mine-Cart Madness in SUPER NINTENDO WORLD",
             "est": "~25 min",
-            "express": true
+            "express": true,
+            "locs": [[28.438084, -81.448769]]
           },
           {
             "id": "tue-dk",
@@ -1261,7 +1316,8 @@ window.TRIP_DAYS = [
             "kind": "meet",
             "meet": true,
             "est": "~15 min",
-            "maybe": true
+            "maybe": true,
+            "locs": [[28.43844, -81.44873]]
           },
           {
             "id": "tue-mario",
@@ -1274,7 +1330,8 @@ window.TRIP_DAYS = [
             "photo": "photos/tue-mario.jpg",
             "photoAlt": "Two girls smile and ride Mario Kart: Bowser's Challenge in SUPER NINTENDO WORLD at Epic Universe",
             "est": "~20 min",
-            "express": true
+            "express": true,
+            "locs": [[28.43875, -81.44783]]
           },
           {
             "id": "tue-yoshi",
@@ -1287,7 +1344,8 @@ window.TRIP_DAYS = [
             "est": "~15 min",
             "express": true,
             "photo": "photos/tue-yoshi.jpg",
-            "photoAlt": "Yoshi's Adventure"
+            "photoAlt": "Yoshi's Adventure",
+            "locs": [[28.43904, -81.44817]]
           }
         ]
       },
@@ -1307,7 +1365,8 @@ window.TRIP_DAYS = [
             "photoAlt": "Monsters Unchained: The Frankenstein Experiment in Dark Universe at Epic Universe",
             "est": "~20 min",
             "express": true,
-            "lockers": true
+            "lockers": true,
+            "locs": [[28.44035, -81.45029]]
           },
           {
             "id": "tue-werewolf",
@@ -1320,7 +1379,8 @@ window.TRIP_DAYS = [
             "photo": "photos/tue-werewolf.jpg",
             "photoAlt": "Two people laughing and riding Curse of the Werewolf at Universal Epic Universe.",
             "est": "~15 min",
-            "express": true
+            "express": true,
+            "locs": [[28.43995, -81.45002]]
           },
           {
             "id": "tue-frank",
@@ -1331,7 +1391,8 @@ window.TRIP_DAYS = [
             "kind": "meet",
             "meet": true,
             "est": "~15 min",
-            "maybe": true
+            "maybe": true,
+            "locs": [[28.4405, -81.44982]]
           },
           {
             "id": "tue-pretzel",
@@ -1363,7 +1424,8 @@ window.TRIP_DAYS = [
             "est": "~40 min",
             "express": true,
             "photo": "photos/tue-cirque.jpg",
-            "photoAlt": "An aerialist at Le Cirque Arcanus"
+            "photoAlt": "An aerialist at Le Cirque Arcanus",
+            "locs": [[28.44284, -81.44758]]
           },
           {
             "id": "tue-repeat",
@@ -1374,7 +1436,8 @@ window.TRIP_DAYS = [
             "kind": "ride",
             "est": "~30–45 min",
             "photo": "photos/tue-ministry.jpg",
-            "photoAlt": "The interior of Battle at the Ministry at Epic Universe"
+            "photoAlt": "The interior of Battle at the Ministry at Epic Universe",
+            "locs": [[28.4429, -81.44809]]
           }
         ]
       },
@@ -1411,7 +1474,8 @@ window.TRIP_DAYS = [
             "photo": "photos/tue-monsters.jpg",
             "photoAlt": "Monsters Unchained: The Frankenstein Experiment in Dark Universe at Epic Universe",
             "est": "~20–40 min",
-            "lockers": true
+            "lockers": true,
+            "locs": [[28.44035, -81.45029]]
           },
           {
             "id": "tue-stardust-night",
@@ -1423,7 +1487,8 @@ window.TRIP_DAYS = [
             "photo": "photos/tue-stardust.jpg",
             "photoAlt": "Guests smile as they ride Stardust Racers in Celestial Park",
             "est": "~20–40 min",
-            "lockers": true
+            "lockers": true,
+            "locs": [[28.441622, -81.447095]]
           }
         ]
       }

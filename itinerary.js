@@ -511,7 +511,7 @@ window.TRIP_DAYS = [
     "name": "Islands → Studios",
     "kicker": "One more coaster. Then movie magic.",
     "hours": "Studios 10 AM – 7 PM",
-    "early": "8 AM at Islands",
+    "early": "8 AM",
     "color": "coral",
     "intro": "Start with VelociCoaster, then take the Hogwarts Express to Studios once it is operating.",
     "tip": "Express works once per ride and starts at park opening, not early admission. Your Monday pass covers Islands too, so ride VelociCoaster standby at 8 AM, then again with Express after 9.",

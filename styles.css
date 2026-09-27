@@ -349,3 +349,9 @@ html.map-mode .view-switch.view-fab button .vs-ico rect{fill:currentColor}
 body.map-mode .map-legend{left:104px}
 .save-status{bottom:calc(80px + env(safe-area-inset-bottom))}
 @media print{.view-fab{display:none}}
+/* Park name and hours stay on one line each (app.js shrinks them to fit). */
+.park-heading h2{white-space:nowrap;overflow:hidden}
+.hours{flex-wrap:nowrap;overflow:hidden;gap:6px}
+.hours span{white-space:nowrap;flex:none;padding:8px 9px}
+.park-logos:has(.park-logo+.park-logo){gap:2px}
+.park-logos:has(.park-logo+.park-logo) .park-logo{height:36px;max-width:54px}

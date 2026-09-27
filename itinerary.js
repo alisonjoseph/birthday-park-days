@@ -489,28 +489,6 @@ window.TRIP_DAYS = [
             "locs": [[28.47231, -81.47375]]
           }
         ]
-      },
-      {
-        "time": "REFERENCE · NOT IN YOUR RIDE TOTAL",
-        "name": "Closed or restricted",
-        "items": [
-          {
-            "id": "sun-jurassic-closed",
-            "title": "Jurassic Park River Adventure",
-            "note": "Scheduled closed through November 19, 2026.",
-            "tag": "CLOSED",
-            "optional": true,
-            "unavailable": true
-          },
-          {
-            "id": "sun-pteranodon",
-            "title": "Pteranodon Flyers",
-            "note": "Guests over 56 inches must accompany a child 36–56 inches tall. This usually rules out an all-teen/adult group.",
-            "tag": "HEIGHT RESTRICTION",
-            "optional": true,
-            "unavailable": true
-          }
-        ]
       }
     ],
     "alert": "Jurassic Park River Adventure is scheduled closed through November 19, 2026. Studios closes at 5 PM today for Halloween Horror Nights; this plan stays at Islands.",

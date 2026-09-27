@@ -330,3 +330,8 @@ body.map-mode .filters{display:flex}
 .recap-dialog .dialog-head{top:8px;right:8px}
 .recap-dialog .recap-body{padding-top:50px}
 .recap-tile{height:clamp(96px,calc((88dvh - 254px) / 3),210px)}
+/* Recap always fits the screen: the three maps share whatever height is left. */
+.recap-dialog[open]{display:flex;flex-direction:column;height:85dvh;overflow:hidden}
+.recap-dialog .recap-body{flex:1;min-height:0;overflow:hidden;padding-top:46px}
+.recap-maps{flex:1;min-height:0;grid-template-rows:repeat(3,minmax(0,1fr))}
+.recap-tile{height:auto;min-height:0}

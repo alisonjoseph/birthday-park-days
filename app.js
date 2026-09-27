@@ -39,8 +39,8 @@ function renderNear(){const box=document.querySelector('#near-you');if(!box)retu
  const head=el('div','near-head');head.append(el('span','near-eyebrow','📍 NEAR YOU'));const off=el('button','near-off','Turn off');off.type='button';off.onclick=()=>{nearOn=false;saveNear();stopNear();nearMsg='';renderNear();};head.append(off);box.append(head);
  const say=t=>box.append(el('p','near-status',t));
  if(nearMsg){say(nearMsg);return;}if(!nearFix){say('Finding you…');return;}
- if(nearFix.acc>NEAR_MAX_ACC){say(`Your location is fuzzy right now (±${Math.round(nearFix.acc)} m). It sharpens outdoors.`);return;}
- const found=nearby();if(!found.length){say('Nothing from today’s plan right here. Walk up to a ride and it will show.');return;}
+ if(nearFix.acc>NEAR_MAX_ACC){say(`Your location is fuzzy right now (±${Math.round(nearFix.acc)} m).`);return;}
+ const found=nearby();if(!found.length){say('Nothing from today’s plan right here.');return;}
  const {item:i,dist}=found[0],done=checked.has(i.id),card=el('div','near-card'+(done?' done':''));
  if(i.photo){const img=el('img','near-photo');img.src='./'+i.photo;img.alt='';img.width=64;img.height=64;img.onerror=()=>img.remove();card.append(img);}
  const txt=el('div','near-text');txt.append(el('span','near-title',i.title),el('span','near-dist',dist<25?'You’re here':`About ${Math.round(dist/5)*5} m away`));card.append(txt);

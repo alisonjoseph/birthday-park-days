@@ -190,7 +190,7 @@ function hourText(h){const ap=h<12||h===24?'AM':'PM';return (h%12||12)+' '+ap;}
 async function loadRides(park){if(live.rides[park])return;const data=await getJSON(WIKI+PARK[park]+'/children');live.rides[park]=data.children.filter(c=>c.entityType==='ATTRACTION'&&c.location).map(c=>[c.id,+c.location.latitude,+c.location.longitude]);saveLive();}
 function ridesAt(loc){const found=[];Object.values(live.rides).forEach(list=>list.forEach(([id,lat,lng])=>{if(metres(loc,[lat,lng])<4)found.push(id);}));return found;}
 async function refreshWaits(){if(document.hidden||!navigator.onLine){paintWaits();return;}
- const waits={};try{for(const p of Object.keys(PARK)){await loadRides(p);const data=await getJSON(WIKI+PARK[p]+'/live');(data.liveData||[]).forEach(e=>{if(Date.now()-Date.parse(e.lastUpdated)<20*60e3)waits[e.id]={status:e.status,wait:e.queue?.STANDBY?.waitTime};});}live.waits=waits;live.at=Date.now();}catch{}
+ const waits={};try{for(const p of Object.keys(PARK)){await loadRides(p);const data=await getJSON(WIKI+PARK[p]+'/live');const rows=data.liveData||[],newest=Math.max(0,...rows.map(e=>Date.parse(e.lastUpdated)||0));if(Date.now()-newest<3*3600e3)rows.forEach(e=>{waits[e.id]={status:e.status,wait:e.queue?.STANDBY?.waitTime};});}live.waits=waits;live.at=Date.now();}catch{}
  paintWaits();renderNear();}
 function waitFor(i){if(i.kind!=='ride'||!i.locs||live.at===undefined||Date.now()-live.at>20*60e3)return null;const parts=i.locs.map(l=>ridesAt(l).map(id=>live.waits[id]).find(Boolean)).filter(Boolean);if(!parts.length)return null;
  if(parts.some(w=>w.status==='DOWN'))return{text:'Down right now',cls:'down'};if(parts.every(w=>w.status==='REFURBISHMENT'))return{text:'Closed for refurb',cls:'down'};

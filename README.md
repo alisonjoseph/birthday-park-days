@@ -11,7 +11,7 @@ On iPhone: Safari → Share → Add to Home Screen. On Android: Chrome → Insta
 In repository Settings → Pages choose **Deploy from a branch**, `main`, `/ (root)`. All asset paths are relative so project sites work under their repository subdirectory.
 
 ## Edit
-- `itinerary.js`: day plans and official-source notes.
+- `itinerary.js`: day plans and official-source notes. `locs` holds `[lat, lng]` pins (from Universal’s attraction data via themeparks.wiki) that the opt-in Near you card matches against.
 - `styles.css`: appearance.
 - `app.js`: checklist and saving.
 - `sw.js`: offline cache. Bump CACHE when releasing an update.

@@ -291,22 +291,21 @@ function openAdd(){const body=document.querySelector('#add-body');body.replaceCh
   b.onclick=()=>{if(planned&&!checked.has(planned.id)){setChecked(planned.id,true);addDlg.close();toast(`${planned.title} is in the plan, so it’s checked off there`);return;}addItem(p.name,p.type,p.loc);};return b;};
  const places=scope=>{const seen=new Set();return (scope==='all'?Object.keys(PARK):[addPark]).flatMap(k=>live.places?.[k]||[]).map(([,name,type,lat,lng])=>({name,type,loc:[lat,lng]})).filter(p=>!seen.has(p.name)&&seen.add(p.name));};
  const byDistance=list=>here?list.map(p=>({p,d:metres(here.loc,p.loc)})).sort((a,b)=>a.d-b.d).map(x=>x.p):list.sort((a,b)=>a.name.localeCompare(b.name));
- const fillNear=()=>{nearBox.replaceChildren();if(addType)return;if(!here){nearBox.append(el('p','add-label',locating?'Finding what’s close…':'Couldn’t find your location. Type it below and pick from the list.'));return;}
-  const near=byDistance(places('all')).filter(p=>metres(here.loc,p.loc)<=150+here.acc).slice(0,6);
-  nearBox.append(el('p','add-label',near.length?'Close to you':'Nothing named close by. Type it below.'));const list=el('div','add-near');near.forEach(p=>list.append(pickBtn(p)));nearBox.append(list);};
+ const fillNear=()=>{nearBox.replaceChildren();if(!here&&locating)nearBox.append(el('p','add-label','Finding what’s close…'));};
  const input=el('input','add-input');input.type='text';input.placeholder='e.g. Churro at Toon Lagoon';input.maxLength=80;input.setAttribute('aria-label','What did you do?');
  const sug=el('div','add-suggest'),norm=s=>s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[’'`]/g,'').replace(/[^a-z0-9]+/g,' ').trim();
- // Typing narrows to matching names; a chosen type lists every place of that type at the day's parks, closest first.
- const suggest=()=>{sug.replaceChildren();const q=norm(input.value);if(!q&&!addType)return;const words=q?q.split(' '):[];let hits=places('day').filter(p=>(!addType||p.type===addType)&&words.every(w=>norm(p.name).includes(w)));
-  hits=q&&!addType?hits.sort((x,y)=>(norm(y.name).startsWith(q)-norm(x.name).startsWith(q))||x.name.localeCompare(y.name)).slice(0,8):byDistance(hits);
-  if(addType&&!hits.length&&!q){sug.append(el('p','add-label',addType==='meet'||addType==='other'?'No list for this one. Type it below.':locating?'Loading…':'Nothing found. Type it below.'));return;}
-  if(addType)sug.append(el('p','add-label',`${hits.length} ${ADD_TYPES.find(t=>t[0]===addType)[1].toLowerCase()} ${hits.length===1?'spot':'spots'} at ${PARK_NAMES[addPark].replace('Universal ','')}${here?', closest first':''}`));hits.forEach(p=>sug.append(pickBtn(p)));};
+ // The whole park is listed from the start, closest first; a type and typed words narrow it.
+ const suggest=()=>{sug.replaceChildren();const q=norm(input.value),words=q?q.split(' '):[];let hits=places('day').filter(p=>(!addType||p.type===addType)&&words.every(w=>norm(p.name).includes(w)));
+  hits=q&&!here?hits.sort((x,y)=>(norm(y.name).startsWith(q)-norm(x.name).startsWith(q))||x.name.localeCompare(y.name)):byDistance(hits);
+  const park=PARK_NAMES[addPark].replace('Universal ','');
+  if(!hits.length){sug.append(el('p','add-label',q?'Nothing by that name. Tap “Add it” to add it as typed.':addType==='meet'||addType==='other'?'No list for this one. Type it above.':!live.places?.[addPark]?.length?(listLoaded?'Couldn’t load the park list. Type it above.':'Loading the park list…'):'Nothing found. Type it above.'));return;}
+  const kind=addType?ADD_TYPES.find(t=>t[0]===addType)[1].toLowerCase()+' ':'';sug.append(el('p','add-label',`${hits.length} ${kind}${hits.length===1?'spot':'spots'} at ${park}${here?', closest first':''}`));hits.forEach(p=>sug.append(pickBtn(p)));};
  const chips=el('div','add-types');ADD_TYPES.forEach(([id,label])=>{const c=el('button','filter-chip',label);c.type='button';c.setAttribute('aria-pressed','false');c.onclick=()=>{addType=addType===id?null:id;chips.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',String(x===c&&addType===id)));fillNear();suggest();};chips.append(c);});
  const save=el('button','add-save','Add it');save.type='button';save.onclick=()=>{if(!input.value.trim()){input.focus();return;}addItem(input.value,addType||'other',here?.loc);};input.onkeydown=e=>{if(e.key==='Enter')save.click();};
  if(!here&&'geolocation' in navigator){locating=true;navigator.geolocation.getCurrentPosition(pos=>{locating=false;if(pos.coords.accuracy<=NEAR_MAX_ACC*2)here={loc:[pos.coords.latitude,pos.coords.longitude],acc:pos.coords.accuracy};fillNear();suggest();},()=>{locating=false;fillNear();suggest();},{enableHighAccuracy:true,timeout:15000,maximumAge:30000});}
- input.oninput=suggest;Promise.all(Object.keys(PARK).map(p=>loadRides(p).catch(()=>{}))).then(()=>{suggest();fillNear();});
+ let listLoaded=false;input.oninput=suggest;Promise.all(Object.keys(PARK).map(p=>loadRides(p).catch(()=>{}))).then(()=>{listLoaded=true;suggest();fillNear();});
  const parkSel=el('select','add-park');parkSel.setAttribute('aria-label','Park');Object.entries(PARK_NAMES).forEach(([k,n])=>{const op=el('option','',n);op.value=k;op.selected=k===addPark;parkSel.append(op);});parkSel.onchange=()=>{addPark=parkSel.value;suggest();};const parkRow=el('label','add-park-row');parkRow.append(el('span','add-label','Park'),parkSel);
- fillNear();body.append(nearBox,parkRow,el('p','add-label','Pick a type to see them all, or type it'),chips,input,sug,save);addDlg.showModal();document.body.classList.add('modal-open');}
+ fillNear();suggest();body.append(parkRow,chips,input,save,nearBox,sug);addDlg.showModal();document.body.classList.add('modal-open');}
 document.querySelector('#add-close').onclick=()=>addDlg.close();addDlg.addEventListener('close',()=>document.body.classList.remove('modal-open'));
 // Live data from the phone: ride waits and park hours (ThemeParks.wiki), weather (Open-Meteo). Last good copy is kept for offline.
 const WIKI='https://api.themeparks.wiki/v1/entity/',PARK={ioa:'267615cc-8943-4c2a-ae2c-5da728ca591f',usf:'eb3f4560-2383-4a36-9152-6b3e5ed6bc57',epic:'12dbb85b-265f-44e6-bccf-f1faa17211fc'};

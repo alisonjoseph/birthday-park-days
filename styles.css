@@ -335,3 +335,17 @@ body.map-mode .filters{display:flex}
 .recap-dialog .recap-body{flex:1;min-height:0;overflow:hidden;padding-top:46px}
 .recap-maps{flex:1;min-height:0;grid-template-rows:repeat(3,minmax(0,1fr))}
 .recap-tile{height:auto;min-height:0}
+/* List/Map: a floating pill for the other view. Bottom right over the list; top left on the map. */
+.view-switch.view-fab{position:fixed;z-index:6;right:max(16px,calc(50% - 344px));bottom:calc(18px + env(safe-area-inset-bottom));left:auto;top:auto;width:auto;margin:0;padding:0;gap:0;background:none;border-radius:999px;box-shadow:0 6px 18px -6px rgba(82,37,61,.55)}
+.view-switch.view-fab::before{content:none}
+.view-switch.view-fab button[aria-pressed=true]{display:none}
+.view-switch.view-fab button,.view-switch.view-fab button[aria-pressed=true]{flex:none;min-height:48px;padding:0 18px 0 14px;border-radius:999px;background:#52253d;color:#fff;font-size:15px;font-weight:750;gap:8px;box-shadow:none}
+.view-switch.view-fab .vs-text{position:static;width:auto;height:auto;overflow:visible;clip:auto}
+.view-switch.view-fab .vs-ico{transform:none}
+.view-switch.view-fab button .vs-ico rect{fill:#fff}
+html.map-mode .view-switch.view-fab{top:calc(var(--nav-h,120px) + 12px);bottom:auto;right:auto;left:12px;box-shadow:0 2px 8px -4px #52253d55}
+html.map-mode .view-switch.view-fab button{min-height:40px;padding:0 14px 0 10px;background:#fff;color:#52253d;border:1px solid #e0b9ca;font-size:14px}
+html.map-mode .view-switch.view-fab button .vs-ico rect{fill:currentColor}
+body.map-mode .map-legend{left:104px}
+.save-status{bottom:calc(80px + env(safe-area-inset-bottom))}
+@media print{.view-fab{display:none}}

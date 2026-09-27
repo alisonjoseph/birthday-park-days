@@ -11,7 +11,8 @@ if(tripStarted()){const stale=[...checked].filter(id=>!(times[id]>=TRIP_START));
 {const d=days.find(d=>d.date===etToday());if(d)state.day=d.id;}
 function etToday(){return new Intl.DateTimeFormat('en-CA',{timeZone:'America/New_York'}).format(new Date());}
 function persist(){try{localStorage.setItem(key,JSON.stringify({checked:[...checked],day:state.day,times}));warning.hidden=true;return true;}catch{warning.hidden=false;warning.textContent='Your browser could not save progress. Keep this page open; checkmarks may be lost when you close it.';return false;}}
-function toast(text){const el=document.querySelector('#save-status');el.textContent=text;el.classList.add('visible');clearTimeout(timer);timer=setTimeout(()=>el.classList.remove('visible'),1800);}
+function toast(text){const el=document.querySelector('#save-status');{// On the map the toast sits just above the stop card instead of over it.
+const sh=document.documentElement.classList.contains('map-mode')&&document.querySelector('#map-sheet'),top=sh?.offsetHeight?sh.getBoundingClientRect().top:0;el.style.bottom=top>0?(innerHeight-top+10)+'px':'';}el.textContent=text;el.classList.add('visible');clearTimeout(timer);timer=setTimeout(()=>el.classList.remove('visible'),1800);}
 function el(tag,cls,text){const e=document.createElement(tag);if(cls)e.className=cls;if(text!==undefined)e.textContent=text;return e;}
 function totals(){const day=days.find(d=>d.id===state.day),items=day.sections.flatMap(s=>s.items).filter(i=>!i.unavailable),done=items.filter(i=>checked.has(i.id)).length;document.querySelector('#day-progress').textContent=`${done} of ${items.length} checked off`;const p=document.querySelector('#progress');p.max=items.length;p.value=done;document.querySelector('#total-progress').textContent=`${checked.size} checked off`;document.querySelector('#all-done').hidden=done!==items.length;return{done,total:items.length};}
 // One set of filters for the list and the map. The colored dots double as the map's key. Tap a chip again to show everything.
@@ -101,7 +102,7 @@ function renderRoute(){const card=document.querySelector('#route-card');if(!card
  const {route,next}=drawMap(mini,day,{pad:14,scale:.85,labels:true,you:true}),main=route.filter(s=>!s.extra),done=main.filter(stopDone).length;
  const lbl=routeLabel(day);document.querySelector('#route-label').textContent=lbl;document.querySelector('#route-open').setAttribute('aria-label','Open '+lbl.replace('Today’s','today’s')+' map');document.querySelector('#route-sum').textContent=next?`${done} of ${main.length} main stops · next: ${next.items[0].title}`:`All ${route.length} stops done`;
  if(mapView?.open){if(mapDay!==state.day){mapDay=state.day;mapPick=null;sheetDir=0;sheetKey='';Object.assign(mapZoom,{z:1,dx:0,dy:0});}renderFullMap();}}
-let lastMap=null,sheetDir=0,sheetKey='';
+let lastMap=null,sheetDir=0,sheetKey='',sheetHold=false;
 // The map redraws often (location fixes, pinch frames); the stop card only rebuilds when what it shows changes, so it never flickers.
 // How much of the map's bottom edge the stop card (and the space under it) covers.
 function sheetSpace(){const svg=document.querySelector('#route-full').getBoundingClientRect(),sh=document.querySelector('#map-sheet').getBoundingClientRect();return sh.height?Math.max(0,svg.bottom-sh.top):0;}
@@ -114,24 +115,31 @@ function focusMap(id){const day=days.find(d=>d.id===state.day),it=mapStops(day).
  const step=now=>{if(run!==zoomAnim)return;const t=dur?Math.min(1,(now-t0)/dur):1,e=1-Math.pow(1-t,3);mapZoom.z=from.z+(to.z-from.z)*e;mapZoom.dx=from.dx+(to.dx-from.dx)*e;mapZoom.dy=from.dy+(to.dy-from.dy)*e;clampPan();drawFullMap();if(t<1)requestAnimationFrame(step);};requestAnimationFrame(step);}
 function renderFullMap(){renderSheet();drawFullMap();}
 function nextOfType(route,next){return activeFilter?(route.slice(Math.max(0,route.indexOf(next))).find(s=>stopMatch(s)&&!stopDone(s))||route.find(s=>stopMatch(s)&&!stopDone(s))):next;}
-function renderSheet(){const day=days.find(d=>d.id===state.day),route=routeFor(day),next=nextStop(route),trail=trailFor(day);
+// Stepping between stops: the old card slides out one way while the new one slides in from the other.
+function slideSheet(sheet,dir){const host=sheet.offsetParent||sheet.parentNode,ghost=sheet.cloneNode(true);ghost.removeAttribute('id');ghost.querySelectorAll('[id]').forEach(e=>e.removeAttribute('id'));ghost.querySelectorAll('.pop').forEach(e=>e.classList.remove('pop'));ghost.setAttribute('aria-hidden','true');ghost.inert=true;Object.assign(ghost.style,{position:'absolute',top:sheet.offsetTop+'px',left:sheet.offsetLeft+'px',width:sheet.offsetWidth+'px',height:sheet.offsetHeight+'px',right:'auto',bottom:'auto',margin:'0',zIndex:'3',pointerEvents:'none'});host.append(ghost);
+ ghost.animate([{transform:'none',opacity:1},{transform:`translateX(${-dir*70}%) rotate(${-dir*2}deg)`,opacity:0}],{duration:340,easing:'cubic-bezier(.4,0,.6,1)',fill:'forwards'}).onfinish=()=>ghost.remove();
+ return()=>sheet.animate([{transform:`translateX(${dir*60}%)`,opacity:0},{transform:'none',opacity:1}],{duration:420,delay:60,easing:'cubic-bezier(.2,.9,.3,1.1)',fill:'backwards'});}
+function renderSheet(){if(sheetHold)return;const day=days.find(d=>d.id===state.day),route=routeFor(day),next=nextStop(route),trail=trailFor(day);
  document.querySelector('#map-title').textContent=day.name;document.querySelector('#map-eyebrow').textContent=routeLabel(day).toUpperCase();
  document.querySelector('#map-extras').setAttribute('aria-pressed',String(mapExtras));
  // With a type chosen in the legend, the default stop is the next one of that type.
  const nextOf=nextOfType(route,next);
  const picked=mapPick&&mapStops(day).find(i=>i.id===mapPick),stop=picked?route.find(s=>s.items.includes(picked)):nextOf,item=picked||(nextOf&&(nextOf.items.find(i=>!checked.has(i.id)&&typeMatch(i))||nextOf.items.find(i=>!checked.has(i.id))));
  const key=[day.id,activeFilter,mapExtras,item?.id,item&&checked.has(item.id),stop===next,route.length,trail.map(i=>i.id).join(),item&&waitFor(item)?.text].join('|');if(key===sheetKey)return;sheetKey=key;
- const sheet=document.querySelector('#map-sheet');sheet.replaceChildren();sheet.className='map-sheet'+(item?(item.food?' food food-'+item.food:'')+(item.kind==='ride'?' ride':'')+(item.show||item.kind==='show'?' show':'')+(item.meet?' meet':'')+(item.booked?' is-booked':'')+(checked.has(item.id)?' done':''):'');
- if(!item){sheet.append(el('p','map-sheet-empty',route.length?'Every stop on this route is checked off. Tap any pin, or use the arrows, to look back.':'No map stops for this day.'));sheet.append(mapNav(route,-1));return;}
+ const sheet=document.querySelector('#map-sheet');const slide=sheetDir&&!calm()&&sheet.childElementCount?slideSheet(sheet,sheetDir):null;sheet.replaceChildren();sheet.className='map-sheet'+(item?(item.food?' food food-'+item.food:'')+(item.kind==='ride'?' ride':'')+(item.show||item.kind==='show'?' show':'')+(item.meet?' meet':'')+(item.booked?' is-booked':'')+(checked.has(item.id)?' done':''):'');
+ if(!item){slide&&requestAnimationFrame(slide);sheet.append(el('p','map-sheet-empty',route.length?'Every stop on this route is checked off. Tap any pin, or use the arrows, to look back.':'No map stops for this day.'));sheet.append(mapNav(route,-1));return;}
  const n=stop?route.indexOf(stop)+1:0,done=checked.has(item.id),last=trail.filter(i=>i.id!==item.id).at(-1);
- const body=el('div','map-sheet-body'+(sheetDir>0?' from-right':sheetDir<0?' from-left':''));
+ const body=el('div','map-sheet-body'+(!slide&&sheetDir>0?' from-right':!slide&&sheetDir<0?' from-left':''));
  const badge=el('span','map-sheet-no t-'+pinType(item)+(done?' done':'')+(item.optional&&!done?' extra':''),done?'✓':n?String(n):'+');badge.setAttribute('aria-hidden','true');
  const eyebrow=[];if(stop&&stop===next&&!done)eyebrow.push('NEXT UP');if(item.optional)eyebrow.push('OPTIONAL');if(n)eyebrow.push(`STOP ${n} OF ${route.length}`);
  const txt=el('div','map-sheet-text');txt.append(el('span','map-sheet-eyebrow',eyebrow.join(' · ')),el('span','map-sheet-title',item.title));{const w=!done&&waitFor(item);if(w)txt.append(el('span','wait wait-'+w.cls,(w.cls==='down'?'⚠️ ':'⏳ ')+w.text));}
  const meta=[];if(last&&!done)meta.push(`About ${walkMins(last.locs[0],item.locs[0],day.id)} min walk`);if(meta.length)txt.append(el('span','map-sheet-meta',meta.join(' · ')));
- const btn=el('label','map-check-box'+(done?' done':'')),cb=el('input');cb.type='checkbox';cb.checked=done;cb.setAttribute('aria-label',(done?'Uncheck ':'Check off ')+item.title);cb.onchange=()=>{mapPick=picked&&!done?null:picked?item.id:null;sheetDir=0;setChecked(item.id,!done);};btn.append(cb);
+ const btn=el('label','map-check-box'+(done?' done':'')),cb=el('input');cb.type='checkbox';cb.checked=done;cb.setAttribute('aria-label',(done?'Uncheck ':'Check off ')+item.title);cb.onchange=()=>{mapPick=picked&&!done?null:picked?item.id:null;sheetDir=0;
+  // Checking off: the card holds a beat to show the tick and confetti, then slides on to the next stop.
+  if(!done&&!calm()){sheetHold=true;btn.classList.add('done');badge.textContent='✓';badge.classList.remove('extra');badge.classList.add('done');sheet.classList.add('done');cb.classList.add('pop');pop(badge,1.2);setChecked(item.id,true);setTimeout(()=>{sheetHold=false;sheetKey='';sheetDir=1;if(mapView?.open)renderFullMap();},800);return;}
+  setChecked(item.id,!done);};btn.append(cb);
  const go=el('a','map-go','Walk ↗');go.href=`https://maps.apple.com/?daddr=${item.locs[0][0]},${item.locs[0][1]}&dirflg=w`;go.target='_blank';go.rel='noopener';go.setAttribute('aria-label','Walking directions to '+item.title+' in Maps');
- const acts=el('div','map-sheet-actions');acts.append(btn,go);body.append(badge,txt,acts);sheet.append(body,mapNav(route,stop?route.indexOf(stop):-1,picked));sheetDir=0;
+ const acts=el('div','map-sheet-actions');acts.append(btn,go);body.append(badge,txt,acts);sheet.append(body,mapNav(route,stop?route.indexOf(stop):-1,picked));slide?.();sheetDir=0;
 }
 // Arrows (and swipes) step through the route in plan order from whatever stop is showing.
 function mapStep(route,pos,picked,dir){if(activeFilter){let s=mapStepAll(route,pos,picked,dir);while(s&&!stopMatch(s))s=route[route.indexOf(s)+dir];return s||null;}return mapStepAll(route,pos,picked,dir);}

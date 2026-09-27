@@ -408,3 +408,5 @@ progress::-webkit-progress-value{transition:width .55s cubic-bezier(.3,.9,.3,1)}
 @media(max-width:400px){.recap-replay{top:8px;left:8px}}
 .recap-dialog .recap-body{padding-top:62px}
 @media(prefers-reduced-motion:reduce){.recap-replay{display:none}}
+.map-check-box input.pop{animation:check-pop .45s cubic-bezier(.3,1.5,.5,1)}
+.map-check-box input.pop:checked:after{animation:tick-in .32s .06s cubic-bezier(.3,1.4,.5,1) both}

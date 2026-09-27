@@ -201,14 +201,14 @@ function renderAdded(day,list){const items=addedFor(day).filter(FILTERS.find(f=>
  const add=el('button','added-add','+ Add something we did');add.type='button';add.onclick=openAdd;box.append(add);section.append(box);list.append(section);}
 function addItem(title,type,loc){title=title.trim().slice(0,80);if(!title)return;const day=days.find(d=>d.date===etToday())||days.find(d=>d.id===state.day);added.push({id:'added-'+Date.now().toString(36),day:day.id,title,type,loc:loc||null,at:Date.now()});const ok=saveAdded();if(state.day!==day.id){state.day=day.id;persist();}addDlg.close();render();toast(ok?'Added · saved on this phone':'Added here · not saved');}
 const addDlg=document.querySelector('#add-dialog');let addType=null;
-function openAdd(){const body=document.querySelector('#add-body');body.replaceChildren();addType=null;const addDay=days.find(d=>d.date===etToday())||days.find(d=>d.id===state.day);
+function openAdd(){const body=document.querySelector('#add-body');body.replaceChildren();addType=null;const addDay=days.find(d=>d.date===etToday())||days.find(d=>d.id===state.day);let addPark=ADD_PARK_DEFAULT[addDay.id];
  let here=nearOn&&nearFix&&nearFix.acc<=NEAR_MAX_ACC?{loc:[nearFix.lat,nearFix.lng],acc:nearFix.acc}:null,locating=false;const nearBox=el('div'),plan=mapStops(addDay);
  const distText=d=>d<25?'right here':d<1000?Math.round(d/5)*5+' m':(d/1609).toFixed(1)+' mi';
  // One button per place. A place that's already in the plan checks that stop off instead of being added twice.
  const pickBtn=p=>{const planned=plan.find(i=>i.locs.some(l=>metres(l,p.loc)<4)),b=el('button','add-pick'),where=here?' · '+distText(metres(here.loc,p.loc)):'';b.type='button';
   b.append(el('span','add-pick-name',p.name),el('span','add-pick-meta',planned?(checked.has(planned.id)?'In the plan · already checked off':'In the plan · tap to check off')+where:ADD_TYPES.find(t=>t[0]===p.type)[1]+where));
   b.onclick=()=>{if(planned){if(!checked.has(planned.id))setChecked(planned.id,true);addDlg.close();return;}addItem(p.name,p.type,p.loc);};return b;};
- const places=scope=>{const seen=new Set();return (scope==='all'?Object.keys(PARK):DAY_PARKS[addDay.id].rides).flatMap(k=>live.places?.[k]||[]).map(([,name,type,lat,lng])=>({name,type,loc:[lat,lng]})).filter(p=>!seen.has(p.name)&&seen.add(p.name));};
+ const places=scope=>{const seen=new Set();return (scope==='all'?Object.keys(PARK):[addPark]).flatMap(k=>live.places?.[k]||[]).map(([,name,type,lat,lng])=>({name,type,loc:[lat,lng]})).filter(p=>!seen.has(p.name)&&seen.add(p.name));};
  const byDistance=list=>here?list.map(p=>({p,d:metres(here.loc,p.loc)})).sort((a,b)=>a.d-b.d).map(x=>x.p):list.sort((a,b)=>a.name.localeCompare(b.name));
  const fillNear=()=>{nearBox.replaceChildren();if(addType)return;if(!here){nearBox.append(el('p','add-label',locating?'Finding what’s close…':'Couldn’t find your location. Type it below and pick from the list.'));return;}
   const near=byDistance(places('all')).filter(p=>metres(here.loc,p.loc)<=150+here.acc).slice(0,6);
@@ -219,12 +219,13 @@ function openAdd(){const body=document.querySelector('#add-body');body.replaceCh
  const suggest=()=>{sug.replaceChildren();const q=norm(input.value);if(!q&&!addType)return;const words=q?q.split(' '):[];let hits=places('day').filter(p=>(!addType||p.type===addType)&&words.every(w=>norm(p.name).includes(w)));
   hits=q&&!addType?hits.sort((x,y)=>(norm(y.name).startsWith(q)-norm(x.name).startsWith(q))||x.name.localeCompare(y.name)).slice(0,8):byDistance(hits);
   if(addType&&!hits.length&&!q){sug.append(el('p','add-label',addType==='meet'||addType==='other'?'No list for this one. Type it below.':locating?'Loading…':'Nothing found. Type it below.'));return;}
-  if(addType)sug.append(el('p','add-label',`${hits.length} ${ADD_TYPES.find(t=>t[0]===addType)[1].toLowerCase()} ${hits.length===1?'spot':'spots'}${here?', closest first':''}`));hits.forEach(p=>sug.append(pickBtn(p)));};
+  if(addType)sug.append(el('p','add-label',`${hits.length} ${ADD_TYPES.find(t=>t[0]===addType)[1].toLowerCase()} ${hits.length===1?'spot':'spots'} at ${PARK_NAMES[addPark].replace('Universal ','')}${here?', closest first':''}`));hits.forEach(p=>sug.append(pickBtn(p)));};
  const chips=el('div','add-types');ADD_TYPES.forEach(([id,label])=>{const c=el('button','filter-chip',label);c.type='button';c.setAttribute('aria-pressed','false');c.onclick=()=>{addType=addType===id?null:id;chips.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',String(x===c&&addType===id)));fillNear();suggest();};chips.append(c);});
  const save=el('button','add-save','Add it');save.type='button';save.onclick=()=>{if(!input.value.trim()){input.focus();return;}addItem(input.value,addType||'other',here?.loc);};input.onkeydown=e=>{if(e.key==='Enter')save.click();};
  if(!here&&'geolocation' in navigator){locating=true;navigator.geolocation.getCurrentPosition(pos=>{locating=false;if(pos.coords.accuracy<=NEAR_MAX_ACC*2)here={loc:[pos.coords.latitude,pos.coords.longitude],acc:pos.coords.accuracy};fillNear();suggest();},()=>{locating=false;fillNear();suggest();},{enableHighAccuracy:true,timeout:15000,maximumAge:30000});}
  input.oninput=suggest;Promise.all(Object.keys(PARK).map(p=>loadRides(p).catch(()=>{}))).then(()=>{suggest();fillNear();});
- fillNear();body.append(nearBox,el('p','add-label','Pick a type to see them all, or type it'),chips,input,sug,save);addDlg.showModal();document.body.classList.add('modal-open');}
+ const parkSel=el('select','add-park');parkSel.setAttribute('aria-label','Park');Object.entries(PARK_NAMES).forEach(([k,n])=>{const op=el('option','',n);op.value=k;op.selected=k===addPark;parkSel.append(op);});parkSel.onchange=()=>{addPark=parkSel.value;suggest();};const parkRow=el('label','add-park-row');parkRow.append(el('span','add-label','Park'),parkSel);
+ fillNear();body.append(nearBox,parkRow,el('p','add-label','Pick a type to see them all, or type it'),chips,input,sug,save);addDlg.showModal();document.body.classList.add('modal-open');}
 document.querySelector('#add-close').onclick=()=>addDlg.close();addDlg.addEventListener('close',()=>document.body.classList.remove('modal-open'));
 // Live data from the phone: ride waits and park hours (ThemeParks.wiki), weather (Open-Meteo). Last good copy is kept for offline.
 const WIKI='https://api.themeparks.wiki/v1/entity/',PARK={ioa:'267615cc-8943-4c2a-ae2c-5da728ca591f',usf:'eb3f4560-2383-4a36-9152-6b3e5ed6bc57',epic:'12dbb85b-265f-44e6-bccf-f1faa17211fc'};
@@ -235,6 +236,7 @@ const etToday=()=>new Intl.DateTimeFormat('en-CA',{timeZone:'America/New_York'})
 async function getJSON(url){const r=await fetch(url,{cache:'no-store'});if(!r.ok)throw new Error(r.status);return r.json();}
 function clock(iso){let h=+iso.slice(11,13);const m=iso.slice(14,16),ap=h<12?'AM':'PM';h=h%12||12;return h+(m==='00'?'':':'+m)+' '+ap;}
 function hourText(h){const ap=h<12||h===24?'AM':'PM';return (h%12||12)+' '+ap;}
+const PARK_NAMES={ioa:'Islands of Adventure',usf:'Universal Studios',epic:'Epic Universe'},ADD_PARK_DEFAULT={sun:'ioa',mon:'usf',tue:'epic'};
 const PLACE_TYPE={ATTRACTION:'ride',RESTAURANT:'food',SHOW:'show'};
 async function loadRides(park){if(live.rides[park]&&live.places?.[park])return;const data=await getJSON(WIKI+PARK[park]+'/children'),kids=data.children.filter(c=>c.location&&c.location.latitude);live.rides[park]=kids.filter(c=>c.entityType==='ATTRACTION').map(c=>[c.id,+c.location.latitude,+c.location.longitude]);(live.places??={})[park]=kids.filter(c=>PLACE_TYPE[c.entityType]&&c.name).map(c=>[c.id,String(c.name).replace(/[™®©]/g,'').trim(),PLACE_TYPE[c.entityType],+c.location.latitude,+c.location.longitude]);saveLive();}
 function ridesAt(loc){const found=[];Object.values(live.rides).forEach(list=>list.forEach(([id,lat,lng])=>{if(metres(loc,[lat,lng])<4)found.push(id);}));return found;}

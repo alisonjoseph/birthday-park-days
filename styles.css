@@ -210,3 +210,4 @@ body::before{content:"";position:fixed;inset:-12%;z-index:-1;pointer-events:none
 .add-suggest{display:grid;gap:6px;margin-top:8px}.add-suggest:empty{display:none}.add-suggest .add-pick{padding:10px 14px}
 .add-suggest .add-label{margin-top:10px}.add-save+.add-suggest{margin-top:14px}
 .add-suggest+.add-save,.add-input+.add-suggest+.add-save{margin-top:14px}
+.add-park-row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 14px}.add-park-row .add-label{margin:0}.add-park{flex:1;max-width:240px;padding:10px 12px;border:1px solid #e6bdd0;border-radius:12px;background:#fff;color:var(--ink);font:inherit;font-size:16px;font-weight:650}

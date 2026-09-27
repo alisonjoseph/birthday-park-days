@@ -32,6 +32,7 @@ window.TRIP_DAYS = [
           },
           {
             "id": "sun-gate",
+            "locs": [[28.47225, -81.467594]],
             "title": "Arrive at the park entrance",
             "note": "Take the hotel shuttle. Bring your room keys and park tickets.",
             "tag": "GET READY",
@@ -556,6 +557,7 @@ window.TRIP_DAYS = [
           },
           {
             "id": "mon-gate",
+            "locs": [[28.47225, -81.467594]],
             "title": "Arrive at Islands of Adventure",
             "note": "Confirm the first hotel shuttle the night before. Bring your room keys and Park-to-Park tickets.",
             "tag": "GET READY",
@@ -1098,6 +1100,7 @@ window.TRIP_DAYS = [
           },
           {
             "id": "tue-gate",
+            "locs": [[28.4386, -81.4467]],
             "title": "Arrive at the park entrance",
             "note": "Bring hotel room keys for early admission.",
             "tag": "GET READY",

@@ -231,14 +231,13 @@ body:not(.map-mode) #route-card .near-you{border-top:0}
 .map-legend .map-extras[aria-pressed="true"]::before{content:'✓ '}
 .map-zoom .map-add{margin-top:8px;background:#52253d;color:#fff;border-color:#52253d;font-size:15px;letter-spacing:-.02em}
 /* map stop card colored like list items */
-.map-dialog .map-sheet.ride{background:#fdeaf2;box-shadow:inset 5px 0 0 #e58db3,0 8px 28px -10px #52253d66}
-.map-dialog .map-sheet.food{background:#f1f7fd;box-shadow:inset 5px 0 0 #5b9bd5,0 8px 28px -10px #52253d66}
-.map-dialog .map-sheet.food-snack{box-shadow:inset 5px 0 0 #9cc4e8,0 8px 28px -10px #52253d66}
-.map-dialog .map-sheet.food-coffee{box-shadow:inset 5px 0 0 #a9745a,0 8px 28px -10px #52253d66}
-.map-dialog .map-sheet.show{background:#f6f1ff;box-shadow:inset 5px 0 0 #9b7fd4,0 8px 28px -10px #52253d66}
-.map-dialog .map-sheet.meet{background:#eefaf6;box-shadow:inset 5px 0 0 #4fae96,0 8px 28px -10px #52253d66}
-.map-dialog .map-sheet.is-booked{background:#fff4ea;box-shadow:inset 5px 0 0 #52253d,0 8px 28px -10px #52253d66}
+.map-dialog .map-sheet.ride{background:#fdeaf2;box-shadow:inset 0 0 0 1px #e58db3,0 8px 28px -10px #52253d66}
+.map-dialog .map-sheet.food{background:#f1f7fd;box-shadow:inset 0 0 0 1px #5b9bd5,0 8px 28px -10px #52253d66}
+.map-dialog .map-sheet.food-snack{box-shadow:inset 0 0 0 1px #9cc4e8,0 8px 28px -10px #52253d66}
+.map-dialog .map-sheet.food-coffee{box-shadow:inset 0 0 0 1px #a9745a,0 8px 28px -10px #52253d66}
+.map-dialog .map-sheet.show{background:#f6f1ff;box-shadow:inset 0 0 0 1px #9b7fd4,0 8px 28px -10px #52253d66}
+.map-dialog .map-sheet.meet{background:#eefaf6;box-shadow:inset 0 0 0 1px #4fae96,0 8px 28px -10px #52253d66}
+.map-dialog .map-sheet.is-booked{background:#fff4ea;box-shadow:inset 0 0 0 1px #52253d,0 8px 28px -10px #52253d66}
 .map-dialog .map-sheet.food.is-booked{background:#f1f7fd}
-.map-dialog .map-sheet{padding-left:18px}
 body.map-mode .map-legend{gap:2px 2px;padding:5px 6px;max-width:calc(100% - 72px)}
 body.map-mode .map-legend button{padding:4px 5px;margin:0}

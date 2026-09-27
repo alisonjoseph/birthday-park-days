@@ -402,3 +402,9 @@ progress::-webkit-progress-value{transition:width .55s cubic-bezier(.3,.9,.3,1)}
 @keyframes fade-in{from{opacity:0}}
 .recap-tile :is(.map-pin,.map-extra){transform-box:fill-box;transform-origin:center}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after,::backdrop{animation:none!important;transition:none!important}.fx-layer{display:none}}
+.recap-replay{position:absolute;top:10px;left:10px;z-index:2;display:inline-flex;align-items:center;gap:5px;min-height:44px;padding:0 14px;border:1px solid #e6bdd0;border-radius:999px;background:transparent;color:var(--ink);font:inherit;font-size:13px;font-weight:700;cursor:pointer;transition:transform .2s cubic-bezier(.3,1.5,.5,1)}
+.recap-replay:active{transform:scale(.95)}
+.recap-replay span{font-size:16px;line-height:1}
+@media(max-width:400px){.recap-replay{top:8px;left:8px}}
+.recap-dialog .recap-body{padding-top:62px}
+@media(prefers-reduced-motion:reduce){.recap-replay{display:none}}

@@ -31,6 +31,10 @@ const LANDS={sun:[['Hogsmeade',28.4729,-81.4731,90],['Jurassic Park',28.4712,-81
  mon:[['Hogsmeade',28.4729,-81.4729,80],['Jurassic Park',28.4713,-81.4724,70],['Diagon Alley',28.4797,-81.4697,65],['New York',28.4766,-81.4693,75],['Production Central',28.4762,-81.4683,70],['Minion Land',28.4755,-81.4677,65],['DreamWorks Land',28.4782,-81.4667,65],['Springfield',28.4789,-81.4680,65],['World Expo',28.4802,-81.4680,55]],
  tue:[['Ministry of Magic',28.4429,-81.4478,80],['Celestial Park',28.4410,-81.4475,95],['Isle of Berk',28.4406,-81.4452,90],['Nintendo World',28.4389,-81.4481,90],['Dark Universe',28.4402,-81.4502,80]]};
 const SVGNS='http://www.w3.org/2000/svg';
+const LAND_TINT={'Hogsmeade':'#e2eaf6','Jurassic Park':'#d9eed3','Skull Island':'#e5e0d9','Toon Lagoon':'#fde8cc','Marvel':'#f8d9d9','Seuss Landing':'#fbefbd','Lost Continent':'#eee2cd','Diagon Alley':'#e6dfef','New York':'#ebe5df','Production Central':'#e0e7f1','Minion Land':'#fbefb4','DreamWorks Land':'#d9efe6','Springfield':'#fbe3c3','World Expo':'#dde8f5','Ministry of Magic':'#e6dfef','Celestial Park':'#e1e3f8','Isle of Berk':'#d8ece2','Nintendo World':'#fbdcd6','Dark Universe':'#e5dce7'};
+// Rough centers of each park's lagoon, drawn as soft water under the lands.
+const LAGOONS={sun:[[28.4718,-81.4708,95]],mon:[[28.4718,-81.4708,95],[28.4779,-81.4683,70]]};
+function blob(cx,cy,rx,ry,seed=0){const w=[1,.88,1.07,.93,1.05,.86,1.09,.95],n=w.length,pt=j=>{const a=j/n*Math.PI*2+seed;return [cx+Math.cos(a)*rx*w[(j+seed*3|0)%n],cy+Math.sin(a)*ry*w[(j+seed*3|0)%n]];};const f=q=>q.map(v=>v.toFixed(1)).join(','),mid=(a,b)=>[(a[0]+b[0])/2,(a[1]+b[1])/2];let d='M'+f(mid(pt(n-1),pt(0)));for(let j=0;j<n;j++)d+='Q'+f(pt(j))+' '+f(mid(pt(j),pt(j+1)));return d+'Z';}
 function sv(tag,attrs,parent){const e=document.createElementNS(SVGNS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);if(parent)parent.append(e);return e;}
 const extrasKey='park-days-map-extras';let mapExtras=true;try{mapExtras=localStorage.getItem(extrasKey)!=='off';}catch{}
 function mapStops(day){return day.sections.flatMap(s=>s.items).filter(i=>i.locs&&!i.unavailable);}
@@ -56,22 +60,29 @@ function drawMap(svg,day,o={}){
  // B places a point on the fitted map; P adds the pinch zoom and drag on top.
  const B=([la,ln])=>[ox+(ln*cl-x0)*k,oy+(-la-y0)*k],P=p=>{const [x,y]=B(p);return [(x-W/2)*z+W/2+v.dx,(y-H/2)*z+H/2+v.dy];},pxPerM=k*z/111320;
  let sc=o.scale||1;if(pxPerM<.5)sc*=.75;// Monday spans two parks, so pins shrink to stay apart
- lands.forEach(([n,la,ln,r])=>{const [x,y]=P([la,ln]),rr=Math.max(r*pxPerM,10);sv('ellipse',{cx:x,cy:y,rx:rr*1.15,ry:rr*.9,class:'map-land'},svg);if(o.labels!==false&&n.length*5.4*sc<rr*2.3){const t=sv('text',{x,y:Math.max(y-rr*.9+10*sc,11*sc),class:'map-land-label','font-size':8.5*sc},svg);t.textContent=n;}});
- const line=list=>list.map((p,j)=>(j?'L':'M')+P(p).map(n=>n.toFixed(1)).join(',')).join('');
+ (LAGOONS[day.id]||[]).forEach(([la,ln,r],j)=>{const [x,y]=P([la,ln]),rr=Math.max(r*pxPerM,8);sv('path',{d:blob(x,y,rr*1.2,rr,j+.4),class:'map-water'},svg);});
+ const labels=[];lands.forEach(([n,la,ln,r],j)=>{const [x,y]=P([la,ln]),rr=Math.max(r*pxPerM,10);sv('path',{d:blob(x,y,rr*1.15,rr*.9,j*.7),class:'map-land',style:LAND_TINT[n]?`fill:${LAND_TINT[n]}`:''},svg);if(o.labels!==false&&n.length*5.4*sc<rr*2.3)labels.push({n,x,y,rr});});
+ // Spread pins that would sit on top of each other, then run the lines through where they end up.
+ const pos=new Map(route.map(s=>[s,P(s.at)]));{const R=(o.pin||10)*sc*1.85,arr=[...pos.values()],orig=arr.map(p=>[...p]);for(let it=0;it<8;it++)for(let a=0;a<arr.length;a++)for(let b=a+1;b<arr.length;b++){const pa=arr[a],pb=arr[b],dx=pb[0]-pa[0],dy=pb[1]-pa[1],d=Math.hypot(dx,dy);if(d<R){const push=(R-d)/2,ux=d>.01?dx/d:Math.cos(a+b),uy=d>.01?dy/d:Math.sin(a+b);pa[0]-=ux*push;pa[1]-=uy*push;pb[0]+=ux*push;pb[1]+=uy*push;}}
+  arr.forEach((p,j)=>{const dx=p[0]-orig[j][0],dy=p[1]-orig[j][1],d=Math.hypot(dx,dy),cap=R*1.4;if(d>cap){p[0]=orig[j][0]+dx/d*cap;p[1]=orig[j][1]+dy/d*cap;}});}
+ const stopOf=new Map(route.flatMap(s=>s.items.map(i=>[i.id,s]))),at=i=>stopOf.has(i.id)?pos.get(stopOf.get(i.id)):P(i.locs[0]);
+ const line=list=>list.map((p,j)=>(j?'L':'M')+p.map(n=>n.toFixed(1)).join(',')).join('');
  const req=route.filter(s=>!s.extra);
- if(req.length>1)sv('path',{d:line(req.map(s=>s.at)),class:'map-plan','stroke-width':2.2*sc},svg);
- if(trail.length>1)sv('path',{d:line(trail.map(i=>i.locs[0])),class:'map-trail','stroke-width':3.4*sc},svg);
+ if(req.length>1)sv('path',{d:line(req.map(s=>pos.get(s))),class:'map-plan','stroke-width':2.2*sc},svg);
+ for(let j=0;j<req.length-1;j++){if(stopDone(req[j+1]))continue;const a=pos.get(req[j]),b=pos.get(req[j+1]),len=Math.hypot(b[0]-a[0],b[1]-a[1]);if(len<34*sc)continue;const ang=Math.atan2(b[1]-a[1],b[0]-a[0])*180/Math.PI;sv('path',{d:'M-3.6,-3.4L3.6,0L-3.6,3.4Z',class:'map-arrow',transform:`translate(${((a[0]+b[0])/2).toFixed(1)},${((a[1]+b[1])/2).toFixed(1)}) rotate(${ang.toFixed(1)}) scale(${sc})`},svg);}
+ if(trail.length>1)sv('path',{d:line(trail.map(at)),class:'map-trail','stroke-width':3.4*sc},svg);const under=sv('g',{},svg);
  const tap=(g,label,pick)=>{if(!o.onPick)return;g.setAttribute('class',g.getAttribute('class')+' map-tap');g.setAttribute('role','button');g.setAttribute('tabindex','0');g.setAttribute('aria-label',label);g.onclick=()=>{if(!mapDragged)o.onPick(pick);};g.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();o.onPick(pick);}};};
  const routeIds=new Set(route.flatMap(s=>s.items.map(i=>i.id)));
  stops.filter(i=>!routeIds.has(i.id)).forEach(i=>{const [x,y]=P(i.locs[0]),g=sv('g',{class:'map-extra t-'+pinType(i)+(o.onPick&&!typeMatch(i)?' faded':'')+(checked.has(i.id)?' done':'')+(mapPick===i.id?' picked':'')},svg);if(o.onPick)sv('circle',{cx:x,cy:y,r:14,class:'map-hit'},g);sv('circle',{cx:x,cy:y,r:3.4*sc},g);tap(g,i.title+(checked.has(i.id)?', checked off':', optional'),i.id);});
  // Draw extras first so the main stops sit on top where they overlap.
- [...route.filter(s=>s.extra),...req].forEach(s=>{const n=route.indexOf(s),[x,y]=P(s.at),st=stopDone(s)?'done':s===next?'next':'later',r=(o.pin||10)*sc*(s.extra&&st!=='next'?.8:1),g=sv('g',{class:'map-pin t-'+pinType(s.items[0])+(o.onPick&&!stopMatch(s)?' faded':'')+' '+st+(s.extra?' extra':'')+(s.items.some(i=>i.id===mapPick)?' picked':'')},svg);
+ [...route.filter(s=>s.extra),...req].forEach(s=>{const n=route.indexOf(s),[x,y]=pos.get(s),st=stopDone(s)?'done':s===next?'next':'later',r=(o.pin||10)*sc*(s.extra&&st!=='next'?.8:1),g=sv('g',{class:'map-pin t-'+pinType(s.items[0])+(o.onPick&&!stopMatch(s)?' faded':'')+' '+st+(s.extra?' extra':'')+(s.items.some(i=>i.id===mapPick)?' picked':'')},svg);
   if(o.onPick)sv('circle',{cx:x,cy:y,r:Math.max(r+6,16),class:'map-hit'},g);
   if(st==='next'&&o.pulse!==false)sv('circle',{cx:x,cy:y,r,class:'map-pulse',style:`animation-delay:-${Date.now()%1800}ms`},g);
   sv('circle',{cx:x,cy:y,r,class:'map-dot'},g);
   if(o.numbers!==false){const t=sv('text',{x,y:y+.5,'font-size':(st==='done'?10:9)*sc*(r/10/sc)},g);t.textContent=st==='done'?'✓':String(n+1);}
   tap(g,`Stop ${n+1}${s.extra?' (optional)':''}: ${s.items[0].title}${st==='done'?', checked off':''}`,s.items[0].id);});
  addedFor(day).filter(i=>i.locs).forEach(i=>{const [x,y]=P(i.locs[0]),g=sv('g',{class:'map-pin map-added done t-'+pinType(i)+(o.onPick&&!typeMatch(i)?' faded':'')},svg),r=(o.pin||10)*sc*.8;sv('circle',{cx:x,cy:y,r,class:'map-dot'},g);const t=sv('text',{x,y:y+.5,'font-size':9*sc*.8},g);t.textContent='★';const tt=sv('title',{},g);tt.textContent=i.title+' (added)';});
+ {const pins=[...pos.values()],hr=(o.pin||10)*sc+2;labels.forEach(({n,x,y,rr})=>{const w=n.length*5.4*sc,h=9*sc,cands=[y-rr*.9+10*sc,y+rr*.9-4*sc,y,y-rr*.9-3*sc,y+rr*.9+9*sc].map(c=>Math.max(c,(o.onPick?(o.top||0)+18:0)+11*sc)),hits=c=>pins.filter(([px,py])=>Math.abs(px-x)<w/2+hr&&Math.abs(py-(c-h*.35))<h/2+hr).length;let best=cands[0],bh=hits(best);cands.slice(1).forEach(c=>{const hh=hits(c);if(hh<bh){best=c;bh=hh;}});const t=sv('text',{x,y:best,class:'map-land-label','font-size':8.5*sc},bh?under:svg);t.textContent=n;});}
  if(o.you&&nearFix&&nearFix.acc<=NEAR_MAX_ACC){const [x,y]=P([nearFix.lat,nearFix.lng]);if(x>-10&&x<W+10&&y>-10&&y<H+10){sv('circle',{cx:x,cy:y,r:Math.max(nearFix.acc*pxPerM,9),class:'map-you-acc'},svg);sv('circle',{cx:x,cy:y,r:6,class:'map-you'},svg);}}
  return {route,next,trail,B,W,H};
 }

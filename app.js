@@ -92,7 +92,7 @@ function renderSheet(){const day=days.find(d=>d.id===state.day),route=routeFor(d
  const badge=el('span','map-sheet-no t-'+pinType(item)+(done?' done':'')+(item.optional&&!done?' extra':''),done?'✓':n?String(n):'+');badge.setAttribute('aria-hidden','true');
  const eyebrow=[];if(stop&&stop===next&&!done)eyebrow.push('NEXT UP');if(item.optional)eyebrow.push('OPTIONAL');if(n)eyebrow.push(`STOP ${n} OF ${route.length}`);
  const txt=el('div','map-sheet-text');txt.append(el('span','map-sheet-eyebrow',eyebrow.join(' · ')),el('span','map-sheet-title',item.title));
- const meta=[];if(item.est)meta.push('⏱ '+item.est);if(last&&!done)meta.push(`About ${walkMins(last.locs[0],item.locs[0])} min walk`);if(meta.length)txt.append(el('span','map-sheet-meta',meta.join(' · ')));
+ const meta=[];if(last&&!done)meta.push(`About ${walkMins(last.locs[0],item.locs[0])} min walk`);if(meta.length)txt.append(el('span','map-sheet-meta',meta.join(' · ')));
  const btn=el('button','map-check'+(done?' done':''),done?'✓ Done':'Check off');btn.type='button';btn.setAttribute('aria-label',(done?'Uncheck ':'Check off ')+item.title);btn.onclick=()=>{mapPick=picked&&!done?null:picked?item.id:null;sheetDir=0;setChecked(item.id,!done);};
  const go=el('a','map-go','Walk ↗');go.href=`https://maps.apple.com/?daddr=${item.locs[0][0]},${item.locs[0][1]}&dirflg=w`;go.target='_blank';go.rel='noopener';go.setAttribute('aria-label','Walking directions to '+item.title+' in Maps');
  const acts=el('div','map-sheet-actions');acts.append(btn,go);body.append(badge,txt,acts);sheet.append(body,mapNav(route,stop?route.indexOf(stop):-1,picked));sheetDir=0;

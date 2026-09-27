@@ -186,3 +186,4 @@ body::before{content:"";position:fixed;inset:-12%;z-index:-1;pointer-events:none
 @media(prefers-reduced-motion:reduce){.map-sheet-body{animation:none!important}}
 .map-extras::before{content:'○ ';}.map-extras[aria-pressed="true"]::before{content:'✓ '}
 .map-head .map-extras{width:auto;height:auto;min-height:40px;border-radius:999px;font-size:13px}
+.map-dialog[open]{position:fixed;inset:0}.map-stage{flex:1}.map-dialog .map-sheet{position:absolute;left:0;right:0;bottom:0;z-index:2}.map-dialog{position:relative}

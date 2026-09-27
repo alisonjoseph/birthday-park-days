@@ -46,7 +46,10 @@ function routeNumbers(day){const m=new Map();routeFor(day).forEach((s,n)=>s.item
 // Where you've actually been: checked stops in the order they were checked (older checkmarks without a time keep plan order).
 function trailFor(day){return mapStops(day).map((i,n)=>({i,n})).filter(x=>checked.has(x.i.id)).concat(addedFor(day).filter(i=>i.locs).map(i=>({i,n:1e9}))).sort((a,b)=>(timeOf(a.i)||0)-(timeOf(b.i)||0)||a.n-b.n).map(x=>x.i);}
 const timeOf=i=>i.added?i.at:times[i.id];
-function walkMins(a,b){return Math.max(1,Math.round(metres(a,b)*1.3/75));}
+// Epic's worlds only connect through Celestial Park, so walks between them bend through its portals.
+const HUB={tue:'Celestial Park'};
+function viaPts(dayId,a,b){const hub=HUB[dayId],L=LANDS[dayId]||[],H=L.find(l=>l[0]===hub);if(!H)return [];const landOf=p=>{let best=null,bd=Infinity;L.forEach(l=>{const d=metres(p,[l[1],l[2]]);if(d<l[3]*1.4&&d<bd){bd=d;best=l;}});return best===H?null:best;},portal=l=>{const d=metres([H[1],H[2]],[l[1],l[2]]),f=Math.min(1,H[3]*.85/d);return [H[1]+(l[1]-H[1])*f,H[2]+(l[2]-H[2])*f];};const A=landOf(a),B=landOf(b);if(A===B)return [];return [A&&portal(A),B&&portal(B)].filter(Boolean);}
+function walkMins(a,b,dayId){const p=[a,...viaPts(dayId,a,b),b];let m=0;for(let j=1;j<p.length;j++)m+=metres(p[j-1],p[j]);return Math.max(1,Math.round(m*1.3/75));}
 let mapPick=null,mapDragged=false,mapType=null;const typeMatch=i=>!mapType||(mapType==='food'?/^(food|coffee)$/.test(pinType(i)):pinType(i)===mapType),stopMatch=s=>s.items.some(typeMatch);const mapZoom={z:1,dx:0,dy:0};
 function drawMap(svg,day,o={}){
  const box=svg.getBoundingClientRect(),W=Math.round(box.width)||o.w||340,H=Math.round(box.height)||o.h||180,pad=o.pad??20,v=o.view||{z:1,dx:0,dy:0},z=v.z;
@@ -63,11 +66,11 @@ function drawMap(svg,day,o={}){
  const pos=new Map(route.map(s=>[s,P(s.at)]));{const R=(o.pin||10)*sc*1.85,arr=[...pos.values()],orig=arr.map(p=>[...p]);for(let it=0;it<8;it++)for(let a=0;a<arr.length;a++)for(let b=a+1;b<arr.length;b++){const pa=arr[a],pb=arr[b],dx=pb[0]-pa[0],dy=pb[1]-pa[1],d=Math.hypot(dx,dy);if(d<R){const push=(R-d)/2,ux=d>.01?dx/d:Math.cos(a+b),uy=d>.01?dy/d:Math.sin(a+b);pa[0]-=ux*push;pa[1]-=uy*push;pb[0]+=ux*push;pb[1]+=uy*push;}}
   arr.forEach((p,j)=>{const dx=p[0]-orig[j][0],dy=p[1]-orig[j][1],d=Math.hypot(dx,dy),cap=R*1.4;if(d>cap){p[0]=orig[j][0]+dx/d*cap;p[1]=orig[j][1]+dy/d*cap;}});}
  const stopOf=new Map(route.flatMap(s=>s.items.map(i=>[i.id,s]))),at=i=>stopOf.has(i.id)?pos.get(stopOf.get(i.id)):P(i.locs[0]);
- const line=list=>list.map((p,j)=>(j?'L':'M')+p.map(n=>n.toFixed(1)).join(',')).join('');
+ const line=list=>list.map((p,j)=>(j?'L':'M')+p.map(n=>n.toFixed(1)).join(',')).join(''),walk=(xs,ls)=>xs.flatMap((x,j)=>j?[...viaPts(day.id,ls[j-1],ls[j]).map(P),x]:[x]);
  const req=route.filter(s=>!s.extra);
- if(req.length>1)sv('path',{d:line(req.map(s=>pos.get(s))),class:'map-plan','stroke-width':2.2*sc},svg);
- for(let j=0;j<req.length-1;j++){if(stopDone(req[j+1]))continue;const a=pos.get(req[j]),b=pos.get(req[j+1]),len=Math.hypot(b[0]-a[0],b[1]-a[1]);if(len<34*sc)continue;const ang=Math.atan2(b[1]-a[1],b[0]-a[0])*180/Math.PI;sv('path',{d:'M-3.6,-3.4L3.6,0L-3.6,3.4Z',class:'map-arrow',transform:`translate(${((a[0]+b[0])/2).toFixed(1)},${((a[1]+b[1])/2).toFixed(1)}) rotate(${ang.toFixed(1)}) scale(${sc})`},svg);}
- if(trail.length>1)sv('path',{d:line(trail.map(at)),class:'map-trail','stroke-width':3.4*sc},svg);const under=sv('g',{},svg);
+ if(req.length>1)sv('path',{d:line(walk(req.map(s=>pos.get(s)),req.map(s=>s.at))),class:'map-plan','stroke-width':2.2*sc},svg);
+ for(let j=0;j<req.length-1;j++){if(stopDone(req[j+1]))continue;const legs=walk([pos.get(req[j]),pos.get(req[j+1])],[req[j].at,req[j+1].at]),k=legs.slice(1).reduce((m,q,i)=>{const L=Math.hypot(q[0]-legs[i][0],q[1]-legs[i][1]);return L>m[0]?[L,i]:m;},[0,0])[1],a=legs[k],b=legs[k+1],len=Math.hypot(b[0]-a[0],b[1]-a[1]);if(len<34*sc)continue;const ang=Math.atan2(b[1]-a[1],b[0]-a[0])*180/Math.PI;sv('path',{d:'M-3.6,-3.4L3.6,0L-3.6,3.4Z',class:'map-arrow',transform:`translate(${((a[0]+b[0])/2).toFixed(1)},${((a[1]+b[1])/2).toFixed(1)}) rotate(${ang.toFixed(1)}) scale(${sc})`},svg);}
+ if(trail.length>1)sv('path',{d:line(walk(trail.map(at),trail.map(i=>i.locs[0]))),class:'map-trail','stroke-width':3.4*sc},svg);const under=sv('g',{},svg);
  const tap=(g,label,pick)=>{if(!o.onPick)return;g.setAttribute('class',g.getAttribute('class')+' map-tap');g.setAttribute('role','button');g.setAttribute('tabindex','0');g.setAttribute('aria-label',label);g.onclick=()=>{if(!mapDragged)o.onPick(pick);};g.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();o.onPick(pick);}};};
  const routeIds=new Set(route.flatMap(s=>s.items.map(i=>i.id)));
  stops.filter(i=>!routeIds.has(i.id)).forEach(i=>{const [x,y]=P(i.locs[0]),g=sv('g',{class:'map-extra t-'+pinType(i)+(o.onPick&&!typeMatch(i)?' faded':'')+(checked.has(i.id)?' done':'')+(mapPick===i.id?' picked':'')},svg);if(o.onPick)sv('circle',{cx:x,cy:y,r:14,class:'map-hit'},g);sv('circle',{cx:x,cy:y,r:3.4*sc},g);tap(g,i.title+(checked.has(i.id)?', checked off':', optional'),i.id);});
@@ -109,7 +112,7 @@ function renderSheet(){const day=days.find(d=>d.id===state.day),route=routeFor(d
  const badge=el('span','map-sheet-no t-'+pinType(item)+(done?' done':'')+(item.optional&&!done?' extra':''),done?'✓':n?String(n):'+');badge.setAttribute('aria-hidden','true');
  const eyebrow=[];if(stop&&stop===next&&!done)eyebrow.push('NEXT UP');if(item.optional)eyebrow.push('OPTIONAL');if(n)eyebrow.push(`STOP ${n} OF ${route.length}`);
  const txt=el('div','map-sheet-text');txt.append(el('span','map-sheet-eyebrow',eyebrow.join(' · ')),el('span','map-sheet-title',item.title));{const w=!done&&waitFor(item);if(w)txt.append(el('span','wait wait-'+w.cls,(w.cls==='down'?'⚠️ ':'⏳ ')+w.text));}
- const meta=[];if(last&&!done)meta.push(`About ${walkMins(last.locs[0],item.locs[0])} min walk`);if(meta.length)txt.append(el('span','map-sheet-meta',meta.join(' · ')));
+ const meta=[];if(last&&!done)meta.push(`About ${walkMins(last.locs[0],item.locs[0],day.id)} min walk`);if(meta.length)txt.append(el('span','map-sheet-meta',meta.join(' · ')));
  const btn=el('button','map-check'+(done?' done':''),done?'✓ Done':'Check off');btn.type='button';btn.setAttribute('aria-label',(done?'Uncheck ':'Check off ')+item.title);btn.onclick=()=>{mapPick=picked&&!done?null:picked?item.id:null;sheetDir=0;setChecked(item.id,!done);};
  const go=el('a','map-go','Walk ↗');go.href=`https://maps.apple.com/?daddr=${item.locs[0][0]},${item.locs[0][1]}&dirflg=w`;go.target='_blank';go.rel='noopener';go.setAttribute('aria-label','Walking directions to '+item.title+' in Maps');
  const acts=el('div','map-sheet-actions');acts.append(btn,go);body.append(badge,txt,acts);sheet.append(body,mapNav(route,stop?route.indexOf(stop):-1,picked));sheetDir=0;

@@ -16,6 +16,13 @@ function persist(){try{localStorage.setItem(key,JSON.stringify({checked:[...chec
 function toast(text){const el=document.querySelector('#save-status');{// On the map the toast sits just above the stop card instead of over it.
 const sh=document.documentElement.classList.contains('map-mode')&&document.querySelector('#map-sheet'),top=sh?.offsetHeight?sh.getBoundingClientRect().top:0;el.style.bottom=top>0?(innerHeight-top+10)+'px':'';}el.textContent=text;el.classList.add('visible');clearTimeout(timer);timer=setTimeout(()=>el.classList.remove('visible'),1800);}
 function el(tag,cls,text){const e=document.createElement(tag);if(cls)e.className=cls;if(text!==undefined)e.textContent=text;return e;}
+// Taps that check things off are read from the finger itself. Rows fold and cards slide right after a check, and a tap that lands while
+// something moves under the finger would otherwise be lost as the browser's own click misses. The browser's click that follows is swallowed so nothing toggles twice.
+const tap={at:0,claim(){this.at=Date.now();return true;},swallow(e){if(e.isTrusted&&Date.now()-tap.at<700&&!e.target.closest('a,button')){e.preventDefault();e.stopPropagation();}}};
+{const list=document.querySelector('#checklist');let down=null;
+ list.addEventListener('pointerdown',e=>{const row=e.target.closest('.item');down=row&&!e.target.closest('a,button')&&row.querySelector('input:not(:disabled)')?{row,x:e.clientX,y:e.clientY,t:Date.now()}:null;});
+ list.addEventListener('pointerup',e=>{const d=down;down=null;if(!d||Math.hypot(e.clientX-d.x,e.clientY-d.y)>10||Date.now()-d.t>800)return;tap.claim();const input=d.row.querySelector('input');if(input&&!input.disabled)input.click();});
+ list.addEventListener('pointercancel',()=>down=null);list.addEventListener('click',tap.swallow,true);}
 function totals(){const day=days.find(d=>d.id===state.day),items=day.sections.flatMap(s=>s.items).filter(i=>!i.unavailable),done=items.filter(i=>checked.has(i.id)).length;document.querySelector('#day-progress').textContent=`${done} of ${items.length} checked off`;const p=document.querySelector('#progress');p.max=items.length;p.value=done;document.querySelector('#total-progress').textContent=`${checked.size} checked off`;document.querySelector('#all-done').hidden=done!==items.length;return{done,total:items.length};}
 // One set of filters for the list and the map. The colored dots double as the map's key. Tap a chip again to show everything.
 const FILTERS=[{id:'ride',label:'Rides',test:i=>i.kind==='ride'},{id:'food',label:'Food',test:i=>Boolean(i.food)},{id:'show',label:'Shows',test:i=>Boolean(i.show||i.kind==='show')},{id:'meet',label:'Meets',test:i=>Boolean(i.meet)},{id:'express',label:'Express',test:i=>Boolean(i.express)}];
@@ -187,10 +194,11 @@ function zoomAt(mx,my,z2){const s=document.querySelector('#route-full').getBound
  svg.addEventListener('gesturestart',e=>e.preventDefault());
  // Swipe the stop card left or right to move through the route.
  const sheet=document.querySelector('#map-sheet');let sw=null;
- sheet.addEventListener('pointerdown',e=>{if(e.target.closest('button,a'))return;sw={x:e.clientX,y:e.clientY};});
+ sheet.addEventListener('pointerdown',e=>{if(e.target.closest('button,a'))return;sw={x:e.clientX,y:e.clientY};});sheet.addEventListener('click',tap.swallow,true);
  sheet.addEventListener('pointerup',e=>{if(!sw)return;const dx=e.clientX-sw.x,dy=e.clientY-sw.y;sw=null;if(Math.abs(dx)>40&&Math.abs(dx)>Math.abs(dy)*1.5)stepFromSheet(dx<0?1:-1);
   // A tap (no swipe) on the card itself checks the stop off, like tapping a row in the list.
-  else if(Math.hypot(dx,dy)<10&&!sheetHold&&e.target.closest('.map-sheet-body')&&!e.target.closest('button,a,label,input'))sheet.querySelector('.map-check-box input')?.click();});
+  // The card may be sliding under the finger, so the tap is judged by the finger, not by where the card ended up.
+  else if(Math.hypot(dx,dy)<10&&!sheetHold&&tap.claim())sheet.querySelector('.map-check-box input')?.click();});
  sheet.addEventListener('pointercancel',()=>sw=null);
 })();
 window.addEventListener('resize',()=>{renderRoute();});

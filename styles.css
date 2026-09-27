@@ -299,3 +299,34 @@ body.map-mode .map-legend button{padding:4px 5px;margin:0}
 .map-check-box input{width:26px;height:26px;border-width:1.5px;border-radius:8px}
 .map-check-box input:checked:after{font-size:19px}
 .item input:disabled{display:none}
+
+/* Compact nav: List/Map sits beside the day tabs as a small stacked toggle. */
+.nav-row{display:flex;gap:8px;align-items:stretch;padding:12px 0 8px}
+.sticky-nav .nav-row .days{flex:1;min-width:0;padding:0;gap:6px}
+.nav-row .day-button{padding:8px 10px}
+.nav-row .view-switch{flex:0 0 46px;flex-direction:column;margin:0;padding:3px;gap:2px;border-radius:14px}
+.nav-row .view-switch button{flex:1 1 0;min-height:0;padding:0;border-radius:11px}
+.nav-row .view-switch::before{top:3px;left:3px;right:3px;bottom:auto;width:auto;height:calc(50% - 4px);border-radius:11px}
+.nav-row .view-switch.is-map::before{transform:translateY(calc(100% + 2px))}
+.vs-text{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+/* Filters: the same chips drive the list and the map; the dots are the map's colors. */
+body.map-mode .filters{display:flex}
+.filters{gap:5px}
+.filter-chip{display:inline-flex;align-items:center;gap:5px;padding:6px 10px;font-size:13px}
+.chip-dot{width:9px;height:9px;border-radius:50%;background:var(--pc);flex-shrink:0}
+.chip-bolt{font-size:11px;line-height:1}
+.filter-chip[aria-pressed=true] .chip-dot{box-shadow:0 0 0 1.5px #fff}
+.map-legend:empty{display:none}
+.map-zoom .map-add{width:auto;min-width:40px;padding:0 10px;align-self:flex-end;font-size:14px;letter-spacing:0;white-space:nowrap}
+.reset-row{margin:4px 0 0}
+/* Recap: no separate title bar, so the three maps get more room. */
+.recap-dialog .dialog-head{position:absolute;top:10px;right:10px;padding:0;border:0;background:none;z-index:2}
+.recap-dialog .dialog-head h2{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.recap-dialog .recap-body{padding-top:26px}
+.recap-tile{height:clamp(96px,calc((88dvh - 230px) / 3),210px)}
+.recap-empty{position:absolute;inset:0;display:grid;place-items:center;font-size:13px;font-weight:650;color:var(--muted)}
+.filters{gap:4px}
+.filter-chip{flex:1 1 auto;justify-content:center;padding:6px 6px;font-size:12.5px;gap:4px}
+.recap-dialog .dialog-head{top:8px;right:8px}
+.recap-dialog .recap-body{padding-top:50px}
+.recap-tile{height:clamp(96px,calc((88dvh - 254px) / 3),210px)}

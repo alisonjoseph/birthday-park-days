@@ -40,7 +40,7 @@ function routeNumbers(day){const m=new Map();routeFor(day).forEach((s,n)=>s.item
 // Where you've actually been: checked stops in the order they were checked (older checkmarks without a time keep plan order).
 function trailFor(day){return mapStops(day).map((i,n)=>({i,n})).filter(x=>checked.has(x.i.id)).sort((a,b)=>(times[a.i.id]||0)-(times[b.i.id]||0)||a.n-b.n).map(x=>x.i);}
 function walkMins(a,b){return Math.max(1,Math.round(metres(a,b)*1.3/75));}
-let mapPick=null,mapDragged=false;const mapZoom={z:1,dx:0,dy:0};
+let mapPick=null,mapDragged=false,mapType=null;const typeMatch=i=>!mapType||(mapType==='food'?/^(food|coffee)$/.test(pinType(i)):pinType(i)===mapType),stopMatch=s=>s.items.some(typeMatch);const mapZoom={z:1,dx:0,dy:0};
 function drawMap(svg,day,o={}){
  const box=svg.getBoundingClientRect(),W=Math.round(box.width)||o.w||340,H=Math.round(box.height)||o.h||180,pad=o.pad??20,v=o.view||{z:1,dx:0,dy:0},z=v.z;
  const stops=mapStops(day),route=routeFor(day),lands=LANDS[day.id]||[],trail=trailFor(day),next=nextStop(route);
@@ -58,9 +58,9 @@ function drawMap(svg,day,o={}){
  if(trail.length>1)sv('path',{d:line(trail.map(i=>i.locs[0])),class:'map-trail','stroke-width':3.4*sc},svg);
  const tap=(g,label,pick)=>{if(!o.onPick)return;g.setAttribute('class',g.getAttribute('class')+' map-tap');g.setAttribute('role','button');g.setAttribute('tabindex','0');g.setAttribute('aria-label',label);g.onclick=()=>{if(!mapDragged)o.onPick(pick);};g.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();o.onPick(pick);}};};
  const routeIds=new Set(route.flatMap(s=>s.items.map(i=>i.id)));
- stops.filter(i=>!routeIds.has(i.id)).forEach(i=>{const [x,y]=P(i.locs[0]),g=sv('g',{class:'map-extra t-'+pinType(i)+(checked.has(i.id)?' done':'')+(mapPick===i.id?' picked':'')},svg);if(o.onPick)sv('circle',{cx:x,cy:y,r:14,class:'map-hit'},g);sv('circle',{cx:x,cy:y,r:3.4*sc},g);tap(g,i.title+(checked.has(i.id)?', checked off':', optional'),i.id);});
+ stops.filter(i=>!routeIds.has(i.id)).forEach(i=>{const [x,y]=P(i.locs[0]),g=sv('g',{class:'map-extra t-'+pinType(i)+(o.onPick&&!typeMatch(i)?' faded':'')+(checked.has(i.id)?' done':'')+(mapPick===i.id?' picked':'')},svg);if(o.onPick)sv('circle',{cx:x,cy:y,r:14,class:'map-hit'},g);sv('circle',{cx:x,cy:y,r:3.4*sc},g);tap(g,i.title+(checked.has(i.id)?', checked off':', optional'),i.id);});
  // Draw extras first so the main stops sit on top where they overlap.
- [...route.filter(s=>s.extra),...req].forEach(s=>{const n=route.indexOf(s),[x,y]=P(s.at),st=stopDone(s)?'done':s===next?'next':'later',r=(o.pin||10)*sc*(s.extra&&st!=='next'?.8:1),g=sv('g',{class:'map-pin t-'+pinType(s.items[0])+' '+st+(s.extra?' extra':'')+(s.items.some(i=>i.id===mapPick)?' picked':'')},svg);
+ [...route.filter(s=>s.extra),...req].forEach(s=>{const n=route.indexOf(s),[x,y]=P(s.at),st=stopDone(s)?'done':s===next?'next':'later',r=(o.pin||10)*sc*(s.extra&&st!=='next'?.8:1),g=sv('g',{class:'map-pin t-'+pinType(s.items[0])+(o.onPick&&!stopMatch(s)?' faded':'')+' '+st+(s.extra?' extra':'')+(s.items.some(i=>i.id===mapPick)?' picked':'')},svg);
   if(o.onPick)sv('circle',{cx:x,cy:y,r:Math.max(r+6,16),class:'map-hit'},g);
   if(st==='next'&&o.pulse!==false)sv('circle',{cx:x,cy:y,r,class:'map-pulse',style:`animation-delay:-${Date.now()%1800}ms`},g);
   sv('circle',{cx:x,cy:y,r,class:'map-dot'},g);
@@ -98,7 +98,8 @@ function renderSheet(){const day=days.find(d=>d.id===state.day),route=routeFor(d
  const acts=el('div','map-sheet-actions');acts.append(btn,go);body.append(badge,txt,acts);sheet.append(body,mapNav(route,stop?route.indexOf(stop):-1,picked));sheetDir=0;
 }
 // Arrows (and swipes) step through the route in plan order from whatever stop is showing.
-function mapStep(route,pos,picked,dir){if(!route.length)return null;if(pos<0&&picked){const plan=mapStops(days.find(d=>d.id===state.day)).indexOf(picked);return dir>0?route.find(s=>s.plan>plan):[...route].reverse().find(s=>s.plan<plan);}if(pos<0)return dir>0?route[0]:route[route.length-1];return route[pos+dir];}
+function mapStep(route,pos,picked,dir){if(mapType){let s=mapStepAll(route,pos,picked,dir);while(s&&!stopMatch(s))s=route[route.indexOf(s)+dir];return s||null;}return mapStepAll(route,pos,picked,dir);}
+function mapStepAll(route,pos,picked,dir){if(!route.length)return null;if(pos<0&&picked){const plan=mapStops(days.find(d=>d.id===state.day)).indexOf(picked);return dir>0?route.find(s=>s.plan>plan):[...route].reverse().find(s=>s.plan<plan);}if(pos<0)return dir>0?route[0]:route[route.length-1];return route[pos+dir];}
 function mapNav(route,pos,picked){const nav=el('div','map-nav');[[-1,'‹','Previous stop'],[1,'›','Next stop']].forEach(([dir,sym,label])=>{const s=mapStep(route,pos,picked,dir),b=el('button','map-nav-btn');b.type='button';b.disabled=!s;b.setAttribute('aria-label',s?`${label}: ${s.items[0].title}`:label);const n=s?route.indexOf(s)+1:0;b.append(dir<0?sym+' ':'',el('span','',s?`Stop ${n}`:dir<0?'Start':'End'),dir>0?' '+sym:'');b.onclick=()=>goStop(s,dir);nav.append(b);});
  const hint=el('span','map-nav-hint','Swipe or tap arrows');nav.insertBefore(hint,nav.lastChild);return nav;}
 function goStop(s,dir){if(!s)return;const item=s.items.find(i=>!checked.has(i.id))||s.items[0];mapPick=item.id;sheetDir=dir;
@@ -107,13 +108,15 @@ function goStop(s,dir){if(!s)return;const item=s.items.find(i=>!checked.has(i.id
  renderFullMap();}
 function stepFromSheet(dir){if(!lastMap)return;const day=days.find(d=>d.id===state.day),picked=mapPick&&mapStops(day).find(i=>i.id===mapPick),{route,next}=lastMap,stop=picked?route.find(s=>s.items.includes(picked)):next;goStop(mapStep(route,stop?route.indexOf(stop):-1,picked,dir),dir);}
 const mapView=document.querySelector('#map-view');
-function openMap(){mapPick=null;sheetDir=0;sheetKey='';Object.assign(mapZoom,{z:1,dx:0,dy:0});mapView.showModal();document.body.classList.add('modal-open');requestAnimationFrame(renderFullMap);}
+function openMap(){mapPick=null;mapType=null;paintLegend();sheetDir=0;sheetKey='';Object.assign(mapZoom,{z:1,dx:0,dy:0});mapView.showModal();document.body.classList.add('modal-open');requestAnimationFrame(renderFullMap);}
 document.querySelector('#route-open').onclick=openMap;document.querySelector('#route-expand').onclick=openMap;
 document.querySelector('#map-close').onclick=()=>mapView.close();mapView.addEventListener('close',()=>{document.body.classList.remove('modal-open');mapPick=null;});
 document.querySelector('#map-extras').onclick=()=>{mapExtras=!mapExtras;try{localStorage.setItem(extrasKey,mapExtras?'on':'off');}catch{}render();};
 document.querySelector('#map-fit').onclick=()=>{Object.assign(mapZoom,{z:1,dx:0,dy:0});drawFullMap();};
 document.querySelectorAll('[data-zoom]').forEach(b=>b.onclick=()=>{const svg=document.querySelector('#route-full').getBoundingClientRect();zoomAt(svg.width/2,svg.height/2,mapZoom.z*Number(b.dataset.zoom));});
 // Pinch to zoom, drag to pan, double-tap to zoom in. Pins stay the same size; the map spreads out under them.
+function paintLegend(){document.querySelectorAll('.map-legend [data-type]').forEach(b=>{const on=mapType===b.dataset.type;b.setAttribute('aria-pressed',String(on));b.classList.toggle('off',!!mapType&&!on);});}
+document.querySelectorAll('.map-legend [data-type]').forEach(b=>b.onclick=()=>{mapType=mapType===b.dataset.type?null:b.dataset.type;const day=days.find(d=>d.id===state.day),p=mapPick&&mapStops(day).find(i=>i.id===mapPick);if(p&&!typeMatch(p))mapPick=null;if(mapType&&!mapPick){const s=routeFor(day).find(s=>stopMatch(s)&&!stopDone(s))||routeFor(day).find(stopMatch);if(s)mapPick=(s.items.find(typeMatch)).id;}sheetDir=0;sheetKey='';paintLegend();renderFullMap();});
 let drawQueued=false;function redrawSoon(){if(drawQueued)return;drawQueued=true;requestAnimationFrame(()=>{drawQueued=false;drawFullMap();});}
 function clampPan(){const s=document.querySelector('#route-full').getBoundingClientRect(),mx=s.width/2*mapZoom.z,my=s.height/2*mapZoom.z;mapZoom.dx=Math.max(-mx,Math.min(mx,mapZoom.dx));mapZoom.dy=Math.max(-my,Math.min(my,mapZoom.dy));if(mapZoom.z<=1.001){mapZoom.z=1;mapZoom.dx=0;mapZoom.dy=0;}}
 function zoomAt(mx,my,z2){const s=document.querySelector('#route-full').getBoundingClientRect(),C=[s.width/2,s.height/2];z2=Math.max(1,Math.min(5,z2));const bx=(mx-C[0]-mapZoom.dx)/mapZoom.z,by=(my-C[1]-mapZoom.dy)/mapZoom.z;mapZoom.dx=mx-C[0]-bx*z2;mapZoom.dy=my-C[1]-by*z2;mapZoom.z=z2;clampPan();redrawSoon();}

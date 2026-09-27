@@ -190,3 +190,5 @@ body::before{content:"";position:fixed;inset:-12%;z-index:-1;pointer-events:none
 .wait{display:block;width:max-content;font-size:13px;font-weight:750;margin-top:4px;padding:3px 8px;border-radius:999px}.wait-short{background:#dff3e4;color:#23633a}.wait-mid{background:#fdf0cf;color:#7a5500}.wait-long{background:#fbdcdc;color:#8f2525}.wait-down{background:#ececec;color:#555}.item.done .wait{display:none}
 .hours .changed{outline:2px solid #52253d;font-weight:700}
 .forecast{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin-top:10px;font-size:14px}.forecast[hidden]{display:none}.fc-icon{font-size:18px}.fc-temp{font-weight:750}.fc-rain{color:var(--muted)}
+.map-legend{pointer-events:auto}.map-legend button{display:inline-flex;align-items:center;gap:5px;font:inherit;color:inherit;background:transparent;border:0;border-radius:999px;padding:4px 6px;margin:-2px -2px;min-height:28px;cursor:pointer}.map-legend button[aria-pressed=true]{background:var(--ink);color:#fff}.map-legend button.off{opacity:.45}
+.map-pin.faded,.map-extra.faded{opacity:.15;pointer-events:none}

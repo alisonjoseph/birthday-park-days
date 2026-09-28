@@ -305,7 +305,9 @@ if(activeFilter&&!passes(addedFor(day).find(a=>a.id===id)))activeFilter=null;con
 const addDlg=document.querySelector('#add-dialog');let addType=null;
 // The park feed has no meet and greets or other spots, so those come from the plan's own stops.
 const parkAt=([la])=>la<28.455?'epic':la<28.4745?'ioa':'usf';
-const PLAN_PLACES=days.flatMap(d=>d.sections.flatMap(s=>s.items)).filter(i=>i.locs&&!/-gate$/.test(i.id)&&!/^Arrive/.test(i.title)&&(i.meet||!(i.kind==='ride'||i.food||i.show||i.kind==='show'))).map(i=>({name:i.title,type:i.meet?'meet':'other',loc:i.locs[0],park:parkAt(i.locs[0])}));
+const PLAN_PLACES=days.flatMap(d=>d.sections.flatMap(s=>s.items)).filter(i=>i.locs&&!/-gate$/.test(i.id)&&!/^Arrive/.test(i.title)&&(i.meet||!(i.kind==='ride'||i.food||i.show||i.kind==='show'))).map(i=>({name:i.title,type:i.meet?'meet':'other',loc:i.locs[0],park:parkAt(i.locs[0])}))
+ // Spots the plan doesn't visit but we might pop into (map spots are approximate).
+ .concat([{name:'Ollivanders (Diagon Alley)',type:'other',loc:[28.47935,-81.46995],park:'usf'},{name:'Cosme Acajor Baguettes Magiques (wand shop)',type:'other',loc:[28.44305,-81.44795],park:'epic'}]);
 function openAdd(){const body=document.querySelector('#add-body');body.replaceChildren();addType=null;const addDay=days.find(d=>d.date===etToday())||days.find(d=>d.id===state.day);let addPark=ADD_PARK_DEFAULT[addDay.id];
  let here=nearOn&&nearFix&&nearFix.acc<=NEAR_MAX_ACC?{loc:[nearFix.lat,nearFix.lng],acc:nearFix.acc}:null,locating=false;const nearBox=el('div'),plan=mapStops(addDay);
  const distText=d=>d<25?'right here':d<1000?Math.round(d/5)*5+' m':(d/1609).toFixed(1)+' mi';

@@ -98,7 +98,7 @@ function drawMap(svg,day,o={}){
  // Draw extras first so the main stops sit on top where they overlap.
  [...route.filter(s=>s.extra),...req].filter(s=>!o.visited||stopStarted(s)).forEach(s=>{const n=route.indexOf(s),[x,y]=pos.get(s),st=stopDone(s)?'done':s===next?'next':'later',r=(o.pin||10)*sc*(s.extra&&st!=='next'?.8:1),g=sv('g',{class:'map-pin t-'+pinType(s.items[0])+(o.onPick&&!stopMatch(s)?' faded':'')+' '+st+(s.extra?' extra':'')+(s.items.some(i=>i.id===mapPick)?' picked':'')},svg);
   if(o.onPick)sv('circle',{cx:x,cy:y,r:Math.max(r+6,16),class:'map-hit'},g);
-  if(st==='next'&&o.pulse!==false)sv('circle',{cx:x,cy:y,r,class:'map-pulse',style:`animation-delay:-${Date.now()%1800}ms`},g);
+  if((o.onPick&&mapPick&&route.some(t=>t.items.some(i=>i.id===mapPick))?s.items.some(i=>i.id===mapPick):st==='next')&&o.pulse!==false)sv('circle',{cx:x,cy:y,r,class:'map-pulse',style:`animation-delay:-${Date.now()%1800}ms`},g);
   sv('circle',{cx:x,cy:y,r,class:'map-dot'},g);
   if(o.numbers!==false){const t=sv('text',{x,y:y+.5,'font-size':(st==='done'?10:9)*sc*(r/10/sc)},g);t.textContent=st==='done'?'✓':String(n+1);}
   tap(g,`Stop ${n+1}${s.extra?' (optional)':''}: ${s.items[0].title}${st==='done'?', checked off':''}`,s.items[0].id);});

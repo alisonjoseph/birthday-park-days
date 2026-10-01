@@ -513,7 +513,7 @@ window.TRIP_DAYS = [
     "hours": "10 AM – 8 PM",
     "early": "9 AM",
     "color": "blue",
-    "intro": "Loop through the worlds one at a time: Ministry of Magic, Isle of Berk, Super Nintendo World for lunch, then Dark Universe for dinner.",
+    "intro": "One loop around the worlds: Ministry of Magic, Dark Universe, Super Nintendo World, Celestial Park, then Isle of Berk. Every big outdoor coaster is done by about 2 PM, and the rainier afternoon is spent indoors back at Ministry of Magic.",
     "tip": "Express works once per ride at Epic and covers every ride except Dragon Racer’s Rally. It doesn’t work during early admission, so Battle at the Ministry is standby first thing.",
     "sections": [
       {
@@ -545,8 +545,8 @@ window.TRIP_DAYS = [
         ]
       },
       {
-        "time": "9–10:15 AM · ~1¼ HR · STANDBY",
-        "name": "Wizarding World: Ministry of Magic",
+        "time": "9–10 AM · ~1 HR · STANDBY",
+        "name": "Ministry of Magic first",
         "items": [
           {
             "id": "tue-ministry",
@@ -560,145 +560,72 @@ window.TRIP_DAYS = [
             "photoAlt": "The interior of Battle at the Ministry at Epic Universe",
             "est": "~45–60 min",
             "locs": [[28.4429, -81.44809]]
-          },
-          {
-            "id": "tue-wand",
-            "title": "Wizarding Paris & Cosme Acajor",
-            "description": "",
-            "note": "Browse the Parisian wand shop and try compatible interactive spell locations with your wand.",
-            "tag": "WAND TIME",
-            "optional": true,
-            "photo": "photos/tue-wand.jpg",
-            "photoAlt": "The exterior of Cosme Acajor Baguettes Magique in Epic Universe",
-            "est": "~20 min"
           }
         ]
       },
       {
-        "time": "10:15 AM–12 PM · ~1¾ HR",
-        "name": "Isle of Berk",
+        "time": "10–10:45 AM · ~45 MIN · EXPRESS",
+        "name": "Dark Universe while it’s dry",
         "items": [
           {
-            "id": "tue-hiccup",
-            "title": "Hiccup’s Wing Gliders",
-            "note": "",
+            "id": "tue-werewolf",
+            "title": "Curse of the Werewolf",
+            "note": "Outdoor coaster that closes for lightning, so ride it first while the morning is dry.",
             "tag": "",
             "optional": false,
-            "description": "Family launch coaster over Berk.",
+            "description": "Spinning family coaster.",
             "kind": "ride",
-            "photo": "photos/tue-hiccup.jpg",
-            "photoAlt": "Guests riding Hiccup's Wing Gliders in Epic Universe",
+            "photo": "photos/tue-werewolf.jpg",
+            "photoAlt": "Two people laughing and riding Curse of the Werewolf at Universal Epic Universe.",
             "est": "~15 min",
             "express": true,
-            "locs": [[28.44114, -81.44518]]
+            "locs": [[28.43995, -81.45002]]
           },
           {
-            "id": "tue-toothless",
-            "title": "Hiccup, Astrid & Toothless",
+            "id": "tue-monsters",
+            "title": "Monsters Unchained: The Frankenstein Experiment",
+            "note": "Indoors, right next to Werewolf. You’ll ride it again after dinner.",
+            "tag": "",
+            "optional": false,
+            "description": "Intense robot-arm ride with monsters.",
+            "kind": "ride",
+            "photo": "photos/tue-monsters.jpg",
+            "photoAlt": "Monsters Unchained: The Frankenstein Experiment in Dark Universe at Epic Universe",
+            "est": "~20 min",
+            "express": true,
+            "lockers": true,
+            "locs": [[28.44035, -81.45029]]
+          },
+          {
+            "id": "tue-frank",
+            "title": "Frankenstein’s Monster & the Bride",
             "note": "",
             "tag": "",
             "optional": true,
             "kind": "meet",
             "meet": true,
-            "est": "~15–20 min",
+            "est": "~15 min",
             "maybe": true,
-            "locs": [[28.44, -81.44511]]
+            "locs": [[28.4405, -81.44982]]
           },
           {
-            "id": "tue-rally",
-            "title": "Dragon Racer’s Rally",
-            "note": "The only Epic ride without Express, so this one is standby.",
-            "tag": "",
-            "optional": false,
-            "description": "Spinning flyer you can barrel-roll.",
-            "kind": "ride",
-            "photo": "photos/tue-rally.jpg",
-            "photoAlt": "Dragon Racers Rally in Epic Universe",
-            "est": "~25 min",
-            "noExpress": true,
-            "locs": [[28.44122, -81.44549]]
-          },
-          {
-            "id": "tue-dragon",
-            "title": "The Untrainable Dragon",
-            "description": "Stage show with a giant flying dragon.",
-            "note": "Catch a morning showtime while you’re in Berk. If none fits, skip it or come back in the afternoon.",
-            "tag": "",
-            "optional": true,
-            "kind": "show",
-            "show": true,
-            "est": "~40 min",
-            "express": true,
-            "locs": [[28.44004, -81.44463]]
-          },
-          {
-            "id": "tue-fyre",
-            "title": "Fyre Drill",
-            "note": "",
-            "tag": "",
-            "optional": true,
-            "description": "Boat ride with water cannons.",
-            "kind": "ride",
-            "photo": "photos/tue-fyre.jpg",
-            "photoAlt": "Fyre Drill in Epic Universe",
-            "est": "~10 min",
-            "express": true,
-            "maybe": true,
-            "locs": [[28.44061, -81.44545]]
-          },
-          {
-            "id": "tue-cone",
-            "locs": [[28.44116, -81.44579]],
-            "title": "Berk: a mac-and-cheese cone",
+            "id": "tue-pretzel",
+            "locs": [[28.44013, -81.45054]],
+            "title": "Dark Universe: Frankenstein pretzel",
             "description": "",
-            "note": "Hooligan’s Grog & Gruel. Share one; lunch is coming up.",
+            "note": "De Lacey’s Cottage. Skip it if you’re saving room for lunch.",
             "tag": "",
             "optional": true,
-            "photo": "photos/tue-cone.jpg",
-            "photoAlt": "Mac and Cheese cones from Hooligan's Grog and Gruel at Epic Universe",
+            "photo": "photos/tue-pretzel.jpg",
+            "photoAlt": "Frankenstein pretzel from De Lacy's Cottage.",
             "est": "~10 min",
-            "food": "snack",
-            "mobileOrder": true
+            "food": "snack"
           }
         ]
       },
       {
-        "time": "12–12:30 PM · ~30 MIN · EXPRESS",
-        "name": "Celestial Park",
-        "items": [
-          {
-            "id": "tue-stardust",
-            "title": "Stardust Racers",
-            "tag": "",
-            "optional": false,
-            "description": "Dueling launch coaster.",
-            "kind": "ride",
-            "photo": "photos/tue-stardust.jpg",
-            "photoAlt": "Guests smile as they ride Stardust Racers in Celestial Park",
-            "est": "~20 min",
-            "express": true,
-            "lockers": true,
-            "locs": [[28.441622, -81.447095]]
-          },
-          {
-            "id": "tue-carousel",
-            "title": "Optional: Constellation Carousel",
-            "note": "",
-            "tag": "OPTIONAL",
-            "optional": true,
-            "description": "Starry spinning carousel.",
-            "kind": "ride",
-            "photo": "photos/tue-carousel.jpg",
-            "photoAlt": "Constellation Carousel in Celestial Park at Epic Universe",
-            "est": "~10 min",
-            "express": true,
-            "locs": [[28.44033, -81.44805]]
-          }
-        ]
-      },
-      {
-        "time": "12:30–2:30 PM · ~2 HR · EXPRESS",
-        "name": "Super Nintendo World",
+        "time": "10:45 AM–12:45 PM · ~2 HR · EXPRESS",
+        "name": "Super Nintendo World & early lunch",
         "items": [
           {
             "id": "tue-powerup",
@@ -710,10 +637,52 @@ window.TRIP_DAYS = [
             "maybe": true
           },
           {
+            "id": "tue-mine",
+            "title": "Mine-Cart Madness",
+            "tag": "",
+            "optional": false,
+            "description": "Coaster that seems to jump broken track.",
+            "kind": "ride",
+            "photo": "photos/tue-mine.jpg",
+            "photoAlt": "A family riding Mine-Cart Madness in SUPER NINTENDO WORLD",
+            "est": "~25 min",
+            "express": true,
+            "locs": [[28.438084, -81.448769]],
+            "note": "Outdoor and closes for lightning, so ride it and Yoshi’s before Mario Kart, which is indoors."
+          },
+          {
+            "id": "tue-yoshi",
+            "title": "Yoshi’s Adventure",
+            "note": "",
+            "tag": "",
+            "optional": false,
+            "description": "Gentle ride on Yoshi’s back.",
+            "kind": "ride",
+            "est": "~15 min",
+            "express": true,
+            "photo": "photos/tue-yoshi.jpg",
+            "photoAlt": "Yoshi's Adventure",
+            "locs": [[28.43904, -81.44817]]
+          },
+          {
+            "id": "tue-mario",
+            "title": "Mario Kart: Bowser’s Challenge",
+            "note": "",
+            "tag": "",
+            "optional": false,
+            "description": "Mario Kart with AR goggles.",
+            "kind": "ride",
+            "photo": "photos/tue-mario.jpg",
+            "photoAlt": "Two girls smile and ride Mario Kart: Bowser's Challenge in SUPER NINTENDO WORLD at Epic Universe",
+            "est": "~20 min",
+            "express": true,
+            "locs": [[28.43875, -81.44783]]
+          },
+          {
             "id": "tue-lunch",
             "locs": [[28.43909, -81.447962]],
             "title": "Lunch: Toadstool Cafe",
-            "note": "No reservations or waitlist. Grab a table, scan the QR code and order in the app. Aim for about 12:30.",
+            "note": "No reservations or waitlist. Grab a table, scan the QR code and order in the app. Aim for about 11:30, before the lunch rush.",
             "tag": "",
             "optional": false,
             "photo": "photos/tue-lunch.jpg",
@@ -747,19 +716,6 @@ window.TRIP_DAYS = [
             "locs": [[28.439343, -81.447997]]
           },
           {
-            "id": "tue-mine",
-            "title": "Mine-Cart Madness",
-            "tag": "",
-            "optional": false,
-            "description": "Coaster that seems to jump broken track.",
-            "kind": "ride",
-            "photo": "photos/tue-mine.jpg",
-            "photoAlt": "A family riding Mine-Cart Madness in SUPER NINTENDO WORLD",
-            "est": "~25 min",
-            "express": true,
-            "locs": [[28.438084, -81.448769]]
-          },
-          {
             "id": "tue-dk",
             "title": "Donkey Kong",
             "note": "",
@@ -770,106 +726,141 @@ window.TRIP_DAYS = [
             "est": "~15 min",
             "maybe": true,
             "locs": [[28.43844, -81.44873]]
-          },
-          {
-            "id": "tue-mario",
-            "title": "Mario Kart: Bowser’s Challenge",
-            "note": "",
-            "tag": "",
-            "optional": false,
-            "description": "Mario Kart with AR goggles.",
-            "kind": "ride",
-            "photo": "photos/tue-mario.jpg",
-            "photoAlt": "Two girls smile and ride Mario Kart: Bowser's Challenge in SUPER NINTENDO WORLD at Epic Universe",
-            "est": "~20 min",
-            "express": true,
-            "locs": [[28.43875, -81.44783]]
-          },
-          {
-            "id": "tue-yoshi",
-            "title": "Yoshi’s Adventure",
-            "note": "",
-            "tag": "",
-            "optional": false,
-            "description": "Gentle ride on Yoshi’s back.",
-            "kind": "ride",
-            "est": "~15 min",
-            "express": true,
-            "photo": "photos/tue-yoshi.jpg",
-            "photoAlt": "Yoshi's Adventure",
-            "locs": [[28.43904, -81.44817]]
           }
         ]
       },
       {
-        "time": "2:30–3:45 PM · ~1¼ HR · EXPRESS",
-        "name": "Dark Universe",
+        "time": "12:45–1:15 PM · ~30 MIN · EXPRESS",
+        "name": "Celestial Park",
         "items": [
           {
-            "id": "tue-monsters",
-            "title": "Monsters Unchained: The Frankenstein Experiment",
-            "note": "",
+            "id": "tue-stardust",
+            "title": "Stardust Racers",
             "tag": "",
             "optional": false,
-            "description": "Intense robot-arm ride with monsters.",
+            "description": "Dueling launch coaster.",
             "kind": "ride",
-            "photo": "photos/tue-monsters.jpg",
-            "photoAlt": "Monsters Unchained: The Frankenstein Experiment in Dark Universe at Epic Universe",
+            "photo": "photos/tue-stardust.jpg",
+            "photoAlt": "Guests smile as they ride Stardust Racers in Celestial Park",
             "est": "~20 min",
             "express": true,
             "lockers": true,
-            "locs": [[28.44035, -81.45029]]
+            "locs": [[28.441622, -81.447095]],
+            "note": "Epic’s biggest outdoor coaster. Ride it now while it’s dry. You can ride again in the dark tonight."
           },
           {
-            "id": "tue-werewolf",
-            "title": "Curse of the Werewolf",
+            "id": "tue-carousel",
+            "title": "Optional: Constellation Carousel",
             "note": "",
+            "tag": "OPTIONAL",
+            "optional": true,
+            "description": "Starry spinning carousel.",
+            "kind": "ride",
+            "photo": "photos/tue-carousel.jpg",
+            "photoAlt": "Constellation Carousel in Celestial Park at Epic Universe",
+            "est": "~10 min",
+            "express": true,
+            "locs": [[28.44033, -81.44805]]
+          }
+        ]
+      },
+      {
+        "time": "1:15–3 PM · ~1¾ HR",
+        "name": "Isle of Berk",
+        "items": [
+          {
+            "id": "tue-hiccup",
+            "title": "Hiccup’s Wing Gliders",
+            "note": "Outdoor and closes for lightning, so ride it first in Berk.",
             "tag": "",
             "optional": false,
-            "description": "Spinning family coaster.",
+            "description": "Family launch coaster over Berk.",
             "kind": "ride",
-            "photo": "photos/tue-werewolf.jpg",
-            "photoAlt": "Two people laughing and riding Curse of the Werewolf at Universal Epic Universe.",
+            "photo": "photos/tue-hiccup.jpg",
+            "photoAlt": "Guests riding Hiccup's Wing Gliders in Epic Universe",
             "est": "~15 min",
             "express": true,
-            "locs": [[28.43995, -81.45002]]
+            "locs": [[28.44114, -81.44518]]
           },
           {
-            "id": "tue-frank",
-            "title": "Frankenstein’s Monster & the Bride",
+            "id": "tue-rally",
+            "title": "Dragon Racer’s Rally",
+            "note": "The only Epic ride without Express, so this one is standby.",
+            "tag": "",
+            "optional": false,
+            "description": "Spinning flyer you can barrel-roll.",
+            "kind": "ride",
+            "photo": "photos/tue-rally.jpg",
+            "photoAlt": "Dragon Racers Rally in Epic Universe",
+            "est": "~25 min",
+            "noExpress": true,
+            "locs": [[28.44122, -81.44549]]
+          },
+          {
+            "id": "tue-fyre",
+            "title": "Fyre Drill",
+            "note": "",
+            "tag": "",
+            "optional": true,
+            "description": "Boat ride with water cannons.",
+            "kind": "ride",
+            "photo": "photos/tue-fyre.jpg",
+            "photoAlt": "Fyre Drill in Epic Universe",
+            "est": "~10 min",
+            "express": true,
+            "maybe": true,
+            "locs": [[28.44061, -81.44545]]
+          },
+          {
+            "id": "tue-toothless",
+            "title": "Hiccup, Astrid & Toothless",
             "note": "",
             "tag": "",
             "optional": true,
             "kind": "meet",
             "meet": true,
-            "est": "~15 min",
+            "est": "~15–20 min",
             "maybe": true,
-            "locs": [[28.4405, -81.44982]]
+            "locs": [[28.44, -81.44511]]
           },
           {
-            "id": "tue-pretzel",
-            "locs": [[28.44013, -81.45054]],
-            "title": "Dark Universe: Frankenstein pretzel",
+            "id": "tue-cone",
+            "locs": [[28.44116, -81.44579]],
+            "title": "Berk: a mac-and-cheese cone",
             "description": "",
-            "note": "De Lacey’s Cottage. Skip it if you’re saving room for dinner.",
+            "note": "Hooligan’s Grog & Gruel. A shared afternoon snack.",
             "tag": "",
             "optional": true,
-            "photo": "photos/tue-pretzel.jpg",
-            "photoAlt": "Frankenstein pretzel from De Lacy's Cottage.",
+            "photo": "photos/tue-cone.jpg",
+            "photoAlt": "Mac and Cheese cones from Hooligan's Grog and Gruel at Epic Universe",
             "est": "~10 min",
-            "food": "snack"
+            "food": "snack",
+            "mobileOrder": true
+          },
+          {
+            "id": "tue-dragon",
+            "title": "The Untrainable Dragon",
+            "description": "Stage show with a giant flying dragon.",
+            "note": "Indoors, so save it for last in Berk. Pick a showtime around 2–2:30 PM. If none fits, skip it.",
+            "tag": "",
+            "optional": true,
+            "kind": "show",
+            "show": true,
+            "est": "~40 min",
+            "express": true,
+            "locs": [[28.44004, -81.44463]]
           }
         ]
       },
       {
-        "time": "3:45–5:30 PM · FREE TIME",
-        "name": "Ministry of Magic: show & second ride",
+        "time": "3–5:30 PM · FREE TIME",
+        "name": "Ministry of Magic: indoors for the rainy afternoon",
         "items": [
           {
             "id": "tue-cirque",
             "title": "Le Cirque Arcanus",
             "description": "Magical circus with Fantastic Beasts puppets.",
-            "note": "In Ministry of Magic, right next to Dark Universe. Check showtimes in the app.",
+            "note": "In Ministry of Magic, right next to Dark Universe. Indoors, so it’s a good pick if it’s raining. Check showtimes in the app.",
             "tag": "",
             "optional": true,
             "kind": "show",
@@ -891,6 +882,17 @@ window.TRIP_DAYS = [
             "photo": "photos/tue-ministry.jpg",
             "photoAlt": "The interior of Battle at the Ministry at Epic Universe",
             "locs": [[28.4429, -81.44809]]
+          },
+          {
+            "id": "tue-wand",
+            "title": "Wizarding Paris & Cosme Acajor",
+            "description": "",
+            "note": "Browse the Parisian wand shop and try compatible interactive spell locations with your wand. Save it for a rainy stretch.",
+            "tag": "WAND TIME",
+            "optional": true,
+            "photo": "photos/tue-wand.jpg",
+            "photoAlt": "The exterior of Cosme Acajor Baguettes Magique in Epic Universe",
+            "est": "~20 min"
           }
         ]
       },

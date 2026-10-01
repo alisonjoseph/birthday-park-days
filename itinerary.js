@@ -561,7 +561,7 @@ window.TRIP_DAYS = [
       },
       {
         "time": "9–10 AM · ~1 HR · STANDBY",
-        "name": "Ministry of Magic first",
+        "name": "Ministry of Magic",
         "items": [
           {
             "id": "tue-ministry",
@@ -580,7 +580,7 @@ window.TRIP_DAYS = [
       },
       {
         "time": "10–10:30 AM · ~30 MIN · EXPRESS",
-        "name": "Celestial Park: Stardust Racers first",
+        "name": "Celestial Park",
         "items": [
           {
             "id": "tue-stardust",
@@ -615,7 +615,7 @@ window.TRIP_DAYS = [
       },
       {
         "time": "10:30–11:15 AM · ~45 MIN · EXPRESS",
-        "name": "Dark Universe while it’s dry",
+        "name": "Dark Universe",
         "items": [
           {
             "id": "tue-werewolf",
@@ -676,7 +676,7 @@ window.TRIP_DAYS = [
       },
       {
         "time": "11:15 AM–1:15 PM · ~2 HR · EXPRESS",
-        "name": "Super Nintendo World & lunch",
+        "name": "Super Nintendo World",
         "items": [
           {
             "id": "tue-powerup",
@@ -874,7 +874,7 @@ window.TRIP_DAYS = [
       },
       {
         "time": "3–5:30 PM · FREE TIME",
-        "name": "Ministry of Magic: indoors for the rainy afternoon",
+        "name": "Ministry of Magic",
         "items": [
           {
             "id": "tue-cirque",

@@ -87,7 +87,8 @@ function drawMap(svg,day,o={}){
   arr.forEach((p,j)=>{const dx=p[0]-orig[j][0],dy=p[1]-orig[j][1],d=Math.hypot(dx,dy),cap=R*1.4;if(d>cap){p[0]=orig[j][0]+dx/d*cap;p[1]=orig[j][1]+dy/d*cap;}});}
  const stopOf=new Map(route.flatMap(s=>s.items.map(i=>[i.id,s]))),at=i=>stopOf.has(i.id)?pos.get(stopOf.get(i.id)):P(i.locs[0]);
  const line=list=>list.map((p,j)=>(j?'L':'M')+p.map(n=>n.toFixed(1)).join(',')).join(''),walk=(xs,ls)=>xs.flatMap((x,j)=>j?[...viaPts(day.id,ls[j-1],ls[j]).map(P),x]:[x]);
- const req=route.filter(s=>!s.extra);
+ // The plan line runs through every numbered pin, so with extras shown it visits them in plan order.
+ const req=route;
  if(req.length>1&&!o.visited)sv('path',{d:line(walk(req.map(s=>pos.get(s)),req.map(s=>s.at))),class:'map-plan','stroke-width':2.2*sc},svg);
  for(let j=0;j<req.length-1&&!o.visited;j++){if(stopDone(req[j+1]))continue;const legs=walk([pos.get(req[j]),pos.get(req[j+1])],[req[j].at,req[j+1].at]),k=legs.slice(1).reduce((m,q,i)=>{const L=Math.hypot(q[0]-legs[i][0],q[1]-legs[i][1]);return L>m[0]?[L,i]:m;},[0,0])[1],a=legs[k],b=legs[k+1],len=Math.hypot(b[0]-a[0],b[1]-a[1]);if(len<34*sc)continue;const ang=Math.atan2(b[1]-a[1],b[0]-a[0])*180/Math.PI;sv('path',{d:'M-3.6,-3.4L3.6,0L-3.6,3.4Z',class:'map-arrow',transform:`translate(${((a[0]+b[0])/2).toFixed(1)},${((a[1]+b[1])/2).toFixed(1)}) rotate(${ang.toFixed(1)}) scale(${sc})`},svg);}
  if(trail.length>1)sv('path',{d:line(walk(trail.map(at),trail.map(i=>i.locs[0]))),class:'map-trail','stroke-width':3.4*sc},svg);const under=sv('g',{},svg);

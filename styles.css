@@ -428,3 +428,4 @@ progress::-webkit-progress-value{transition:width .55s cubic-bezier(.3,.9,.3,1)}
 .day-button.tab-waiting{background:transparent!important;border-color:transparent!important;transition:none!important}
 
 .outdoor-tag{background:#dfe9f5;color:#1f4870;margin-right:6px}
+.sheet-tag{width:max-content;margin-top:6px;font-size:11px;padding:3px 7px}

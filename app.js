@@ -142,7 +142,7 @@ function renderSheet(){if(sheetHold)return;const day=days.find(d=>d.id===state.d
  const body=el('div','map-sheet-body'+(!slide&&sheetDir>0?' from-right':!slide&&sheetDir<0?' from-left':''));
  const badge=el('span','map-sheet-no t-'+pinType(item)+(done?' done':'')+(item.optional&&!done?' extra':''),done?'✓':n?String(n):'+');badge.setAttribute('aria-hidden','true');
  const eyebrow=[];if(stop&&stop===next&&!done)eyebrow.push('NEXT UP');if(item.optional)eyebrow.push('OPTIONAL');if(n)eyebrow.push(`STOP ${n} OF ${route.length}`);
- const txt=el('div','map-sheet-text');txt.append(el('span','map-sheet-eyebrow',eyebrow.join(' · ')),el('span','map-sheet-title',item.title));{const w=!done&&waitFor(item);if(w)txt.append(el('span','wait wait-'+w.cls,(w.cls==='down'?'⚠️ ':'⏳ ')+w.text));}
+ const txt=el('div','map-sheet-text');txt.append(el('span','map-sheet-eyebrow',eyebrow.join(' · ')),el('span','map-sheet-title',item.title));{const w=!done&&waitFor(item);if(w)txt.append(el('span','wait wait-'+w.cls,(w.cls==='down'?'⚠️ ':w.cls==='closed'?'':'⏳ ')+w.text));}if(item.outdoor)txt.append(el('span','tag outdoor-tag sheet-tag','⛈ OUTSIDE'));
  const meta=[];if(last&&!done)meta.push(`About ${walkMins(last.locs[0],item.locs[0],day.id)} min walk`);if(meta.length)txt.append(el('span','map-sheet-meta',meta.join(' · ')));
  const btn=el('label','map-check-box'+(done?' done':'')),cb=el('input');cb.type='checkbox';cb.checked=done;cb.setAttribute('aria-label',(done?'Uncheck ':'Check off ')+item.title);cb.onchange=()=>{mapPick=picked&&!done?null:picked?item.id:null;sheetDir=0;
   // Checking off: the card holds a beat to show the tick and confetti, then slides on to the next stop.

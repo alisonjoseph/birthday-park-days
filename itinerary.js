@@ -66,7 +66,8 @@ window.TRIP_DAYS = [
             "est": "~45–60 min",
             "noExpress": true,
             "lockers": true,
-            "locs": [[28.47308, -81.472862]]
+            "locs": [[28.47308, -81.472862]],
+            "outdoor": true
           },
           {
             "id": "sun-veloci",
@@ -79,7 +80,8 @@ window.TRIP_DAYS = [
             "photoAlt": "VelociCoaster",
             "est": "~15–25 min",
             "lockers": true,
-            "locs": [[28.471429, -81.472284]]
+            "locs": [[28.471429, -81.472284]],
+            "outdoor": true
           }
         ]
       },
@@ -113,7 +115,8 @@ window.TRIP_DAYS = [
             "show": true,
             "est": "~15 min",
             "maybe": true,
-            "locs": [[28.472635, -81.473392]]
+            "locs": [[28.472635, -81.473392]],
+            "outdoor": true
           },
           {
             "id": "sun-triwizard",
@@ -126,7 +129,8 @@ window.TRIP_DAYS = [
             "show": true,
             "est": "~15 min",
             "maybe": true,
-            "locs": [[28.4725985, -81.473455]]
+            "locs": [[28.4725985, -81.473455]],
+            "outdoor": true
           },
           {
             "id": "sun-hippo",
@@ -140,7 +144,8 @@ window.TRIP_DAYS = [
             "express": true,
             "photo": "photos/sun-hippo.jpg",
             "photoAlt": "Flight of the Hippogriff",
-            "locs": [[28.472416, -81.473636]]
+            "locs": [[28.472416, -81.473636]],
+            "outdoor": true
           },
           {
             "id": "sun-wand",
@@ -214,7 +219,8 @@ window.TRIP_DAYS = [
             "est": "~20 min",
             "express": true,
             "maybe": true,
-            "locs": [[28.470448, -81.471401]]
+            "locs": [[28.470448, -81.471401]],
+            "outdoor": true
           },
           {
             "id": "sun-ripsaw",
@@ -229,7 +235,8 @@ window.TRIP_DAYS = [
             "est": "~20 min",
             "express": true,
             "maybe": true,
-            "locs": [[28.4695018, -81.4714998]]
+            "locs": [[28.4695018, -81.4714998]],
+            "outdoor": true
           },
           {
             "id": "sun-doom",
@@ -244,7 +251,8 @@ window.TRIP_DAYS = [
             "maybe": true,
             "photo": "photos/sun-doom.jpg",
             "photoAlt": "Doctor Doom's Fearfall",
-            "locs": [[28.470678, -81.469502]]
+            "locs": [[28.470678, -81.469502]],
+            "outdoor": true
           },
           {
             "id": "sun-spider",
@@ -284,7 +292,8 @@ window.TRIP_DAYS = [
             "est": "~20 min",
             "express": true,
             "lockers": true,
-            "locs": [[28.471195, -81.468946]]
+            "locs": [[28.471195, -81.468946]],
+            "outdoor": true
           }
         ]
       },
@@ -305,7 +314,8 @@ window.TRIP_DAYS = [
             "maybe": true,
             "photo": "photos/sun-storm.jpg",
             "photoAlt": "Storm Force Accelatron",
-            "locs": [[28.471007, -81.468794]]
+            "locs": [[28.471007, -81.468794]],
+            "outdoor": true
           },
           {
             "id": "sun-cat",
@@ -335,7 +345,8 @@ window.TRIP_DAYS = [
             "est": "~10 min",
             "express": true,
             "maybe": true,
-            "locs": [[28.473197, -81.469351]]
+            "locs": [[28.473197, -81.469351]],
+            "outdoor": true
           },
           {
             "id": "sun-caro",
@@ -365,7 +376,8 @@ window.TRIP_DAYS = [
             "est": "~15 min",
             "express": true,
             "maybe": true,
-            "locs": [[28.473011, -81.470178]]
+            "locs": [[28.473011, -81.470178]],
+            "outdoor": true
           },
           {
             "id": "sun-tots",
@@ -396,7 +408,8 @@ window.TRIP_DAYS = [
             "photo": "photos/sun-veloci.jpg",
             "photoAlt": "VelociCoaster",
             "lockers": true,
-            "locs": [[28.471429, -81.472284]]
+            "locs": [[28.471429, -81.472284]],
+            "outdoor": true
           },
           {
             "id": "sun-repeat",
@@ -442,7 +455,8 @@ window.TRIP_DAYS = [
             "photo": "photos/sun-hagrid.jpg",
             "photoAlt": "People riding Hagrid's Magical Creatures Motorbike Adventure.",
             "lockers": true,
-            "locs": [[28.47308, -81.472862], [28.471429, -81.472284]]
+            "locs": [[28.47308, -81.472862], [28.471429, -81.472284]],
+            "outdoor": true
           },
           {
             "id": "sun-spells",
@@ -486,7 +500,8 @@ window.TRIP_DAYS = [
             "est": "~15 min",
             "photo": "photos/sun-dark-arts.jpg",
             "photoAlt": "Hogwarts Castle lit up for Dark Arts",
-            "locs": [[28.47231, -81.47375]]
+            "locs": [[28.47231, -81.47375]],
+            "outdoor": true
           }
         ]
       }
@@ -570,7 +585,7 @@ window.TRIP_DAYS = [
           {
             "id": "tue-werewolf",
             "title": "Curse of the Werewolf",
-            "note": "Outdoor coaster that closes for lightning, so ride it first while the morning is dry.",
+            "note": "",
             "tag": "",
             "optional": false,
             "description": "Spinning family coaster.",
@@ -579,12 +594,13 @@ window.TRIP_DAYS = [
             "photoAlt": "Two people laughing and riding Curse of the Werewolf at Universal Epic Universe.",
             "est": "~15 min",
             "express": true,
-            "locs": [[28.43995, -81.45002]]
+            "locs": [[28.43995, -81.45002]],
+            "outdoor": true
           },
           {
             "id": "tue-monsters",
             "title": "Monsters Unchained: The Frankenstein Experiment",
-            "note": "Indoors, right next to Werewolf. You’ll ride it again after dinner.",
+            "note": "Right next to Werewolf. You’ll ride it again after dinner.",
             "tag": "",
             "optional": false,
             "description": "Intense robot-arm ride with monsters.",
@@ -648,7 +664,7 @@ window.TRIP_DAYS = [
             "est": "~25 min",
             "express": true,
             "locs": [[28.438084, -81.448769]],
-            "note": "Outdoor and closes for lightning, so ride it and Yoshi’s before Mario Kart, which is indoors."
+            "outdoor": true
           },
           {
             "id": "tue-yoshi",
@@ -662,7 +678,8 @@ window.TRIP_DAYS = [
             "express": true,
             "photo": "photos/tue-yoshi.jpg",
             "photoAlt": "Yoshi's Adventure",
-            "locs": [[28.43904, -81.44817]]
+            "locs": [[28.43904, -81.44817]],
+            "outdoor": true
           },
           {
             "id": "tue-mario",
@@ -746,7 +763,7 @@ window.TRIP_DAYS = [
             "express": true,
             "lockers": true,
             "locs": [[28.441622, -81.447095]],
-            "note": "Epic’s biggest outdoor coaster. Ride it now while it’s dry. You can ride again in the dark tonight."
+            "outdoor": true
           },
           {
             "id": "tue-carousel",
@@ -771,7 +788,7 @@ window.TRIP_DAYS = [
           {
             "id": "tue-hiccup",
             "title": "Hiccup’s Wing Gliders",
-            "note": "Outdoor and closes for lightning, so ride it first in Berk.",
+            "note": "",
             "tag": "",
             "optional": false,
             "description": "Family launch coaster over Berk.",
@@ -780,7 +797,8 @@ window.TRIP_DAYS = [
             "photoAlt": "Guests riding Hiccup's Wing Gliders in Epic Universe",
             "est": "~15 min",
             "express": true,
-            "locs": [[28.44114, -81.44518]]
+            "locs": [[28.44114, -81.44518]],
+            "outdoor": true
           },
           {
             "id": "tue-rally",
@@ -794,7 +812,8 @@ window.TRIP_DAYS = [
             "photoAlt": "Dragon Racers Rally in Epic Universe",
             "est": "~25 min",
             "noExpress": true,
-            "locs": [[28.44122, -81.44549]]
+            "locs": [[28.44122, -81.44549]],
+            "outdoor": true
           },
           {
             "id": "tue-fyre",
@@ -809,7 +828,8 @@ window.TRIP_DAYS = [
             "est": "~10 min",
             "express": true,
             "maybe": true,
-            "locs": [[28.44061, -81.44545]]
+            "locs": [[28.44061, -81.44545]],
+            "outdoor": true
           },
           {
             "id": "tue-toothless",
@@ -841,7 +861,7 @@ window.TRIP_DAYS = [
             "id": "tue-dragon",
             "title": "The Untrainable Dragon",
             "description": "Stage show with a giant flying dragon.",
-            "note": "Indoors, so save it for last in Berk. Pick a showtime around 2–2:30 PM. If none fits, skip it.",
+            "note": "Pick a showtime around 2–2:30 PM. If none fits, skip it.",
             "tag": "",
             "optional": true,
             "kind": "show",
@@ -860,7 +880,7 @@ window.TRIP_DAYS = [
             "id": "tue-cirque",
             "title": "Le Cirque Arcanus",
             "description": "Magical circus with Fantastic Beasts puppets.",
-            "note": "In Ministry of Magic, right next to Dark Universe. Indoors, so it’s a good pick if it’s raining. Check showtimes in the app.",
+            "note": "In Ministry of Magic, right next to Dark Universe. Check showtimes in the app.",
             "tag": "",
             "optional": true,
             "kind": "show",
@@ -887,7 +907,7 @@ window.TRIP_DAYS = [
             "id": "tue-wand",
             "title": "Wizarding Paris & Cosme Acajor",
             "description": "",
-            "note": "Browse the Parisian wand shop and try compatible interactive spell locations with your wand. Save it for a rainy stretch.",
+            "note": "Browse the Parisian wand shop and try compatible interactive spell locations with your wand.",
             "tag": "WAND TIME",
             "optional": true,
             "photo": "photos/tue-wand.jpg",
@@ -944,7 +964,8 @@ window.TRIP_DAYS = [
             "photoAlt": "Guests smile as they ride Stardust Racers in Celestial Park",
             "est": "~20–40 min",
             "lockers": true,
-            "locs": [[28.441622, -81.447095]]
+            "locs": [[28.441622, -81.447095]],
+            "outdoor": true
           }
         ]
       }
@@ -1017,7 +1038,8 @@ window.TRIP_DAYS = [
             "photoAlt": "VelociCoaster",
             "est": "~30–45 min",
             "lockers": true,
-            "locs": [[28.471429, -81.472284]]
+            "locs": [[28.471429, -81.472284]],
+            "outdoor": true
           }
         ]
       },
@@ -1057,7 +1079,8 @@ window.TRIP_DAYS = [
             "est": "~15 min",
             "express": true,
             "lockers": true,
-            "locs": [[28.471429, -81.472284]]
+            "locs": [[28.471429, -81.472284]],
+            "outdoor": true
           }
         ]
       },
@@ -1352,7 +1375,8 @@ window.TRIP_DAYS = [
             "photoAlt": "A father and son riding Trolls Trollercoaster in DreamWorks Land",
             "est": "~10 min",
             "express": true,
-            "locs": [[28.4785148, -81.4663856]]
+            "locs": [[28.4785148, -81.4663856]],
+            "outdoor": true
           },
           {
             "id": "mon-shrek",
@@ -1392,7 +1416,8 @@ window.TRIP_DAYS = [
             "est": "~10 min",
             "express": true,
             "maybe": true,
-            "locs": [[28.479352, -81.467877]]
+            "locs": [[28.479352, -81.467877]],
+            "outdoor": true
           },
           {
             "id": "mon-donut",

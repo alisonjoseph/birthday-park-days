@@ -528,7 +528,7 @@ window.TRIP_DAYS = [
     "hours": "10 AM – 8 PM",
     "early": "9 AM",
     "color": "blue",
-    "intro": "One loop around the worlds: Ministry of Magic, Dark Universe, Super Nintendo World, Celestial Park, then Isle of Berk. Every big outdoor coaster is done by about 2 PM, and the rainier afternoon is spent indoors back at Ministry of Magic.",
+    "intro": "One loop around the worlds: Ministry of Magic, Stardust Racers in Celestial Park, Dark Universe, Super Nintendo World, then Isle of Berk. Every big outdoor coaster is done by about 2 PM, and the rainier afternoon is spent indoors back at Ministry of Magic.",
     "tip": "Express works once per ride at Epic and covers every ride except Dragon Racer’s Rally. It doesn’t work during early admission, so Battle at the Ministry is standby first thing.",
     "sections": [
       {
@@ -579,7 +579,42 @@ window.TRIP_DAYS = [
         ]
       },
       {
-        "time": "10–10:45 AM · ~45 MIN · EXPRESS",
+        "time": "10–10:30 AM · ~30 MIN · EXPRESS",
+        "name": "Celestial Park: Stardust Racers first",
+        "items": [
+          {
+            "id": "tue-stardust",
+            "title": "Stardust Racers",
+            "tag": "",
+            "optional": false,
+            "description": "Dueling launch coaster.",
+            "kind": "ride",
+            "photo": "photos/tue-stardust.jpg",
+            "photoAlt": "Guests smile as they ride Stardust Racers in Celestial Park",
+            "est": "~20 min",
+            "express": true,
+            "lockers": true,
+            "locs": [[28.441622, -81.447095]],
+            "outdoor": true
+          },
+          {
+            "id": "tue-carousel",
+            "title": "Optional: Constellation Carousel",
+            "note": "",
+            "tag": "OPTIONAL",
+            "optional": true,
+            "description": "Starry spinning carousel.",
+            "kind": "ride",
+            "photo": "photos/tue-carousel.jpg",
+            "photoAlt": "Constellation Carousel in Celestial Park at Epic Universe",
+            "est": "~10 min",
+            "express": true,
+            "locs": [[28.44033, -81.44805]]
+          }
+        ]
+      },
+      {
+        "time": "10:30–11:15 AM · ~45 MIN · EXPRESS",
         "name": "Dark Universe while it’s dry",
         "items": [
           {
@@ -640,8 +675,8 @@ window.TRIP_DAYS = [
         ]
       },
       {
-        "time": "10:45 AM–12:45 PM · ~2 HR · EXPRESS",
-        "name": "Super Nintendo World & early lunch",
+        "time": "11:15 AM–1:15 PM · ~2 HR · EXPRESS",
+        "name": "Super Nintendo World & lunch",
         "items": [
           {
             "id": "tue-powerup",
@@ -699,7 +734,7 @@ window.TRIP_DAYS = [
             "id": "tue-lunch",
             "locs": [[28.43909, -81.447962]],
             "title": "Lunch: Toadstool Cafe",
-            "note": "No reservations or waitlist. Grab a table, scan the QR code and order in the app. Aim for about 11:30, before the lunch rush.",
+            "note": "No reservations or waitlist. Grab a table, scan the QR code and order in the app. Aim for about 12, after Mine-Cart and Yoshi’s.",
             "tag": "",
             "optional": false,
             "photo": "photos/tue-lunch.jpg",
@@ -743,41 +778,6 @@ window.TRIP_DAYS = [
             "est": "~15 min",
             "maybe": true,
             "locs": [[28.43844, -81.44873]]
-          }
-        ]
-      },
-      {
-        "time": "12:45–1:15 PM · ~30 MIN · EXPRESS",
-        "name": "Celestial Park",
-        "items": [
-          {
-            "id": "tue-stardust",
-            "title": "Stardust Racers",
-            "tag": "",
-            "optional": false,
-            "description": "Dueling launch coaster.",
-            "kind": "ride",
-            "photo": "photos/tue-stardust.jpg",
-            "photoAlt": "Guests smile as they ride Stardust Racers in Celestial Park",
-            "est": "~20 min",
-            "express": true,
-            "lockers": true,
-            "locs": [[28.441622, -81.447095]],
-            "outdoor": true
-          },
-          {
-            "id": "tue-carousel",
-            "title": "Optional: Constellation Carousel",
-            "note": "",
-            "tag": "OPTIONAL",
-            "optional": true,
-            "description": "Starry spinning carousel.",
-            "kind": "ride",
-            "photo": "photos/tue-carousel.jpg",
-            "photoAlt": "Constellation Carousel in Celestial Park at Epic Universe",
-            "est": "~10 min",
-            "express": true,
-            "locs": [[28.44033, -81.44805]]
           }
         ]
       },

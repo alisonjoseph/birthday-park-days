@@ -355,8 +355,8 @@ async function refreshWaits(){if(document.hidden||!navigator.onLine){paintWaits(
   rows.filter(e=>e.entityType==='SHOW'&&Array.isArray(e.showtimes)).forEach(e=>{const times=e.showtimes.map(t=>t.startTime).filter(t=>t&&t.slice(0,10)===etToday());if(times.length)shows[e.id]={name:String(e.name||'').replace(/[™®©]/g,'').trim(),park:p,times};});}live.waits=waits;live.at=Date.now();if(Object.keys(shows).length){live.shows={date:etToday(),byId:shows};saveLive();}}catch{}
  paintWaits();renderNear();if(mapView.open)renderSheet();}
 const tidy=s=>String(s).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[’'`]/g,'').replace(/\b(the|and)\b/g,' ').replace(/[^a-z0-9]+/g,' ').trim();
-// Today's showtimes for a show in the plan, matched to the park feed by name, else by its spot on the map.
-function showTimesFor(i){const byId=live.shows?.date===etToday()&&live.shows.byId;if(!byId||days.find(d=>d.sections.some(s=>s.items.includes(i)))?.date!==etToday())return null;
+// Today's showtimes for a show in the plan (on every day tab, like ride waits), matched to the park feed by name, else by its spot on the map.
+function showTimesFor(i){const byId=live.shows?.date===etToday()&&live.shows.byId;if(!byId)return null;
  const t=tidy(i.title),list=Object.entries(byId);let hit=list.find(([,x])=>{const n=tidy(x.name);return n===t||(Math.min(n.length,t.length)>=6&&(n.includes(t)||t.includes(n)));});
  if(!hit&&i.locs)hit=list.find(([id])=>Object.values(live.places||{}).some(pl=>pl.some(([pid,,,la,lo])=>pid===id&&i.locs.some(l=>metres(l,[la,lo])<4))));return hit?hit[1].times:null;}
 function nextShow(i){const times=showTimesFor(i);if(!times)return null;const now=Date.now(),all=[...new Set(times)].sort(),ahead=all.filter(t=>Date.parse(t)>now-60e3);

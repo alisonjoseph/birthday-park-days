@@ -904,7 +904,7 @@ window.TRIP_DAYS = [
         ]
       },
       {
-        "time": "3:45–5:30 PM · FREE TIME",
+        "time": "3:45–6 PM · FREE TIME",
         "name": "Birthday girl’s choice",
         "items": [
           {
@@ -925,7 +925,7 @@ window.TRIP_DAYS = [
           {
             "id": "sun-death-eaters",
             "title": "Optional: Death Eaters in Diagon Alley",
-            "note": "Only on select days, and they may not be out on Monday. Check the Universal app first. Hogwarts Express to Studios around 3:45, find them by Knockturn Alley, and ride back by about 4:45 for Mythos.",
+            "note": "Only on select days, and they may not be out on Monday. Check the Universal app first. Hogwarts Express to Studios around 3:45, find them by Knockturn Alley, and ride back by about 5:15 for Mythos.",
             "tag": "",
             "optional": true,
             "kind": "meet",
@@ -937,7 +937,7 @@ window.TRIP_DAYS = [
           {
             "id": "sun-repeat",
             "title": "Pick a favorite to ride again",
-            "note": "Re-ride favourites standby or take a pool break at the hotel. Head to Mythos by about 5:20.",
+            "note": "Re-ride favourites standby or take a pool break at the hotel. Head to Mythos by about 5:50.",
             "tag": "YOUR CHOICE",
             "optional": false,
             "est": "~1½ hr"
@@ -945,7 +945,7 @@ window.TRIP_DAYS = [
         ]
       },
       {
-        "time": "5:30 PM · BOOKED · ~1¼ HR",
+        "time": "6 PM · BOOKED · ~1¼ HR",
         "name": "Dinner at Mythos",
         "items": [
           {
@@ -957,14 +957,14 @@ window.TRIP_DAYS = [
             "optional": false,
             "est": "~1¼ hr",
             "food": "meal",
-            "booked": "5:30 PM",
+            "booked": "6 PM",
             "photo": "photos/sun-dinner.jpg",
             "photoAlt": "Family dining at Mythos"
           }
         ]
       },
       {
-        "time": "6:45–8 PM · ~1 HR",
+        "time": "7:15–8 PM · ~45 MIN",
         "name": "Hogsmeade at dusk",
         "items": [
           {

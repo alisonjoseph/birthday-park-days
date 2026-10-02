@@ -237,6 +237,17 @@ window.TRIP_DAYS = [
             "outdoor": true
           },
           {
+            "id": "sun-comic-meet",
+            "title": "Classic Comic Book Characters",
+            "note": "Toon Lagoon characters, right by Popeye’s.",
+            "tag": "",
+            "optional": true,
+            "kind": "meet",
+            "meet": true,
+            "est": "~15 min",
+            "maybe": true
+          },
+          {
             "id": "sun-doom",
             "title": "Doctor Doom’s Fearfall",
             "note": "The first ride you reach in Marvel coming from Toon Lagoon.",
@@ -268,7 +279,7 @@ window.TRIP_DAYS = [
           },
           {
             "id": "sun-marvel-meet",
-            "title": "Marvel Super Heroes",
+            "title": "Spider-Man & Marvel Super Heroes",
             "note": "",
             "tag": "",
             "optional": true,
@@ -375,6 +386,31 @@ window.TRIP_DAYS = [
             "express": true,
             "maybe": true,
             "locs": [[28.473011, -81.470178]],
+            "outdoor": true
+          },
+          {
+            "id": "sun-seuss-meet",
+            "title": "Seuss Character Zone",
+            "note": "The Cat in the Hat, the Grinch and friends in Seuss Landing.",
+            "tag": "",
+            "optional": true,
+            "kind": "meet",
+            "meet": true,
+            "est": "~15 min",
+            "maybe": true,
+            "outdoor": true
+          },
+          {
+            "id": "sun-stories",
+            "title": "Oh! The Stories You’ll Hear!",
+            "description": "A sing-along Seuss street show.",
+            "note": "Seuss Landing.",
+            "tag": "",
+            "optional": true,
+            "kind": "show",
+            "show": true,
+            "est": "~15 min",
+            "maybe": true,
             "outdoor": true
           },
           {
@@ -647,8 +683,8 @@ window.TRIP_DAYS = [
           },
           {
             "id": "tue-frank",
-            "title": "Frankenstein’s Monster & the Bride",
-            "note": "",
+            "title": "Residents of Darkmoor",
+            "note": "Frankenstein’s Monster & the Bride. No times in the live feed, so check the app.",
             "tag": "",
             "optional": true,
             "kind": "meet",
@@ -743,8 +779,8 @@ window.TRIP_DAYS = [
           },
           {
             "id": "tue-mario-meet",
-            "title": "Mario, Luigi & Toad",
-            "note": "",
+            "title": "Mario & Luigi",
+            "note": "Toad meets separately nearby.",
             "tag": "",
             "optional": true,
             "kind": "meet",
@@ -831,8 +867,8 @@ window.TRIP_DAYS = [
           },
           {
             "id": "tue-toothless",
-            "title": "Hiccup, Astrid & Toothless",
-            "note": "",
+            "title": "Toothless & Friends",
+            "note": "Hiccup and Astrid usually join him.",
             "tag": "",
             "optional": true,
             "kind": "meet",
@@ -963,6 +999,19 @@ window.TRIP_DAYS = [
             "est": "~20–40 min",
             "lockers": true,
             "locs": [[28.441622, -81.447095]],
+            "outdoor": true
+          },
+          {
+            "id": "tue-goodnight",
+            "title": "Universal Celestial Goodnight",
+            "description": "The nighttime show over Celestial Park.",
+            "note": "Usually one show near closing. Grab a spot early.",
+            "tag": "",
+            "optional": true,
+            "kind": "show",
+            "show": true,
+            "est": "~15 min",
+            "maybe": true,
             "outdoor": true
           }
         ]
@@ -1262,6 +1311,31 @@ window.TRIP_DAYS = [
             "locs": [[28.475881, -81.469363]]
           },
           {
+            "id": "mon-blues",
+            "title": "The Blues Brothers Show",
+            "note": "On the street in New York.",
+            "tag": "",
+            "optional": true,
+            "kind": "show",
+            "show": true,
+            "est": "~15 min",
+            "maybe": true,
+            "outdoor": true
+          },
+          {
+            "id": "mon-beat",
+            "title": "Beat Builders",
+            "description": "Construction-crew drum show.",
+            "note": "New York.",
+            "tag": "",
+            "optional": true,
+            "kind": "show",
+            "show": true,
+            "est": "~15 min",
+            "maybe": true,
+            "outdoor": true
+          },
+          {
             "id": "mon-transformers",
             "title": "TRANSFORMERS: The Ride-3D",
             "note": "In Production Central, between New York and Minion Land.",
@@ -1277,8 +1351,8 @@ window.TRIP_DAYS = [
           },
           {
             "id": "mon-optimus",
-            "title": "Optimus Prime, Bumblebee or Megatron",
-            "note": "",
+            "title": "Meet the Transformers",
+            "note": "Optimus Prime, Bumblebee or Megatron.",
             "tag": "",
             "optional": true,
             "kind": "meet",
@@ -1304,6 +1378,29 @@ window.TRIP_DAYS = [
           {
             "id": "mon-minion-meet",
             "title": "Minions",
+            "note": "",
+            "tag": "",
+            "optional": true,
+            "kind": "meet",
+            "meet": true,
+            "est": "~15 min",
+            "maybe": true
+          },
+          {
+            "id": "mon-illumination",
+            "title": "Illumination Theater",
+            "description": "Minions and Illumination pals, indoors.",
+            "note": "Minion Land.",
+            "tag": "",
+            "optional": true,
+            "kind": "show",
+            "show": true,
+            "est": "~15 min",
+            "maybe": true
+          },
+          {
+            "id": "mon-spongebob",
+            "title": "Meet SpongeBob SquarePants & Friends",
             "note": "",
             "tag": "",
             "optional": true,
@@ -1348,6 +1445,31 @@ window.TRIP_DAYS = [
             "locs": [[28.475976, -81.466979]]
           },
           {
+            "id": "mon-marilyn",
+            "title": "Marilyn and the Diamond Bellas",
+            "note": "Hollywood.",
+            "tag": "",
+            "optional": true,
+            "kind": "show",
+            "show": true,
+            "est": "~15 min",
+            "maybe": true,
+            "outdoor": true
+          },
+          {
+            "id": "mon-vamos",
+            "title": "¡Vamos! Báilalo",
+            "description": "Latin dance street party.",
+            "note": "",
+            "tag": "",
+            "optional": true,
+            "kind": "show",
+            "show": true,
+            "est": "~15 min",
+            "maybe": true,
+            "outdoor": true
+          },
+          {
             "id": "mon-et",
             "title": "E.T. Adventure",
             "note": "",
@@ -1378,8 +1500,8 @@ window.TRIP_DAYS = [
           },
           {
             "id": "mon-shrek",
-            "title": "Shrek, Fiona & Donkey",
-            "note": "",
+            "title": "Shrek’s Swamp Meet",
+            "note": "Shrek, Fiona & Donkey.",
             "tag": "",
             "optional": true,
             "kind": "meet",
@@ -1387,6 +1509,18 @@ window.TRIP_DAYS = [
             "est": "~15 min",
             "maybe": true,
             "locs": [[28.4781559, -81.4669]]
+          },
+          {
+            "id": "mon-dreamworks-show",
+            "title": "DreamWorks Imagination Celebration",
+            "description": "Shrek, Po, the Trolls and friends on stage.",
+            "note": "DreamWorks Land.",
+            "tag": "",
+            "optional": true,
+            "kind": "show",
+            "show": true,
+            "est": "~20 min",
+            "maybe": true
           },
           {
             "id": "mon-shrekzel",

@@ -446,6 +446,18 @@ window.TRIP_DAYS = [
             "outdoor": true
           },
           {
+            "id": "sun-death-eaters",
+            "title": "Optional: Death Eaters in Diagon Alley",
+            "note": "Only on select days, and Sunday may be the one. Check the Universal app first. Hogwarts Express to Studios around 3:45, find them by Knockturn Alley, and ride back by about 4:45 for Mythos. Studios closes at 5 PM today.",
+            "tag": "",
+            "optional": true,
+            "kind": "meet",
+            "meet": true,
+            "est": "~1 hr round trip",
+            "maybe": true,
+            "locs": [[28.479579, -81.469605]]
+          },
+          {
             "id": "sun-repeat",
             "title": "Pick a favorite to ride again",
             "note": "Re-ride favourites standby or take a pool break at the hotel. Head to Mythos by about 5:20.",
@@ -1219,18 +1231,6 @@ window.TRIP_DAYS = [
             "tag": "",
             "optional": true,
             "est": "~10 min"
-          },
-          {
-            "id": "mon-death-eaters",
-            "title": "Death Eaters in Diagon Alley",
-            "note": "Select days through Nov 1. Check the app.",
-            "tag": "",
-            "optional": true,
-            "kind": "meet",
-            "meet": true,
-            "est": "~10 min",
-            "maybe": true,
-            "locs": [[28.479579, -81.469605]]
           }
         ]
       },

@@ -3,9 +3,9 @@ const MOBILE_ORDER_URL='https://www.universalorlando.com/web/en/us/plan-your-vis
 (() => {
 'use strict';
 const days=window.TRIP_DAYS, key='park-days-v1', validIds=new Set(days.flatMap(d=>d.sections.flatMap(s=>s.items.filter(i=>!i.unavailable).map(i=>i.id))));
-let state={checked:[],day:'sun',times:{}}, hidden=false, timer, installPrompt;
+let state={checked:[],day:days[0].id,times:{}}, hidden=false, timer, installPrompt;
 const warning=document.querySelector('#save-warning');
-try { const saved=JSON.parse(localStorage.getItem(key)||'null'); if(saved&&Array.isArray(saved.checked)){state.checked=saved.checked.filter(x=>validIds.has(x));if(saved.times&&typeof saved.times==='object')state.times=saved.times;if(days.some(d=>d.id===saved.day))state.day=saved.day;} else {const today=new Intl.DateTimeFormat('en-CA',{timeZone:'America/New_York'}).format(new Date());state.day=days.find(d=>d.date===today)?.id||'sun';} } catch { warning.hidden=false;warning.textContent='Saved progress could not be loaded. Checkmarks will work here, but may not survive closing this page.'; }
+try { const saved=JSON.parse(localStorage.getItem(key)||'null'); if(saved&&Array.isArray(saved.checked)){state.checked=saved.checked.filter(x=>validIds.has(x));if(saved.times&&typeof saved.times==='object')state.times=saved.times;if(days.some(d=>d.id===saved.day))state.day=saved.day;} else {const today=new Intl.DateTimeFormat('en-CA',{timeZone:'America/New_York'}).format(new Date());state.day=days.find(d=>d.date===today)?.id||days[0].id;} } catch { warning.hidden=false;warning.textContent='Saved progress could not be loaded. Checkmarks will work here, but may not survive closing this page.'; }
 let checked=new Set(state.checked),times={};state.checked.forEach(id=>{if(Number.isFinite(state.times[id]))times[id]=state.times[id];});
 // From the first park day on, checkmarks made before the trip were tests, so they're cleared. On a trip day the app always opens on today.
 const TRIP_START=Date.parse(days[0].date+'T00:00:00-04:00'),tripStarted=()=>etToday()>=days[0].date;

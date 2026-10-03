@@ -429,3 +429,18 @@ progress::-webkit-progress-value{transition:width .55s cubic-bezier(.3,.9,.3,1)}
 
 .outdoor-tag{background:#dfe9f5;color:#1f4870;margin-right:6px}
 .sheet-tag{width:max-content;margin-top:6px;font-size:11px;padding:3px 7px}
+/* Steps & miles: a quiet pill in the corner of each recap map, and a slim totals line. */
+.recap-tools{position:absolute;top:10px;left:10px;z-index:2;display:flex;gap:6px}.recap-tools .recap-replay{position:static}.recap-save:disabled{opacity:.5}
+@media(max-width:400px){.recap-tools{top:8px;left:8px}}
+.recap-activity{position:absolute;left:8px;bottom:8px;display:inline-flex;align-items:center;gap:5px;max-width:calc(100% - 16px);min-height:26px;padding:3px 9px;border:0;border-radius:8px;background:rgba(255,255,255,.88);color:var(--muted);font:inherit;font-size:11.5px;font-weight:600;white-space:nowrap;cursor:pointer}
+.recap-activity b{color:var(--ink);font-weight:750;font-variant-numeric:tabular-nums}.recap-activity .ra-icon{font-size:11px}.ra-sep{opacity:.55}.recap-activity .ra-edit{margin-left:2px;font-size:11px;opacity:.45}
+.recap-activity.empty{background:rgba(255,255,255,.6);border:1px dashed #e3b6ca;color:var(--muted);font-weight:650;padding:2px 9px;opacity:.85}
+.recap-activity::before{content:"";position:absolute;inset:-9px -6px}
+.recap-walk{margin:-4px 0 0;display:flex;justify-content:center;align-items:baseline;gap:6px;flex-wrap:wrap;font-size:13px;font-weight:650;color:var(--muted)}.recap-walk[hidden]{display:none}.recap-walk b{color:var(--ink);font-size:16px;font-weight:750;letter-spacing:-.02em;font-variant-numeric:tabular-nums}.recap-walk .ra-sep{margin:0 4px}
+#activity-dialog[open]{height:fit-content}.activity-dialog .dialog-head h2{margin:0;font-size:22px;letter-spacing:-.02em}.activity-day{margin:0;font-size:11px;font-weight:750;letter-spacing:.12em;color:var(--muted);text-transform:uppercase}
+.activity-form{display:flex;flex-direction:column;padding-top:16px}.activity-form .add-label{margin:0 0 6px}.activity-form .add-input+.add-label{margin-top:14px}.activity-form .add-input{font-weight:650;font-variant-numeric:tabular-nums}
+.activity-hint{margin:10px 0 16px;font-size:13px;line-height:1.45;color:var(--muted)}.activity-hint.bad{color:#b12f71;font-weight:650}
+.activity-clear{align-self:center;margin-top:8px;min-height:44px;padding:0 12px;border:0;background:none;color:var(--muted);font:inherit;font-size:14px;text-decoration:underline;text-underline-offset:3px}
+.keepsake-preview{position:absolute;inset:0;z-index:5;display:flex;flex-direction:column;gap:12px;padding:20px;background:var(--paper);overflow:auto;text-align:center}.keepsake-preview[hidden]{display:none}.keepsake-preview p{margin:0;font-size:14px;color:var(--muted)}.keepsake-preview img{display:block;width:100%;height:auto;border-radius:14px;box-shadow:0 8px 24px -12px #52253d88;-webkit-touch-callout:default}.keepsake-preview .add-save{flex:none}
+:is(#activity-dialog)[open]{animation:sheet-in .42s cubic-bezier(.2,.9,.3,1.1)}:is(#activity-dialog)[open]::backdrop{animation:fade-in .3s ease}
+:is(.recap-activity,.activity-clear):active{transform:scale(.95)}.recap-activity{transition:transform .2s cubic-bezier(.3,1.5,.5,1)}

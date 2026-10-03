@@ -218,8 +218,8 @@ function renderRecap(){const wrap=document.querySelector('#recap-maps');wrap.rep
  days.forEach((d,n)=>{const tile=el('div','recap-tile'),svg=document.createElementNS(SVGNS,'svg');svg.setAttribute('role','img');const c=mapStops(d).filter(i=>checked.has(i.id)).length;svg.setAttribute('aria-label',`${d.name}: ${c} places checked off`);tile.append(svg,el('span','recap-label',`${d.short} · ${parkShort(d)}`));if(!trailFor(d).length)tile.append(el('span','recap-empty','Nothing checked off yet'));wrap.append(tile);});
  const added=days.flatMap(addedFor),all=days.flatMap(d=>d.sections.flatMap(s=>s.items)),rides=all.filter(i=>i.kind==='ride'&&checked.has(i.id)).length+added.filter(i=>i.kind==='ride').length,treats=all.filter(i=>i.food&&checked.has(i.id)).length+added.filter(i=>i.food).length;
  const stats=document.querySelector('#recap-stats');stats.replaceChildren();[[rides,'rides'],[treats,'meals & treats'],[all.filter(i=>checked.has(i.id)).length+added.length,'checked off']].forEach(([v,l])=>{const d=el('div');d.append(el('b','',String(v)),el('span','',l));stats.append(d);});
- paintActivity();keepsake=null;
- requestAnimationFrame(()=>{wrap.querySelectorAll('svg').forEach((svg,n)=>drawMap(svg,days[n],{pad:10,scale:.62,labels:false,numbers:false,pulse:false,pin:9,visited:true}));inkRecap();setTimeout(prepKeepsake,calm()?0:2600);});}
+ paintActivity();
+ requestAnimationFrame(()=>{wrap.querySelectorAll('svg').forEach((svg,n)=>drawMap(svg,days[n],{pad:10,scale:.62,labels:false,numbers:false,pulse:false,pin:9,visited:true}));inkRecap();});}
 // Each day's steps sit in the corner of its map; trip totals go under the counts. Nothing shows for a day until something is entered.
 function paintActivity(){document.querySelectorAll('#recap-maps .recap-tile').forEach((tile,n)=>{const d=days[n],a=activity[d.id];tile.querySelector('.recap-activity')?.remove();const b=el('button','recap-activity'+(a?'':' empty'));b.type='button';
   if(a){activityParts(a).forEach(([icon,num,unit],j)=>{if(j)b.append(el('span','ra-sep','·'));const s=el('span');s.append(el('span','ra-icon',icon),' ',el('b','',num),' '+unit);b.append(s);});b.append(el('span','ra-edit','✎'));b.setAttribute('aria-label',`Edit ${d.short} activity: ${activityParts(a).map(p=>p[1]+' '+(p[2]==='mi'?'miles':p[2])).join(', ')}`);}
@@ -231,55 +231,33 @@ function paintActivity(){document.querySelectorAll('#recap-maps .recap-tile').fo
 let recapParty;function inkRecap(){clearTimeout(recapParty);if(calm())return;const tiles=document.querySelectorAll('#recap-maps .recap-tile');if(document.querySelector('#recap-maps .map-trail,#recap-maps .map-pin'))recapParty=setTimeout(()=>{if(document.querySelector('#recap')?.open)shower();},350+(tiles.length-1)*650+1500);document.querySelectorAll('#recap-maps .recap-tile').forEach((tile,n)=>{const wait=350+n*650;tile.querySelectorAll('.map-trail').forEach(p=>{p.setAttribute('pathLength','1');p.style.strokeDasharray='1';p.animate([{strokeDashoffset:1},{strokeDashoffset:0}],{duration:1600,delay:wait,easing:'cubic-bezier(.45,0,.25,1)',fill:'backwards'});});tile.querySelectorAll('.map-pin,.map-extra').forEach((g,j)=>g.animate([{transform:'scale(0)',opacity:0},{transform:'scale(1)',opacity:1}],{duration:480,delay:wait+j*120,easing:'cubic-bezier(.3,1.6,.5,1)',fill:'backwards'}));});
  document.querySelectorAll('#recap-stats b,#recap-walk b').forEach(b=>{const end=Number(b.dataset.end??b.textContent),fmt=b.dataset.dec?fmtMi:b.dataset.end?fmtInt:v=>String(Math.round(v));if(!(end>1))return;const t0=performance.now()+350,step=now=>{const k=Math.min(1,Math.max(0,(now-t0)/1800));b.textContent=fmt(end*(1-Math.pow(1-k,3)));if(k<1)requestAnimationFrame(step);};b.textContent=fmt(0);requestAnimationFrame(step);});}
 document.querySelector('#recap-replay').onclick=renderRecap;document.querySelector('#recap-open').onclick=()=>{recap.showModal();document.body.classList.add('modal-open');renderRecap();};
-document.querySelector('#recap-close').onclick=()=>recap.close();recap.addEventListener('close',()=>{document.body.classList.remove('modal-open');document.querySelector('#keepsake-preview').hidden=true;});
+document.querySelector('#recap-close').onclick=()=>recap.close();recap.addEventListener('close',()=>document.body.classList.remove('modal-open'));
 // Add or fix a day's steps and miles. Empty both to clear the day.
 const actDlg=document.querySelector('#activity-dialog'),actForm=document.querySelector('#activity-form'),actSteps=document.querySelector('#activity-steps'),actMiles=document.querySelector('#activity-miles'),actHint=document.querySelector('#activity-hint'),HINT=actHint.textContent;let actDay=null;
 function openActivity(d){actDay=d;const a=activity[d.id];document.querySelector('#activity-day').textContent=`${d.short} · ${parkShort(d)}`;document.querySelector('#activity-title').textContent=a?'Edit activity':'Add activity';actSteps.value=a?.steps?fmtInt(a.steps):'';actMiles.value=a?.miles?String(a.miles):'';document.querySelector('#activity-clear').hidden=!a;actHint.textContent=HINT;actHint.classList.remove('bad');actDlg.showModal();}
 function readNum(input,max,label){const raw=input.value.replace(/[,\s]/g,'').replace(/(mi|miles|steps)$/i,'');if(!raw)return 0;const n=Number(raw);if(!Number.isFinite(n)||n<0||n>max)throw new Error(`That ${label} number doesn’t look right.`);return n;}
-function setActivity(d,a){if(a)activity[d.id]=a;else delete activity[d.id];const ok=saveActivity();keepsake=null;paintActivity();prepKeepsake();const pill=document.querySelectorAll('#recap-maps .recap-activity')[days.indexOf(d)];pop(pill);bump(document.querySelector('#recap-walk'));toast(ok?(a?'Steps saved 👟':'Cleared'):'Couldn’t save on this phone');}
+function setActivity(d,a){if(a)activity[d.id]=a;else delete activity[d.id];const ok=saveActivity();paintActivity();const pill=document.querySelectorAll('#recap-maps .recap-activity')[days.indexOf(d)];pop(pill);bump(document.querySelector('#recap-walk'));toast(ok?(a?'Steps saved 👟':'Cleared'):'Couldn’t save on this phone');}
 actForm.onsubmit=e=>{e.preventDefault();try{const a=cleanActivity({steps:readNum(actSteps,200000,'steps'),miles:readNum(actMiles,60,'miles')});actDlg.close();setActivity(actDay,a);}catch(err){actHint.textContent=err.message;actHint.classList.add('bad');}};
 actSteps.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();actMiles.focus();}});
 document.querySelector('#activity-clear').onclick=()=>{actDlg.close();setActivity(actDay,null);};
 document.querySelector('#activity-close').onclick=()=>actDlg.close();
-// Save: draws the recap fresh onto a canvas (no screenshot needed) and hands it to the share sheet, so it can go to Photos.
-let keepsake=null,keepsakeJob=null;
-function prepKeepsake(){if(!recap.open)return;const job=keepsakeJob=drawKeepsake().then(b=>{if(job===keepsakeJob)keepsake=b;return b;}).catch(()=>null);return job;}
-function inlineSvg(svg){const clone=svg.cloneNode(true),src=svg.querySelectorAll('*'),dst=clone.querySelectorAll('*'),props=['fill','fill-opacity','stroke','stroke-width','stroke-opacity','stroke-dasharray','stroke-linecap','stroke-linejoin','opacity','font-size','font-weight','font-family','letter-spacing','text-anchor','dominant-baseline','paint-order','display','visibility'];
- src.forEach((s,i)=>{const cs=getComputedStyle(s);dst[i].setAttribute('style',props.map(p=>`${p}:${cs.getPropertyValue(p)}`).join(';'));});clone.setAttribute('xmlns',SVGNS);return clone;}
-function svgImage(svg,w,h){const c=inlineSvg(svg);c.setAttribute('width',w);c.setAttribute('height',h);const url='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(new XMLSerializer().serializeToString(c));return new Promise((ok,no)=>{const img=new Image();img.onload=()=>ok(img);img.onerror=no;img.src=url;});}
-function roundRect(ctx,x,y,w,h,r){ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath();}
-async function drawKeepsake(){const W=540,P=28,TW=W-P*2,TH=210,S=2,SANS='-apple-system,BlinkMacSystemFont,"Segoe UI",ui-sans-serif,sans-serif',INK='#52253d',MUTED='#785366';
- // Draw the maps at keepsake size in an off-screen tile so they pick up the same styles as on screen.
- const host=el('div','recap-maps keepsake-src');host.setAttribute('aria-hidden','true');host.style.cssText='position:fixed;left:-10000px;top:0;display:block;pointer-events:none';recap.append(host);const imgs=[];
- try{for(const d of days){const tile=el('div','recap-tile'),svg=document.createElementNS(SVGNS,'svg');tile.style.cssText=`width:${TW}px;height:${TH}px`;tile.append(svg);host.append(tile);drawMap(svg,d,{pad:14,scale:.72,labels:false,numbers:false,pulse:false,pin:9,visited:true,w:TW,h:TH});imgs.push(await svgImage(svg,TW*S,TH*S));}}finally{host.remove();}
- const t=activityTotals(),hasWalk=t.steps||t.miles,H=P+18+46+days.length*(TH+12)+12+64+(hasWalk?34:0)+34+P;
- const cv=document.createElement('canvas');cv.width=W*S;cv.height=H*S;const ctx=cv.getContext('2d');ctx.scale(S,S);ctx.fillStyle='#fffafc';ctx.fillRect(0,0,W,H);ctx.textBaseline='alphabetic';
- const text=(s,x,y,font,color,align='left')=>{ctx.font=font;ctx.fillStyle=color;ctx.textAlign=align;ctx.fillText(s,x,y);return ctx.measureText(s).width;};
- let y=P+12;text('UNIVERSAL ORLANDO · OCT 4–6, 2026',W/2,y,`750 11px ${SANS}`,MUTED,'center');
- y+=40;ctx.font=`700 32px ${SANS}`;const a=ctx.measureText('Rowyn’s 16th, ').width;ctx.font=`italic 400 32px Georgia,"Times New Roman",serif`;const b=ctx.measureText('mapped').width;let x=(W-a-b)/2;x+=text('Rowyn’s 16th, ',x,y,`700 32px ${SANS}`,INK);text('mapped',x,y,`italic 400 32px Georgia,"Times New Roman",serif`,INK);
- y+=18;days.forEach((d,n)=>{ctx.save();roundRect(ctx,P,y,TW,TH,16);ctx.fillStyle='#fbe9f1';ctx.fill();ctx.clip();ctx.drawImage(imgs[n],P,y,TW,TH);ctx.restore();
-  const pill=(s,px,py,font,bg)=>{ctx.font=font;const w=ctx.measureText(s).width+18;roundRect(ctx,px,py,w,24,8);ctx.fillStyle=bg;ctx.fill();text(s,px+9,py+16.5,font,INK);};
-  pill(`${d.short} · ${parkShort(d)}`.toUpperCase(),P+10,y+9,`800 12px ${SANS}`,'#ffffff');
-  if(!trailFor(d).length)text('Nothing checked off yet',P+TW/2,y+TH/2+4,`650 13px ${SANS}`,MUTED,'center');
-  const act=activity[d.id];if(act)pill(activityParts(act).map(p=>p.join(' ')).join('  ·  '),P+10,y+TH-34,`650 12.5px ${SANS}`,'rgba(255,255,255,.92)');
-  y+=TH+12;});
- const added=days.flatMap(addedFor),all=days.flatMap(d=>d.sections.flatMap(s=>s.items)),done=all.filter(i=>checked.has(i.id)),cols=[[done.filter(i=>i.kind==='ride').length+added.filter(i=>i.kind==='ride').length,'rides'],[done.filter(i=>i.food).length+added.filter(i=>i.food).length,'meals & treats'],[done.length+added.length,'checked off']];
- y+=12;cols.forEach(([v,l],i)=>{const cx=P+TW*(i+.5)/3;text(String(v),cx,y+26,`750 30px ${SANS}`,INK,'center');text(l,cx,y+46,`650 13px ${SANS}`,MUTED,'center');});y+=64;
- if(hasWalk){const segs=[t.steps&&[fmtInt(t.steps),' steps'],t.miles&&[fmtMi(t.miles),' mi walked']].filter(Boolean),SEP='   ·   ',bold=`750 16px ${SANS}`,reg=`600 15px ${SANS}`;let w=0;segs.forEach(([n,l],i)=>{ctx.font=bold;w+=ctx.measureText(n).width;ctx.font=reg;w+=ctx.measureText(l+(i?SEP:'')).width;});let wx=(W-w)/2;const wy=y+18;
-  segs.forEach(([n,l],i)=>{if(i)wx+=text(SEP,wx,wy,reg,MUTED);wx+=text(n,wx,wy,bold,INK);wx+=text(l,wx,wy,reg,MUTED);});y+=34;}
- text('The ink line follows the order things were checked off.',W/2,y+20,`500 12px ${SANS}`,MUTED,'center');
- return new Promise((ok,no)=>cv.toBlob(b=>b?ok(b):no(new Error('no image')),'image/png'));}
-const keepsakeName=()=>`rowyns-16th-recap-${etToday()}.png`;
-function showKeepsake(blob){const box=document.querySelector('#keepsake-preview'),img=document.querySelector('#keepsake-img');if(img.src)URL.revokeObjectURL(img.src);img.src=URL.createObjectURL(blob);box.hidden=false;}
-document.querySelector('#keepsake-done').onclick=()=>document.querySelector('#keepsake-preview').hidden=true;
-document.querySelector('#recap-save').onclick=async e=>{const btn=e.currentTarget;let blob=keepsake;
- if(!blob){btn.disabled=true;try{blob=await(keepsakeJob||prepKeepsake())||await drawKeepsake();}catch{blob=null;}btn.disabled=false;}
- if(!blob){toast('Couldn’t make the picture. A screenshot still works!');return;}
- const file=new File([blob],keepsakeName(),{type:'image/png'});
+// Save: the whole trip as a JSON file (days, checkoffs in order, steps, totals) to build a keepsake from later.
+const isoET=ms=>{if(!Number.isFinite(ms))return null;const p=Object.fromEntries(new Intl.DateTimeFormat('en-CA',{timeZone:'America/New_York',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit',hourCycle:'h23'}).formatToParts(new Date(ms)).map(x=>[x.type,x.value]));return `${p.year}-${p.month}-${p.day}T${p.hour}:${p.minute}:${p.second}-04:00`;};
+const typeOf=i=>i.kind==='ride'?'ride':i.food?'food':i.show||i.kind==='show'?'show':i.meet?'meet':'other';
+function tripData(){const base=new URL('./',location.href).href;let rides=0,treats=0,count=0;
+ const out=days.map(d=>{const planned=d.sections.flatMap(s=>s.items.filter(i=>checked.has(i.id)).map(i=>({i,section:s.name}))),extra=addedFor(d).map(i=>({i,section:null}));
+  const list=planned.concat(extra).sort((a,b)=>(timeOf(a.i)||0)-(timeOf(b.i)||0)),r=list.filter(x=>x.i.kind==='ride').length,t=list.filter(x=>x.i.food).length;rides+=r;treats+=t;count+=list.length;
+  const trail=new Set(trailFor(d).map(i=>i.id));
+  return{id:d.id,date:d.date,weekday:d.short,park:d.name,parkShort:parkShort(d),activity:activity[d.id]?{...activity[d.id]}:null,counts:{rides:r,mealsAndTreats:t,checkedOff:list.length},
+   checkedOff:list.map(({i,section},n)=>({order:n+1,id:i.id,title:i.title,type:typeOf(i),...(i.food?{food:i.food}:{}),section,checkedAt:isoET(timeOf(i)),planned:!i.added,onMap:trail.has(i.id),location:i.locs?{lat:i.locs[0][0],lng:i.locs[0][1]}:null,...(i.photo?{photo:base+i.photo}:{})}))};});
+ const t=activityTotals();
+ return{title:'Rowyn’s 16th, mapped',trip:'Universal Orlando',dates:{start:days[0].date,end:days[days.length-1].date},exportedAt:isoET(Date.now()),
+  totals:{rides,mealsAndTreats:treats,checkedOff:count,...(t.steps?{steps:t.steps}:{}),...(t.miles?{miles:t.miles}:{})},days:out};}
+const tripFileName=()=>`rowyns-16th-trip-${etToday()}.json`;
+document.querySelector('#recap-save').onclick=async()=>{let file;try{file=new File([JSON.stringify(tripData(),null,2)],tripFileName(),{type:'application/json'});}catch{toast('Couldn’t make the file');return;}
+ // iPhone: the share sheet, where Save to Files keeps it. Elsewhere (or if sharing isn't offered): a normal download.
  if(navigator.canShare?.({files:[file]})){try{await navigator.share({files:[file]});return;}catch(err){if(err.name==='AbortError')return;}}
- // No share sheet (or it refused): phones get the picture to press and hold; computers get a download.
- if(matchMedia('(pointer:coarse)').matches){showKeepsake(blob);return;}
- const a=el('a');a.href=URL.createObjectURL(blob);a.download=keepsakeName();document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),4000);toast('Saved ✦');};
+ const a=el('a');a.href=URL.createObjectURL(file);a.download=file.name;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),4000);toast('Trip file saved ✦');};
 // Near you: opt-in, foreground-only. Watches location only while the page is visible and stops the moment it is hidden.
 const nearKey='park-days-near',NEAR_MAX_ACC=50,NEAR_RADIUS=60;let nearOn=false,nearPinned=null,nearWatch=null,nearFix=null,nearMsg='';
 try{nearOn=localStorage.getItem(nearKey)==='on';}catch{}
